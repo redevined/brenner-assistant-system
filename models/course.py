@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-from utils import database as db
+from utils import Database
 
 
 class Course() :
@@ -15,11 +15,11 @@ class Course() :
 
 def add(username, info) :
 	course = Course(info.name, info.date, info.start, info.end, info.role)
-	return db.storeCourse(username, course)
+	return Database.storeCourse(username, course)
 
 def getAll(username) :
-	courses = db.loadCourses(username)
+	courses = Database.loadCourses(username)
 	return courses
 
 def delete(username, id) :
-	return db.deleteCourse(id)
+	return Database.deleteCourse(id)

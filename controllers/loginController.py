@@ -2,27 +2,26 @@
 
 from flask import flash, redirect, render_template
 
-from models import user
-from config import Notifications, Logger
+from models import User
+from config import Notifications, Logger, Urls
 
 
 def view() :
-	#return render_template("login.html")
-	return "Come in!"
+	return render_template("login.html")
 
 def login(form) :
-	user.session.set(user.getByLogin(form))
-	if user.session.exists() :
+	User.session.set(User.getByLogin(form))
+	if User.session.exists() :
 		Logger.info("controllers::loginController::login User {0} logged in".format(form["username"]))
-		return redirect("/")
+		return redirect(Urls.home)
 	else :
 		Logger.warn("controllers::loginController::login Failed login with username '{0}'".format(form["username"]))
 		flash(Notifications.login_error)
-	return redirect("/login")
+	return redirect(Urls.login)
 
 def logout() :
-	if user.session.exists() :
-		Logger.info("controllers::loginController::logout User {0} logged out".format(user.session.get().username))
-		user.session.remove()
+	if User.session.exists() :
+		Logger.info("controllers::loginController::logout User {0} logged out".format(User.session.get().username))
+		User.session.remove()
 		flash(Notifications.logout)
-	return redirect("/login")
+	return redirect(Urls.login)

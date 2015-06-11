@@ -2,16 +2,19 @@
 
 from flask import render_template
 
-from models import user
-import courseController
+from models import User
+import CourseController
 from config import Logger
 
 
 def view() :
-	if user.session.exists() :
-		return courseController.view()
-	#return render_template("home.html")
-	return "Welcome home!"
+	if User.session.exists() :
+		return CourseController.view()
+	return render_template("home.html")
+
+def about() :
+	#return render_template("about.html")
+	return "About this project."
 
 def error(code) :
 	#return render_template("error.html", code = code), code

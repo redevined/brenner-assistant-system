@@ -1,30 +1,30 @@
 #/usr/bin/env python
 
-from utils import session, database as db
-from config import Roles, Keys, Functions
+from utils import Session, Database, Compression
+from config import Roles, Keys
 
 
-session = session.UserSession(Keys.session)
+session = Session.UserSession(Keys.session)
 
 
 class User() :
 
 	def __init__(self, username, password, role = Roles.user) :
 		self.username = username
-		self.password = Functions.hash(password)
+		self.password = Compression.hash(password)
 		self.role = role
 
 
 def getByLogin(credentials) :
-	user = db.loadUser(credentials["username"])
+	user = Database.loadUser(credentials["username"])
 	if user :
-		if user.password == Functions.hash(credentials["password"]) :
+		if user.password == Compression.hash(credentials["password"]) :
 			return user
 
 def getByRegister(credentials) :
 	username, password = credentials["username"], credentials["password"]
 	if username and password :
-		if not db.existsUser(username) :
+		if not Database.existsUser(username) :
 			user = User(username, password)
-			if db.storeUser(user) :
+			if Database.storeUser(user) :
 				return user

@@ -4,52 +4,58 @@ import os
 from flask import Flask, request
 
 from controllers import *
+from utils.Interface import ViewInterface
 from config import Urls, Logger
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
+app.jinja_env.globals.update(app = ViewInterface())
 
 Logger.set(app.logger)
 
 
 @app.route(Urls.home)
 def home() :
-	return homeController.view()
+	return HomeController.view()
+
+@app.route(Urls.about)
+def about() :
+	return HomeController.about()
 
 @app.route(Urls.login, methods = ["GET", "POST"])
 def login() :
 	if request.method == "POST" :
-		return loginController.login(request.form)
-	return loginController.view()
+		return LoginController.login(request.form)
+	return LoginController.view()
 
 @app.route(Urls.register, methods = ["GET", "POST"])
 def register() :
 	if request.method == "POST" :
-		return registerController.register(request.form)
-	return registerController.view()
+		return RegisterController.register(request.form)
+	return RegisterController.view()
 
 @app.route(Urls.logout)
 def logout() :
-	return loginController.logout()
+	return LoginController.logout()
 
 @app.route(Urls.courseAdd, methods = ["POST"])
 def courseAdd() :
-	return courseController.add(request.form)
+	return CourseController.add(request.form)
 
 @app.route(Urls.courseDelete, methods = ["POST"])
 def courseDelete(id) :
-	return courseController.add(id)
+	return CourseController.add(id)
 
 @app.route(Urls.courseUpdate, methods = ["POST"])
 def courseUpdate(id) :
-	return courseController.add(id, request.form)
+	return CourseController.add(id, request.form)
 
 @app.errorhandler(403)
 @app.errorhandler(404)
 @app.errorhandler(500)
 def throw(error) :
-	return homeController.error(error.code)
+	return HomeController.error(error.code)
 
 
 if __name__ == "__main__" :

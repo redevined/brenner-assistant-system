@@ -1,12 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
     <head>
-        <title>{% block title %}{% endblock %}</title>
+    	<!-- Standard meta -->
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    	<!-- Meta description and favicon -->
+	    <meta name="description" content="BASys (Brenner Assistenten System)">
+	    <meta name="author" content="redevined (Oliver Wirth)">
+	    <link rel="icon" href="../static/img/favicon.ico">
+
+    	<!-- Title template block -->
+        <title>{% block title %}{% endblock %} - BASys</title>
+
+    	<!-- Bootstrap core and custom CSS -->
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../static/css/global.css" rel="stylesheet">
+        <link href="../static/css/template.css" rel="stylesheet">
+        <link href="../static/css/{% block style %}{% endblock %}" rel="stylesheet">
     </head>
     <body>
-        <div class="content" id="{% block style %}{% endblock %}">
-            {% block content %}
-            {% endblock %}
+
+		<div class="site-wrapper">
+			<div class="site-wrapper-inner">
+				<div class="cover-container">
+
+					<div class="cover-head clearfix">
+						<div class="inner">
+							<a href="{{ app.Urls.home }}"><h3 class="cover-head-brand">BASys</h3></a>
+							<nav>
+								<ul class="nav cover-head-nav">
+									<li class="{% if app.request.endpoint == 'about' %}active{% endif %}">
+										<a href="{{ app.Urls.about }}">Projekt</a>
+									</li>
+									{% if app.User.session.exists() %}
+									<li>
+										<a href="{{ app.Urls.logout }}">Abmelden <span class="glyphicon glyphicon-log-out"></span></a>
+									</li>
+									{% else %}
+									<li class="{% if app.request.endpoint in ('login', 'register') %}active{% endif %}">
+										<a href="{{ app.Urls.login }}">Anmelden <span class="glyphicon glyphicon-log-in"></span></a>
+									</li>
+									{% endif %}
+								</ul>
+							</nav>
+						</div>
+					</div>
+
+		            {% block content %}{% endblock %}
+
+					<div class="cover-foot lighter">
+						<div class="inner">
+							<p>BASys ist ein Projekt von <a href="{{ app.Urls.github }}"><span class="glyphicon glyphicon-link"></span>redevined</a>.</p>
+						</div>
+					</div>
+
+		        </div>
+	        </div>
         </div>
+
+        <!-- Bootstrap core Javascript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	    <script src="../static/js/bootstrap.min.js"></script>
+	    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	    <script src="../static/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

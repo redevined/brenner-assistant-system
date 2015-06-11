@@ -1,4 +1,5 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import hashlib, pickle
 from base64 import b64encode, b64decode
@@ -9,12 +10,14 @@ Urls = type(
 	"config.Urls", (),
 	{
 		"home" 				: 	"/",
+		"about"				:	"/about",
 		"login" 			: 	"/login",
-		"register"			:	"/register",
 		"logout"			:	"/logout",
+		"register"			:	"/register",
 		"courseAdd"			:	"/course/add",
 		"courseDelete"		:	"/course/delete/<int:id>",
-		"courseUpdate"		:	"/course/update/<int:id>"
+		"courseUpdate"		:	"/course/update/<int:id>",
+		"github"			:	"https://github.com/redevined/brenner-assistants-system"
 	}
 )()
 
@@ -41,7 +44,7 @@ Keys = type(
 Notifications = type(
 	"config.Notifications", (),
 	{
-		"login_error" 		: 	"Ung&uml;ltige Benutzereingaben.",
+		"login_error" 		: 	u"Ungültige Anmeldedaten.",
 		"register_error"	:	"Der Benutzername ist bereits vergeben.",
 		"logout" 			: 	"Du wurdest erfolgreich abgemeldet."
 	}
@@ -60,11 +63,8 @@ Roles = type(
 Functions = type(
 	"config.Functions", (),
 	{
-		"hash"				:	lambda _, s		: 	hashlib.sha1(s).hexdigest(),
 		"newId" 			: 	lambda _		:	hex(0),
-		"incId"				:	lambda _, i		:	hex(int(i, 16) + 1),
-		"encode"			:	lambda _, o		: 	b64encode(pickle.dumps(o)),
-		"decode" 			: 	lambda _, o		:	pickle.loads(b64decode(o))
+		"incId"				:	lambda _, i		:	hex(int(i, 16) + 1)
 	}
 )()
 

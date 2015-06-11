@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}home.css{% endblock %}
+
+{% block content %}
+<div class="inner cover">
+	<h1>Behalte deine Kurse im Überblick. <small>BASys</small></h1>
+	<br />
+	<p class="lead">
+		Das Brenner Assistenten System ist eine Webapplikation mit der Assistenten und Tanzlehrer der Tanzschule Brenner Heilbronn ihre geleisteten Arbeitsstunden dokumentieren können.
+	</p>
+	<p class="lead">
+		Die Verwendung von BASys ist einfach und kostenfrei, also leg gleich los!
+	</p>
+	<p class="lead">
+		<a href="{{ app.Urls.logout }}" class="btn btn-lg btn-primary">Starten!</a>
+	</p>
+</div>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 from flask import session
 
-from config import Functions
+from Compression import decode, encode
 
 
 class UserSession() :
@@ -14,11 +14,11 @@ class UserSession() :
 	def get(self) :
 		user = self.session.get(self.key)
 		if user :
-			return Functions.decode(user)
+			return decode(user)
 
 	def set(self, user) :
 		if user :
-			self.session[self.key] = Functions.encode(user)
+			self.session[self.key] = encode(user)
 
 	def remove(self) :
 		self.session.pop(self.key, None)

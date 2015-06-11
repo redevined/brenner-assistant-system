@@ -1,6 +1,7 @@
 #/usr/bin/env python
 
 __all__ = [
-	"database",
-	"session"
+	"Database",
+	"Session",
+	"ViewInterface"
 ]
