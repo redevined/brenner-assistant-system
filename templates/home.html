@@ -2,10 +2,10 @@
 
 {% block title %}Home{% endblock %}
 
-{% block style %}home.css{% endblock %}
+{% block style %}<link href="../static/css/home.css" rel="stylesheet">{% endblock %}
 
 {% block content %}
-<div class="inner cover">
+<div class="inner cover center">
 	<h1>Behalte deine Kurse im Überblick. <small>BASys</small></h1>
 	<br />
 	<p class="lead">
@@ -15,7 +15,7 @@
 		Die Verwendung von BASys ist einfach und kostenfrei, also leg gleich los!
 	</p>
 	<p class="lead">
-		<a href="{{ app.Urls.logout }}" class="btn btn-lg btn-primary">Starten!</a>
+		<a href="{{ app.Urls.login }}" class="btn btn-lg btn-primary">Starten!</a>
 	</p>
 </div>
 {% endblock %}

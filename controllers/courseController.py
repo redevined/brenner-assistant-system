@@ -9,8 +9,7 @@ from config import Notifications, Logger, Urls
 def view() :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
-	#return render_template("view.html", courses = courses)
-	return "Your courses!"
+	return render_template("courses.html", user = user, courses = courses)
 
 def add(form) :
 	if User.session.exists() :

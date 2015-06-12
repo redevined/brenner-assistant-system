@@ -3,6 +3,8 @@
 
 class ViewInterface() :
 
+	from flask import request
+	from datetime import datetime
+
 	from models import User, Course
 	from config import Urls
-	from flask import request

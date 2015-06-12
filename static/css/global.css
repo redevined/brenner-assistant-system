@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-  color: #eee;
+  color: #ddd;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
@@ -26,8 +26,17 @@ h1, h2, h3 {
   color: rgba(255,255,255,.5);
 }
 
+.center {
+  text-align: center;
+}
+
 .inner {
   padding: 30px;
+}
+
+.sevenhundred {
+  width: 700px;
+  margin: auto;
 }
 
 .cover {

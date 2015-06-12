@@ -59,15 +59,6 @@ Roles = type(
 	}
 )()
 
-# Various functions
-Functions = type(
-	"config.Functions", (),
-	{
-		"newId" 			: 	lambda _		:	hex(0),
-		"incId"				:	lambda _, i		:	hex(int(i, 16) + 1)
-	}
-)()
-
 # Wrapper for app.logger for global accessability
 Logger = type(
 	"config.Logger", (),
