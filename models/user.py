@@ -16,13 +16,13 @@ class User() :
 
 
 def getByLogin(credentials) :
-	user = Database.loadUser(credentials["username"])
+	user = Database.loadUser(credentials.get("username"))
 	if user :
-		if user.password == Compression.hash(credentials["password"]) :
+		if user.password == Compression.hash(credentials.get("password")) :
 			return user
 
 def getByRegister(credentials) :
-	username, password = credentials["username"], credentials["password"]
+	username, password = credentials.get("username"), credentials.get("password")
 	if username and password :
 		if not Database.existsUser(username) :
 			user = User(username, password)

@@ -25,3 +25,6 @@ class UserSession() :
 
 	def exists(self) :
 		return self.session.has_key(self.key)
+
+	def remember(self, val) :
+		self.session.permanent = val

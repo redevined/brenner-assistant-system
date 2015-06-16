@@ -51,6 +51,7 @@ h1, h2, h3 {
 }
 
 .flash {
+  color: #fff;
   background-color: #d83;
   border: 1px solid transparent;
   border-color: #c72;

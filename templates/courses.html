@@ -4,84 +4,81 @@
 
 {% block style %}
 <link href="../static/css/courses.css" rel="stylesheet">
-<link href="../static/css/bootstrap-table.min.css" rel="stylesheet">
-{% endblock %}
-
-{% block script %}
-<script src="../static/js/bootstrap-table.min.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="inner cover">
 	<h2>Willkommen, {{ user.username }}.</h2>
 	<br />
-	<table data-toggle="table">
-		<thead>
-			<tr>
-				<th class="col-md-4">Kurs</th>
-				<th class="col-md-2">Datum</th>
-				<th class="col-md-4">Uhrzeit</th>
-				<th class="col-md-2">Rolle</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<label for="course" class="sr-only">Kurs</label>
-					<input type="text" id="course" name="course" class="form-control" placeholder="Kurs" required>
-				</td>
-				<td>
-					<label for="date" class="sr-only">Datum</label>
-					<input type="date" id="date" name="date" class="form-control" value="{{ app.datetime.today().strftime('%Y-%m-%d') }}" required>
-				</td>
-				<td>
-					<label for="time_start" class="sr-only">Start</label>
-					<input type="time" id="time_start" name="time_start" class="form-control" value="{{ app.datetime.today().strftime('%H:%M') }}" required>
-					<span>-</span>
-					<label for="time_end" class="sr-only">Ende</label>
-					<input type="time" id="time_end" name="time_end" class="form-control" value="{{ app.datetime.today().replace(hour = app.datetime.today().hour + 1).strftime('%H:%M') }}" required>
-				</td>
-				<td>
-					<label for="role" class="sr-only">Rolle</label>
-					<select id="role" name="role" class="form-control">
-						<option value="assistant" selected>Assistent</option>
-						<option value="trainer">Lehrer</option>
-						<option value="participant">Teilnehmer</option>
-					</select>
-				</td>
-				<td>
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</td>
-			</tr>
-			<tr>
-				<td>WTP</td>
-				<td>01.01.15</td>
-				<td>12:00 - 13:30</td>
-				<td>Assistent</td>
-				<td>
-					<span class="glyphicon glyphicon-minus-sign"></span>
-				</td>
-			</tr>
-			<tr>
-				<td>WTP</td>
-				<td>01.01.15</td>
-				<td>12:00 - 13:30</td>
-				<td>Assistent</td>
-				<td>
-					<span class="glyphicon glyphicon-minus-sign"></span>
-				</td>
-			</tr>
-			<tr>
-				<td>WTP</td>
-				<td>01.01.15</td>
-				<td>12:00 - 13:30</td>
-				<td>Assistent</td>
-				<td>
-					<span class="glyphicon glyphicon-minus-sign"></span>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="scroll-body">
+		<form method="POST" action="{{ app.Urls.courseAdd }}">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="course">Kurs</th>
+						<th class="date">Datum</th>
+						<th class="time">Uhrzeit</th>
+						<th class="role">Rolle</th>
+						<th class="functions"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="input-row">
+						<td>
+							<label for="name" class="sr-only">Kurs</label>
+							<input type="text" id="name" name="name" class="form-control" placeholder="Kurs" required autofocus>
+						</td>
+						<td>
+							<label for="date" class="sr-only">Datum</label>
+							<input type="date" id="date" name="date" class="form-control" value="{{ app.datetime.today().strftime('%Y-%m-%d') }}" required>
+						</td>
+						<td>
+							<span class="left">
+								<label for="time_start" class="sr-only">Start</label>
+								<input type="time" id="time_start" name="time_start" class="form-control" value="{{ app.datetime.today().strftime('%H:%M') }}" required>
+							</span>
+							<span class="right">
+								<label for="time_end" class="sr-only">Ende</label>
+								<input type="time" id="time_end" name="time_end" class="form-control" value="{{ app.datetime.today().replace(hour = app.datetime.today().hour + 1).strftime('%H:%M') }}" required>
+							</span>
+						</td>
+						<td>
+							<label for="role" class="sr-only">Rolle</label>
+							<select id="role" name="role" class="form-control">
+								<option value="Assistent" selected>Assistent</option>
+								<option value="Lehrer">Lehrer</option>
+								<option value="Teilnehmer">Teilnehmer</option>
+							</select>
+						</td>
+						<td>
+							<div class="right">
+								<button class="btn btn-primary" type="submit">
+									<span class="glyphicon glyphicon-plus-sign"></span>
+								</button>
+							</div>
+						</td>
+					</tr>
+					{% for course in courses %}
+					<tr>
+						<td>{{ course.name }}</td>
+						<td>{{ course.date }}</td>
+						<td>{{ '{0} - {1}'.format(*course.time) }}</td>
+						<td>{{ course.role }}</td>
+						<td>
+							<div class="right">
+								<a href="{{ app.Urls.courseDelete }}/{{ course.id }}" class="btn btn-primary">
+									<span class="glyphicon glyphicon-minus-sign"></span>
+								</a>
+						</div>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<a href="{{ app.Urls.courseSubmit }}" class="btn btn-lg btn-primary btn-block {% if not courses %}disabled{% endif %}">
+		Auflistung erstellen
+	</a>
 </div>
 {% endblock %}

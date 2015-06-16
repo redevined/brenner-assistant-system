@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{ code }} - BASys</title>
-		<style>
-			.error {
-				width: 600px;
-				height: 200px;
-			}
-			.error p {
-				padding-left: 50px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="error">
-			<h1>Error {{ code }} :(</h1>
-			{% if code == 404 %}
-			<p>This page does not exist. Try another one.</p>
-			{% elif code == 403 %}
-			<p>I'm sorry, but you do not have access to this page.</p>
-			{% elif code == 500 %}
-			<p>Something went terribly wrong here.</p>
-			{% endif %}
-			<p>You can go back to the <a href="{{ app.Urls.home }}">starting page</a>.</p>
-		</div>
-	</body>
-</html>
+{% extends "template.html" %}
+
+{% block title %}{{ code }}{% endblock %}
+
+{% block style %}
+<link href="../static/css/home.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="inner cover center">
+	<h1>Error {{ code }} :(</h1>
+	{% if code == 404 %}
+	<p>Diese Seite existiert nicht. Probiers mit einer anderen.</p>
+	{% elif code == 403 %}
+	<p>Zugriff verweigert.</p>
+	{% elif code == 500 %}
+	<p>Irgendwas lief hier schief.</p>
+	{% endif %}
+	<p>Hier gehts zurück zur <a href="{{ app.Urls.home }}">Startseite</a>.</p>
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@
 from flask import redirect, render_template
 
 from models import User, Course
-from config import Notifications, Logger, Urls
+from config import Notifications, Urls
 
 
 def view() :
@@ -15,20 +15,28 @@ def add(form) :
 	if User.session.exists() :
 		user = User.session.get()
 		Course.add(user.username, form)
-		Logger.info("controllers::courseController::add User {0} added a new course".format(user.username))
 	return redirect(Urls.home)
 
 def delete(id) :
 	if User.session.exists() :
 		user = User.session.get()
 		Course.delete(user.username, id)
-		Logger.info("controllers::courseController::add User {0} deleted course #{1}".format(user.username, id))
 	return redirect(Urls.home)
 
 def update(id, form) :
 	if User.session.exists() :
 		user = User.session.get()
-		Course.delete(id)
+		Course.delete(user.username, id)
 		Course.add(user.username, form)
-		Logger.info("controllers::courseController::add User {0} updated course #{1}".format(user.username, id))
+	return redirect(Urls.home)
+
+def submit() :
+	if User.session.exists() :
+		user = User.session.get()
+		grouped_courses = Course.getAllGrouped(user.username)
+		for year, months in grouped_courses.items() :
+			for month, courses in months.items() :
+				sheet = render_template("sheet.html", user = user, courses = courses, year = year, month = month)
+				# Some cool magic...
+				# Course.deleteAll(user.username)
 	return redirect(Urls.home)

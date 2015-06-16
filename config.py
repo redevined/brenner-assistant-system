@@ -4,10 +4,11 @@
 import hashlib, pickle
 from base64 import b64encode, b64decode
 
+from utils import ConfigObject
+
 
 # Routing URLS
-Urls = type(
-	"config.Urls", (),
+Urls = ConfigObject.create(
 	{
 		"home" 				: 	"/",
 		"about"				:	"/about",
@@ -15,57 +16,63 @@ Urls = type(
 		"logout"			:	"/logout",
 		"register"			:	"/register",
 		"courseAdd"			:	"/course/add",
-		"courseDelete"		:	"/course/delete/<int:id>",
-		"courseUpdate"		:	"/course/update/<int:id>",
+		"courseDelete"		:	"/course/delete",
+		"courseUpdate"		:	"/course/update",
+		"courseSubmit"		:	"/course/submit",
 		"github"			:	"https://github.com/redevined/brenner-assistants-system"
 	}
-)()
+)
 
 # Redis connection
-Db = type(
-	"config.Db", (),
+Connection = ConfigObject.create(
 	{
 		"host"				:	"localhost",
 		"port"				:	6379
 	}
-)()
+)
 
 # Session and database keys
-Keys = type(
-	"config.Keys", (),
+Keys = ConfigObject.create(
 	{
 		"session"			:	"user",
 		"user_data" 		: 	"USERDATA",
 		"course_incr"		:	"COURSEINCR"
 	}
-)()
+)
 
 # Flash messages
-Notifications = type(
-	"config.Notifications", (),
+Notifications = ConfigObject.create(
 	{
 		"login_error" 		: 	u"Ungültige Anmeldedaten.",
 		"register_error"	:	"Der Benutzername ist bereits vergeben.",
 		"logout" 			: 	"Du wurdest erfolgreich abgemeldet."
 	}
-)()
+)
 
 # User roles
-Roles = type(
-	"config.Roles", (),
+Roles = ConfigObject.create(
 	{
 		"user" 				: 	"USER",
 		"admin" 			: 	"ADMIN"
 	}
-)()
+)
 
-# Wrapper for app.logger for global accessability
-Logger = type(
-	"config.Logger", (),
+# Localized month names
+Months = ConfigObject.create(
 	{
-		"set"				:	lambda _, o		: 	setattr(_, "logger", o),
-		"info" 				: 	lambda _, *a	:	_.logger.info(*a) if hasattr(_, "logger") else None,
-		"warn"	 			: 	lambda _, *a	:	_.logger.warning(*a) if hasattr(_, "logger") else None,
-		"debug" 			: 	lambda _, *a	:	_.logger.debug(*a) if hasattr(_, "logger") else None
+		"get" 				: 	[
+									"Januar",
+									"Februar",
+									"März",
+									"April",
+									"Mai",
+									"Juni",
+									"Juli",
+									"August",
+									"September",
+									"Oktober",
+									"November",
+									"Dezember"
+								]
 	}
-)()
+)

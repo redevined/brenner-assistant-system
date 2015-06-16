@@ -3,12 +3,14 @@
 import redis
 
 from Compression import decode, encode
-from config import Db, Keys, Logger
+from config import Connection, Keys
 
 
-db = redis.StrictRedis(host = Db.host, port = Db.port)
-if not db.ping() :
-	Logger.warn("utils::Database::__main__ No running Redis instance found, please check your connection settings")
+db = redis.StrictRedis(host = Connection.host, port = Connection.port)
+try :
+	db.ping()
+except redis.exceptions.ConnectionError :
+	print "WARNING: No running Redis instance found, please check your connection settings."
 
 
 def loadUser(un) :
@@ -42,6 +44,7 @@ def optimize(un) :
 	courses = { int(key) : value for key, value in db.hgetall(un).items() if key not in (Keys.user_data, Keys.course_incr) }
 	for id, key in enumerate(sorted(courses.keys()), 1) :
 		db.hdel(un, key)
+		courses[key].id = id
 		db.hset(un, id, courses[key])
 
 def optimizeAll() :

@@ -5,14 +5,12 @@ from flask import Flask, request
 
 from controllers import *
 from utils.Interface import ViewInterface
-from config import Urls, Logger
+from config import Urls
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 app.jinja_env.globals.update(app = ViewInterface())
-
-Logger.set(app.logger)
 
 
 @app.route(Urls.home)
@@ -43,13 +41,17 @@ def logout() :
 def courseAdd() :
 	return CourseController.add(request.form)
 
-@app.route(Urls.courseDelete, methods = ["POST"])
+@app.route(Urls.courseDelete + "/<int:id>")
 def courseDelete(id) :
-	return CourseController.add(id)
+	return CourseController.delete(id)
 
-@app.route(Urls.courseUpdate, methods = ["POST"])
+@app.route(Urls.courseUpdate + "/<int:id>", methods = ["POST"])
 def courseUpdate(id) :
-	return CourseController.add(id, request.form)
+	return CourseController.update(id, request.form)
+
+@app.route(Urls.courseSubmit)
+def courseSubmit() :
+	return CourseController.submit()
 
 @app.errorhandler(403)
 @app.errorhandler(404)

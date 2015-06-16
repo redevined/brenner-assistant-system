@@ -2,7 +2,8 @@
 
 __all__ = [
 	"Compression",
+	"ConfigObject",
 	"Database",
-	"Session",
-	"ViewInterface"
+	"Interface",
+	"Session"
 ]
