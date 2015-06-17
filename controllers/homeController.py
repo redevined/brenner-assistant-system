@@ -2,6 +2,7 @@
 
 from flask import render_template
 
+from controllers import CourseController
 from models import User
 
 
@@ -15,6 +16,3 @@ def about() :
 
 def error(code) :
 	return render_template("error.html", code = code), code
-
-
-import CourseController
