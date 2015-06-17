@@ -3,11 +3,6 @@
 import os
 from flask import Flask, request
 
-import controllers
-print controllers
-print dir(controllers)
-print controllers.HomeController
-
 from controllers import HomeController, CourseController, LoginController, RegisterController
 from utils.Interface import ViewInterface
 from config import Urls
