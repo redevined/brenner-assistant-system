@@ -8,10 +8,8 @@ from utils.Interface import ViewInterface
 from config import Urls
 
 # Stupid test...
-with open("justatest.txt", "a") as f :
-	f.write("This actually works!")
-with open("justatest.txt") as f :
-	print f.read()
+print os.listdir(".")
+os.remove("justatest.txt")
 
 
 app = Flask(__name__)
