@@ -7,10 +7,6 @@ from controllers import HomeController, CourseController, LoginController, Regis
 from utils.Interface import ViewInterface
 from config import Urls
 
-# Stupid test...
-print os.listdir(".")
-os.remove("justatest.txt")
-
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
