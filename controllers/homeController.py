@@ -3,7 +3,6 @@
 from flask import render_template
 
 from models import User
-import CourseController
 
 
 def view() :
@@ -16,3 +15,6 @@ def about() :
 
 def error(code) :
 	return render_template("error.html", code = code), code
+
+
+import CourseController
