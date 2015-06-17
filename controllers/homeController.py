@@ -2,6 +2,7 @@
 
 from flask import render_template
 
+print "HC - Starting imports..."
 from controllers import CourseController
 from models import User
 

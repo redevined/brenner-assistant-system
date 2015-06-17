@@ -3,7 +3,8 @@
 import os
 from flask import Flask, request
 
-from controllers import CourseController, HomeController, LoginController, RegisterController
+print "app - Starting imports..."
+from controllers import HomeController, CourseController, LoginController, RegisterController
 from utils.Interface import ViewInterface
 from config import Urls
 

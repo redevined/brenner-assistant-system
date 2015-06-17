@@ -2,6 +2,7 @@
 
 from flask import redirect, render_template
 
+print "CC - Starting imports..."
 from models import User, Course
 from config import Notifications, Urls
 
