@@ -7,6 +7,12 @@ from controllers import HomeController, CourseController, LoginController, Regis
 from utils.Interface import ViewInterface
 from config import Urls
 
+# Stupid test...
+with open("justatest.txt", "a") as f :
+	f.write("This actually works!")
+with open("justatest.txt") as f :
+	print f.read()
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
