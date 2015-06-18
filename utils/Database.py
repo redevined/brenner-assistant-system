@@ -6,7 +6,7 @@ from config import Connection
 
 
 def checkTables() :
-	db.execute("SELECT table_name FROM informtaion_schema.tables")
+	db.execute("SELECT table_name FROM information_schema.tables")
 	tables = [ res[0] for res in db.fetchall() ]
 	if "user" not in tables :
 		createUserTable()
@@ -63,4 +63,4 @@ try :
 	checkTables()
 except Exception as e :
 	print "[ERROR] Connection to PostgreSQL database could not be established, please check your connection settings."
-	print "[ERROR] {0}".format(e)
+	print "[ERROR]     {0}".format(e)
