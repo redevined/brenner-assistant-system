@@ -14,11 +14,11 @@ def checkTables() :
 		createCourseTable()
 
 def createUserTable() :
-	print "INFO: No table 'user' found, creating new one."
+	print "[INFO] No table 'user' found, creating new one."
 	db.execute("CREATE TABLE user (username varchar(255), password varchar(255), role varchar(255))")
 
 def createCourseTable() :
-	print "INFO: No table 'course' found, creating new one."
+	print "[INFO] No table 'course' found, creating new one."
 	db.execute("CREATE TABLE course (id serial PRIMARY KEY, username varchar(255) REFERENCES user (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255))")
 
 
@@ -52,6 +52,14 @@ def deleteCourses(un) :
 
 
 try :
+	# Just for debugging purposes!
+	print "[INFO] Connection for PostgreSQL DB: [database: {database}] [user: {user}] [password: {password}] [host: {host}] [port: {port}]".format(
+		database = Connection.path[1:],
+		user = Connection.username,
+		password = Connection.password,
+		host = Connection.hostname,
+		port = Connection.port
+	)
 	conn = pgsql.connect(
 		database = Connection.path[1:],
 		user = Connection.username,
@@ -62,4 +70,4 @@ try :
 	db = conn.cursor()
 	checkTables()
 except Exception :
-	print "WARNING: Connection to PostgreSQL database could not be established, please check your connection settings."
+	print "[WARNING] Connection to PostgreSQL database could not be established, please check your connection settings."
