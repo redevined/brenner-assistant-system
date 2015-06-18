@@ -3,7 +3,7 @@
 from flask import redirect, render_template
 
 from models import User, Course
-from config import Notifications, Urls
+from config import Urls
 
 
 def view() :

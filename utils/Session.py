@@ -2,7 +2,7 @@
 
 from flask import session
 
-from Compression import decode, encode
+from utils.Compression import decode, encode
 
 
 class UserSession() :

@@ -6,11 +6,11 @@ from config import Months
 
 class Course() :
 
-	def __init__(self, name, date, start, end, role) :
+	def __init__(self, name, date, time, role) :
 		self.id = None
 		self.name = name
 		self.date = date
-		self.time = (start, end)
+		self.time = time
 		self.role = role
 
 
@@ -22,11 +22,12 @@ def _dateSortKey(course) :
 
 
 def add(username, info) :
-	course = Course(info.get("name"), _format(info.get("date")), info.get("time_start"), info.get("time_end"), info.get("role"))
-	return Database.storeCourse(username, course)
+	course = Course(info.get("name"), _format(info.get("date")), (info.get("time_start"), info.get("time_end")), info.get("role"))
+	Database.storeCourse(username, course)
 
 def getAll(username) :
-	courses = Database.loadCourses(username)
+	data = Database.loadCourses(username)
+	courses = [Course(*obj) for obj in data]
 	return sorted(courses, key = _dateSortKey)
 
 def getAllGrouped(username) :
@@ -42,8 +43,7 @@ def getAllGrouped(username) :
 	return courses
 
 def delete(username, id) :
-	return Database.deleteCourse(username, id)
+	Database.deleteCourse(username, id)
 
 def deleteAll(username) :
-	for course in getAll(courses) :
-		delete(username, course.id)
+	Database.deleteCourses(username)

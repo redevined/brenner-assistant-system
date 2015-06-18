@@ -3,7 +3,7 @@
 from flask import flash, redirect, render_template
 
 from models import User
-from config import Notifications, Urls
+from config import Urls
 
 
 def view() :
@@ -14,5 +14,5 @@ def register(form) :
 	if User.session.exists() :
 		return redirect(Urls.home)
 	else :
-		flash(Notifications.register_error)
+		flash("Der Benutzername ist bereits vergeben.")
 	return redirect(Urls.register)

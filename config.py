@@ -1,11 +1,16 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import hashlib, pickle
-from base64 import b64encode, b64decode
+import os, urlparse
 
 from utils import ConfigObject
 
+
+# Database connection
+urlparse.uses_netloc.append("postgres")
+Connection = urlparse.urlparse(
+	os.environ["DATABASE_URL"]
+)
 
 # Routing URLS
 Urls = ConfigObject.create(
@@ -23,32 +28,6 @@ Urls = ConfigObject.create(
 	}
 )
 
-# Redis connection
-Connection = ConfigObject.create(
-	{
-		"host"				:	"localhost",
-		"port"				:	6379
-	}
-)
-
-# Session and database keys
-Keys = ConfigObject.create(
-	{
-		"session"			:	"user",
-		"user_data" 		: 	"USERDATA",
-		"course_incr"		:	"COURSEINCR"
-	}
-)
-
-# Flash messages
-Notifications = ConfigObject.create(
-	{
-		"login_error" 		: 	u"Ungültige Anmeldedaten.",
-		"register_error"	:	"Der Benutzername ist bereits vergeben.",
-		"logout" 			: 	"Du wurdest erfolgreich abgemeldet."
-	}
-)
-
 # User roles
 Roles = ConfigObject.create(
 	{
@@ -63,7 +42,7 @@ Months = ConfigObject.create(
 		"get" 				: 	[
 									"Januar",
 									"Februar",
-									"März",
+									u"März",
 									"April",
 									"Mai",
 									"Juni",

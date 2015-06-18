@@ -1,52 +1,65 @@
 #/usr/bin/env python
 
-import redis
+import psycopg2 as pgsql
 
-from Compression import decode, encode
-from config import Connection, Keys
+from config import Connection
 
 
-db = redis.StrictRedis(host = Connection.host, port = Connection.port)
-try :
-	db.ping()
-except redis.exceptions.ConnectionError :
-	print "WARNING: No running Redis instance found, please check your connection settings."
+def checkTables() :
+	db.execute("SELECT table_name FROM informtaion_schema.tables")
+	tables = [ res[0] for res in db.fetchall() ]
+	if "user" not in tables :
+		createUserTable()
+	if "course" not in tables :
+		createCourseTable()
+
+def createUserTable() :
+	print "INFO: No table 'user' found, creating new one."
+	db.execute("CREATE TABLE user (username varchar(255), password varchar(255), role varchar(255))")
+
+def createCourseTable() :
+	print "INFO: No table 'course' found, creating new one."
+	db.execute("CREATE TABLE course (id serial PRIMARY KEY, username varchar(255) REFERENCES user (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255))")
 
 
 def loadUser(un) :
-	user = db.hget(un, Keys.user_data)
-	if user :
-		return decode(user)
+	db.execute("SELECT username, password, role FROM user WHERE username=%s", (un,))
+	return db.fetchone()
 
 def storeUser(user) :
-	db.hincrby(user.username, Keys.course_incr, 1)
-	return db.hset(user.username, Keys.user_data, encode(user))
+	db.execute("INSERT INTO user (username, password, role) VALUES (%s, %s, %s)", (user.username, user.password, user.role))
 
 def deleteUser(un) :
-	return db.delete(un)
+	db.execute("DELETE FROM user WHERE username=%s", (un,))
+	deleteCourses(un)
 
 def existsUser(un) :
-	return db.exists(un)
+	return loadUser(un) is not None
+
 
 def loadCourses(un) :
-	courses = [ decode(value) for key, value in db.hgetall(un).items() if key not in (Keys.user_data, Keys.course_incr) ]
-	return courses
+	db.execute("SELECT id, name, date, time, role FROM course WHERE username=%s", (un,))
+	return db.fetchall()
 
 def storeCourse(un, course) :
-	course.id = db.hget(un, Keys.course_incr)
-	db.hincrby(un, Keys.course_incr, 1)
-	return db.hset(un, course.id, encode(course))
+	db.execute("INSERT INTO course (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s)", (un, course.name, course.date, course.time, user.role))
 
 def deleteCourse(un, id) :
-	return db.hdel(un, id)
+	db.execute("DELETE FROM course WHERE username=%s and id=%s", (un, id))
 
-def optimize(un) :
-	courses = { int(key) : value for key, value in db.hgetall(un).items() if key not in (Keys.user_data, Keys.course_incr) }
-	for id, key in enumerate(sorted(courses.keys()), 1) :
-		db.hdel(un, key)
-		courses[key].id = id
-		db.hset(un, id, courses[key])
+def deleteCourses(un) :
+	db.execute("DELETE FROM course WHERE username=%s", (un,))
 
-def optimizeAll() :
-	for key in db.keys("*") :
-		optimize(key)
+
+try :
+	conn = pgsql.connect(
+		database = Connection.path[1:],
+		user = Connection.username,
+		password = Connection.password,
+		host = Connection.hostname,
+		port = Connection.port
+	)
+	db = conn.cursor()
+	checkTables()
+except Exception :
+	print "WARNING: Connection to PostgreSQL database could not be established, please check your connection settings."

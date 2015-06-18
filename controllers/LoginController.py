@@ -1,9 +1,10 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 from flask import flash, redirect, render_template
 
 from models import User
-from config import Notifications, Urls
+from config import Urls
 
 
 def view() :
@@ -16,11 +17,11 @@ def login(form) :
 			User.session.remember(True)
 		return redirect(Urls.home)
 	else :
-		flash(Notifications.login_error)
+		flash(u"Ungültige Anmeldedaten.")
 	return redirect(Urls.login)
 
 def logout() :
 	if User.session.exists() :
 		User.session.remove()
-		flash(Notifications.logout)
+		flash("Du wurdest erfolgreich abgemeldet.")
 	return redirect(Urls.login)

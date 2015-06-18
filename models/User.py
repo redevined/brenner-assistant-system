@@ -1,10 +1,10 @@
 #/usr/bin/env python
 
 from utils import Session, Database, Compression
-from config import Roles, Keys
+from config import Roles
 
 
-session = Session.UserSession(Keys.session)
+session = Session.UserSession("user")
 
 
 class User() :
@@ -16,8 +16,9 @@ class User() :
 
 
 def getByLogin(credentials) :
-	user = Database.loadUser(credentials.get("username"))
-	if user :
+	data = Database.loadUser(credentials.get("username"))
+	if data :
+		user = User(*data)
 		if user.password == Compression.hash(credentials.get("password")) :
 			return user
 
@@ -26,5 +27,5 @@ def getByRegister(credentials) :
 	if username and password :
 		if not Database.existsUser(username) :
 			user = User(username, password)
-			if Database.storeUser(user) :
-				return user
+			Database.storeUser(user)
+			return user
