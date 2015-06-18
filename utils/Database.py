@@ -8,29 +8,29 @@ from config import Connection
 def checkTables() :
 	db.execute("SELECT table_name FROM information_schema.tables")
 	tables = [ res[0] for res in db.fetchall() ]
-	if "user" not in tables :
+	if "users" not in tables :
 		createUserTable()
-	if "course" not in tables :
+	if "courses" not in tables :
 		createCourseTable()
 
 def createUserTable() :
-	print "[INFO] No table 'user' found, creating new one."
-	db.execute("CREATE TABLE user (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255))")
+	print "[INFO] No table 'users' found, creating new one."
+	db.execute("CREATE TABLE users (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255))")
 
 def createCourseTable() :
-	print "[INFO] No table 'course' found, creating new one."
-	db.execute("CREATE TABLE course (id serial PRIMARY KEY, username varchar(255) REFERENCES user (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255))")
+	print "[INFO] No table 'courses' found, creating new one."
+	db.execute("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255))")
 
 
 def loadUser(un) :
-	db.execute("SELECT username, password, role FROM user WHERE username=%s", (un,))
+	db.execute("SELECT username, password, role FROM users WHERE username=%s", (un,))
 	return db.fetchone()
 
 def storeUser(user) :
-	db.execute("INSERT INTO user (username, password, role) VALUES (%s, %s, %s)", (user.username, user.password, user.role))
+	db.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", (user.username, user.password, user.role))
 
 def deleteUser(un) :
-	db.execute("DELETE FROM user WHERE username=%s", (un,))
+	db.execute("DELETE FROM users WHERE username=%s", (un,))
 	deleteCourses(un)
 
 def existsUser(un) :
@@ -38,17 +38,17 @@ def existsUser(un) :
 
 
 def loadCourses(un) :
-	db.execute("SELECT id, name, date, time, role FROM course WHERE username=%s", (un,))
+	db.execute("SELECT id, name, date, time, role FROM courses WHERE username=%s", (un,))
 	return db.fetchall()
 
 def storeCourse(un, course) :
-	db.execute("INSERT INTO course (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s)", (un, course.name, course.date, course.time, user.role))
+	db.execute("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s)", (un, course.name, course.date, course.time, user.role))
 
 def deleteCourse(un, id) :
-	db.execute("DELETE FROM course WHERE username=%s and id=%s", (un, id))
+	db.execute("DELETE FROM courses WHERE username=%s and id=%s", (un, id))
 
 def deleteCourses(un) :
-	db.execute("DELETE FROM course WHERE username=%s", (un,))
+	db.execute("DELETE FROM courses WHERE username=%s", (un,))
 
 
 try :
