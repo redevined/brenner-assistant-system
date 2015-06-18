@@ -14,12 +14,14 @@ def checkTables() :
 		createCourseTable()
 
 def createUserTable() :
-	print "[INFO] No table 'users' found, creating new one."
+	print "[WARN] No table 'users' found!"
 	db.execute("CREATE TABLE users (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255));")
+	print "[INFO] New table 'users' created."
 
 def createCourseTable() :
-	print "[INFO] No table 'courses' found, creating new one."
+	print "[WARN] No table 'courses' found!"
 	db.execute("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
+	print "[INFO] New table 'courses' created."
 
 
 def loadUser(un) :
