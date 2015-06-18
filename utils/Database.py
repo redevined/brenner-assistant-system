@@ -15,7 +15,7 @@ def checkTables() :
 
 def createUserTable() :
 	print "[INFO] No table 'user' found, creating new one."
-	db.execute("CREATE TABLE user (username varchar(255), password varchar(255), role varchar(255))")
+	db.execute("CREATE TABLE user (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255))")
 
 def createCourseTable() :
 	print "[INFO] No table 'course' found, creating new one."
