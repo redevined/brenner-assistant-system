@@ -52,14 +52,6 @@ def deleteCourses(un) :
 
 
 try :
-	# Just for debugging purposes!
-	print "[INFO] Connection for PostgreSQL DB: [database: {database}] [user: {user}] [password: {password}] [host: {host}] [port: {port}]".format(
-		database = Connection.path[1:],
-		user = Connection.username,
-		password = Connection.password,
-		host = Connection.hostname,
-		port = Connection.port
-	)
 	conn = pgsql.connect(
 		database = Connection.path[1:],
 		user = Connection.username,
@@ -69,5 +61,6 @@ try :
 	)
 	db = conn.cursor()
 	checkTables()
-except Exception :
-	print "[WARNING] Connection to PostgreSQL database could not be established, please check your connection settings."
+except Exception as e :
+	print "[ERROR] Connection to PostgreSQL database could not be established, please check your connection settings."
+	print "[ERROR] {0}".format(e)
