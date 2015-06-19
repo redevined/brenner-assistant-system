@@ -15,21 +15,21 @@ def log(level, msg, *args, **kwargs) :
 	)
 
 # Log function with loglevel INFO
-def info(msg, *args, **kwargs) :
+def info(msg = "", *args, **kwargs) :
 	level = "INFO"
 	log(level, msg, *args, **kwargs)
 
 # Log function with loglevel WARN
-def warn(msg, *args, **kwargs) :
+def warn(msg = "", *args, **kwargs) :
 	level = "WARN"
 	log(level, msg, *args, **kwargs)
 
 # Log function with loglevel ERROR
-def error(msg, *args, **kwargs) :
+def error(msg = "", *args, **kwargs) :
 	level = "ERROR"
 	log(level, msg, *args, **kwargs)
 
 # Log function with loglevel DEBUG
-def debug(msg, *args, **kwargs) :
+def debug(msg = "", *args, **kwargs) :
 	level = "DEBUG"
 	log(level, msg, *args, **kwargs)

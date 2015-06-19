@@ -64,9 +64,9 @@ def admin() :
 
 @app.errorhandler(403)
 @app.errorhandler(404)
-@app.errorhandler(500)
+#@app.errorhandler(500)
 def throw(error) :
-	return HomeController.error(error)
+	return HomeController.error(error.code)
 
 
 if __name__ == "__main__" :
