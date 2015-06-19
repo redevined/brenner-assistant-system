@@ -15,6 +15,7 @@ class User() :
 		self.role = role
 
 	def checkPassword(self, pw) :
+		Log.debug(correct = self.password, given = Compression.hash(pw))
 		return self.password == Compression.hash(pw)
 
 	def isAdmin(self) :
@@ -26,7 +27,7 @@ def getByLogin(credentials) :
 	Log.debug(data)
 	if data :
 		user = User(*data)
-		Log.debug(user)
+		Log.debug(user, password_match = user.checkPassword(credentials.get("password")))
 		if user.checkPassword(credentials.get("password")) :
 			return user
 
