@@ -11,30 +11,24 @@ class User() :
 
 	def __init__(self, username, password, role = Roles.user) :
 		self.username = username
-		self.password = Compression.hash(password)
+		self.password = password
 		self.role = role
-
-	def checkPassword(self, pw) :
-		Log.debug(correct = self.password, given = Compression.hash(pw))
-		return self.password == Compression.hash(pw)
 
 	def isAdmin(self) :
 		return self.role == Roles.admin
 
 
 def getByLogin(credentials) :
-	data = Database.loadUser(credentials.get("username"))
+	data = Database.loadUser(credentials.get("username"), Compression.hash(credentials.get("password")))
 	Log.debug(data)
 	if data :
 		user = User(*data)
-		Log.debug(user, password_match = user.checkPassword(credentials.get("password")))
-		if user.checkPassword(credentials.get("password")) :
-			return user
+		return user
 
 def getByRegister(credentials) :
 	username, password = credentials.get("username"), credentials.get("password")
 	if not Database.existsUser(username) :
-		user = User(username, password)
+		user = User(username, Compression.hash(password))
 		Log.debug(user)
 		Database.storeUser(user)
 		return user

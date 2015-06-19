@@ -32,8 +32,8 @@ def createCourseTable() :
 	Log.info("New table 'courses' created")
 
 
-def loadUser(un) :
-	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", un)
+def loadUser(un, pw) :
+	data = exeq("SELECT username, password, role FROM users WHERE username=%s AND password=%s;", un, pw)
 	return data[0] if data else None
 
 def storeUser(user) :
