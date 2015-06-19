@@ -34,11 +34,12 @@ def createCourseTable() :
 
 def loadUser(un) :
 	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", True, un)
-	Log.debug(data)
 	return data
 
 def storeUser(user) :
+	Log.debug("executing insert")
 	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
+	Log.debug("insert executed")
 
 def deleteUser(un) :
 	exeq("DELETE FROM users WHERE username=%s;", un)
