@@ -19,7 +19,7 @@ class UserSession() :
 			return decode(user)
 
 	def set(self, user) :
-		Log.debug("Session::set" user = user)
+		Log.debug("Session::set", user = user)
 		if user :
 			self.session[self.key] = encode(user)
 
