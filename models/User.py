@@ -26,7 +26,7 @@ def getByLogin(credentials) :
 	Log.debug(data)
 	if data :
 		user = User(*data)
-		log.debug(user)
+		Log.debug(user)
 		if user.checkPassword(credentials.get("password")) :
 			return user
 
