@@ -33,7 +33,9 @@ def createCourseTable() :
 
 
 def loadUser(un) :
+	Log.debug("loadUser")
 	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", True, un)
+	Log.debug("query executed")
 	return data
 
 def storeUser(user) :
@@ -44,6 +46,7 @@ def deleteUser(un) :
 	deleteCourses(un)
 
 def existsUser(un) :
+	Log.debug("existsUser")
 	return loadUser(un) is not None
 
 
