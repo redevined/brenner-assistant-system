@@ -33,7 +33,7 @@ def getByRegister(credentials) :
 	username, password = credentials.get("username"), credentials.get("password")
 	if not Database.existsUser(username) :
 		user = User(username, password)
-		log.debug(user)
+		Log.debug(user)
 		Database.storeUser(user)
-		log.debug("user stored")
+		Log.debug("user stored")
 		return user
