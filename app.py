@@ -66,6 +66,7 @@ def admin() :
 @app.errorhandler(404)
 @app.errorhandler(500)
 def throw(error) :
+	print error
 	return HomeController.error(error.code)
 
 
