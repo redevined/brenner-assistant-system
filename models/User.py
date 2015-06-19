@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-from utils import Session, Database, Compression, Log
+from utils import Session, Database, Compression
 from config import Roles
 
 
