@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-from utils import Session, Database, Compression
+from utils import Session, Database, Compression, Log
 from config import Roles
 
 
@@ -29,9 +29,12 @@ def getByLogin(credentials) :
 			return user
 
 def getByRegister(credentials) :
+	Log.debug("getByRegister")
 	username, password = credentials.get("username"), credentials.get("password")
-	if username and password :
-		if not Database.existsUser(username) :
-			user = User(username, password)
-			Database.storeUser(user)
-			return user
+	Log.debug("credentials:", username = username, password = password)
+	if not Database.existsUser(username) :
+		user = User(username, password)
+		log.debug(user)
+		Database.storeUser(user)
+		log.debug("user stored")
+		return user
