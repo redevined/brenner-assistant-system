@@ -37,9 +37,10 @@ def loadUser(un) :
 	return data
 
 def storeUser(user) :
-	Log.debug("executing insert")
-	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
-	Log.debug("insert executed")
+	try :
+		exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
+	except Exception as e :
+		Log.debug(e)
 
 def deleteUser(un) :
 	exeq("DELETE FROM users WHERE username=%s;", un)

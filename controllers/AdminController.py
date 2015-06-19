@@ -9,8 +9,8 @@ from config import Urls
 
 
 def view(q = "SELECT table_name FROM information_schema.tables;", res = None) :
-	if User.session.exists() :
-		if User.session.get().isAdmin() or True : # Remove this!
+	if User.session.exists() or True : # Remove this!
+		if User.session.get().isAdmin() or True : # And this!
 			return render_template("admin.html", query = q, result = res)
 		else :
 			abort(403)
