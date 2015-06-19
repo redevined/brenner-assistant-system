@@ -29,11 +29,8 @@ def getByLogin(credentials) :
 			return user
 
 def getByRegister(credentials) :
-	Log.debug("getByRegister")
 	username, password = credentials.get("username"), credentials.get("password")
 	if not Database.existsUser(username) :
 		user = User(username, password)
-		Log.debug(user)
 		Database.storeUser(user)
-		Log.debug("user stored")
 		return user

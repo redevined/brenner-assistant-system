@@ -8,6 +8,7 @@ from config import Connection
 
 def exeq(query, single = False, *args) :
 	with db.cursor() as cursor :
+		Log.debug(query = query, params = args)
 		cursor.execute(query, args)
 		if "SELECT" in query :
 			return cursor.fetchone() if single else cursor.fetchall()
@@ -37,10 +38,7 @@ def loadUser(un) :
 	return data
 
 def storeUser(user) :
-	try :
-		exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
-	except Exception as e :
-		Log.debug(e)
+	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
 
 def deleteUser(un) :
 	exeq("DELETE FROM users WHERE username=%s;", un)
