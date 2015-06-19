@@ -6,12 +6,11 @@ from utils import Log
 from config import Connection
 
 
-def exeq(query, single = False, *args) :
+def exeq(query, *params) :
 	with db.cursor() as cursor :
-		Log.debug(query = query, params = args)
-		cursor.execute(query, args)
+		cursor.execute(query, params)
 		if "SELECT" in query :
-			return cursor.fetchone() if single else cursor.fetchall()
+			return cursor.fetchall()
 
 
 def checkTables() :
@@ -34,8 +33,8 @@ def createCourseTable() :
 
 
 def loadUser(un) :
-	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", True, un)
-	return data
+	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", un)
+	return data[0] if data else None
 
 def storeUser(user) :
 	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)

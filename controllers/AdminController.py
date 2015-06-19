@@ -4,7 +4,7 @@
 from flask import abort, flash, redirect, render_template
 
 from models import User
-from utils import Database, Log
+from utils import Database
 from config import Urls
 
 
