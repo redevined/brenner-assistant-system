@@ -23,6 +23,7 @@ class User() :
 
 def getByLogin(credentials) :
 	data = Database.loadUser(credentials.get("username"))
+	Log.debug(data)
 	if data :
 		user = User(*data)
 		if user.checkPassword(credentials.get("password")) :

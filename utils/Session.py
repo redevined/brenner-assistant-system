@@ -27,7 +27,7 @@ class UserSession() :
 		self.session.pop(self.key, None)
 
 	def exists(self) :
-		Log.debug("Session::exists", exists = self.session.has_key(self.key))
+		Log.debug("Session::exists", exists = self.session.has_key(self.key), session = session.items())
 		return self.session.has_key(self.key)
 
 	def remember(self, val) :
