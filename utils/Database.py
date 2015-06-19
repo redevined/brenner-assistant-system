@@ -14,6 +14,7 @@ def exeq(query, single = False, *args) :
 
 
 def checkTables() :
+	Log.info("Performing table check")
 	tables = [ res[0] for res in exeq("SELECT table_name FROM information_schema.tables;") ]
 	if "users" not in tables :
 		createUserTable()
@@ -21,14 +22,14 @@ def checkTables() :
 		createCourseTable()
 
 def createUserTable() :
-	Log.warn("No table 'users' found!")
+	Log.warn("No table 'users' found")
 	exeq("CREATE TABLE users (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255));")
-	Log.info("New table 'users' created.")
+	Log.info("New table 'users' created")
 
 def createCourseTable() :
-	Log.warn("No table 'courses' found!")
+	Log.warn("No table 'courses' found")
 	exeq("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
-	Log.info("New table 'courses' created.")
+	Log.info("New table 'courses' created")
 
 
 def loadUser(un) :
@@ -69,6 +70,9 @@ try :
 		port = Connection.port
 	)
 	db.autocommit = True
-	checkTables()
+	try :
+		checkTables()
+	except Exception as e :
+		Log.error("Exception during table check", exception = str(e).replace("\n", " "))
 except Exception as e :
-	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings.", exception = str(e).replace("\n", " "))
+	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings", exception = str(e).replace("\n", " "))

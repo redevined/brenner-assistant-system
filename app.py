@@ -3,7 +3,7 @@
 import os
 from flask import Flask, request
 
-from controllers import HomeController, CourseController, LoginController, RegisterController
+from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from utils.Interface import ViewInterface
 from config import Urls
 
@@ -21,6 +21,7 @@ def home() :
 def about() :
 	return HomeController.about()
 
+
 @app.route(Urls.login, methods = ["GET", "POST"])
 def login() :
 	if request.method == "POST" :
@@ -37,6 +38,7 @@ def register() :
 def logout() :
 	return LoginController.logout()
 
+
 @app.route(Urls.courseAdd, methods = ["POST"])
 def courseAdd() :
 	return CourseController.add(request.form)
@@ -52,6 +54,13 @@ def courseUpdate(id) :
 @app.route(Urls.courseSubmit)
 def courseSubmit() :
 	return CourseController.submit()
+
+
+@app.route(Urls.admin, methods = ["GET", "POST"])
+def admin() :
+	if request.method == "POST" :
+		return AdminController.execute(request.form)
+	return AdminController.view()
 
 @app.errorhandler(403)
 @app.errorhandler(404)

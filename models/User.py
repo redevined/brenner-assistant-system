@@ -14,12 +14,18 @@ class User() :
 		self.password = Compression.hash(password)
 		self.role = role
 
+	def checkPassword(self, pw) :
+		return self.password == Compression.hash(pw)
+
+	def isAdmin(self) :
+		return self.role == Roles.admin
+
 
 def getByLogin(credentials) :
 	data = Database.loadUser(credentials.get("username"))
 	if data :
 		user = User(*data)
-		if user.password == Compression.hash(credentials.get("password")) :
+		if user.checkPassword(credentials.get("password")) :
 			return user
 
 def getByRegister(credentials) :

@@ -24,6 +24,7 @@ Urls = ConfigObject.create(
 		"courseDelete"		:	"/course/delete",
 		"courseUpdate"		:	"/course/update",
 		"courseSubmit"		:	"/course/submit",
+		"admin"				:	"/admin",
 		"github"			:	"https://github.com/redevined/brenner-assistants-system"
 	}
 )

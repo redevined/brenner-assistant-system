@@ -14,21 +14,29 @@ class Course() :
 		self.role = role
 
 
-def _format(date) :
+def _formatDate(date) :
 	return ".".join(date.split("-")[::-1])
 
-def _dateSortKey(course) :
+def _formatTime(start, end) :
+	return "{0} - {1}".format(start, end)
+
+def _sortDate(course) :
 	return map(int, course.date.split(".")[::-1])
 
 
 def add(username, info) :
-	course = Course(info.get("name"), _format(info.get("date")), (info.get("time_start"), info.get("time_end")), info.get("role"))
+	course = Course(
+		info.get("name"),
+		_formatDate(info.get("date")),
+		_formatTime(info.get("time_start"), info.get("time_end")),
+		info.get("role")
+	)
 	Database.storeCourse(username, course)
 
 def getAll(username) :
 	data = Database.loadCourses(username)
 	courses = [Course(*obj) for obj in data]
-	return sorted(courses, key = _dateSortKey)
+	return sorted(courses, key = _sortDate)
 
 def getAllGrouped(username) :
 	courses = dict()

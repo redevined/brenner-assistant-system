@@ -50,6 +50,11 @@ h1, h2, h3 {
   border: 1px solid #fff;
 }
 
+.code {
+  font-family: Consolas, Lucida Console, monospace;
+  width: 500px !important;
+}
+
 .flash {
   color: #fff;
   background-color: #d83;

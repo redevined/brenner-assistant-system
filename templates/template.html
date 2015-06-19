@@ -32,6 +32,13 @@
 							<a href="{{ app.Urls.home }}"><span class="cover-head-brand"><img src="../static/img/logo.png" alt="BASys" /></span></a>
 							<nav>
 								<ul class="nav cover-head-nav">
+									{% if app.User.session.exists() %}
+									{% if app.User.session.get().isAdmin() %}
+									<li class="{% if app.request.endpoint == 'admin' %}active{% endif %}">
+										<a href="{{ app.Urls.admin }}">Projekt</a>
+									</li>
+									{% endif %}
+									{% endif %}
 									<li class="{% if app.request.endpoint == 'about' %}active{% endif %}">
 										<a href="{{ app.Urls.about }}">Projekt</a>
 									</li>
