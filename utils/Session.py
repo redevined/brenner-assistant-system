@@ -35,7 +35,10 @@ class SessionCleaner() :
 	def __init__(self, objs, timeout = 60*30) :
 		self.objects = objs
 		self.timeout = timeout
-		self.start()
+		self.run = False
+
+	def __del__(self) :
+		self.stop()
 
 	def start(self, interval = 60) :
 		Log.info("Starting cleaner thread", check_interval = interval, session_timeout = self.timeout)
@@ -58,10 +61,12 @@ class SessionCleaner() :
 
 class UserSession() :
 
-	def __init__(self, name) :
+	def __init__(self, name, clean = False) :
 		self.name = name
 		self.sessions = SessionContainer()
 		self.cleaner = SessionCleaner(self.sessions)
+		if clean :
+			self.cleaner.start()
 
 	def get(self) :
 		key = cookie.get(self.name)
