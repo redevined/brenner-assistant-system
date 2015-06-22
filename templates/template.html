@@ -35,7 +35,7 @@
 									{% if app.User.session.exists() %}
 									{% if app.User.session.get().isAdmin() %}
 									<li class="{% if app.request.endpoint == 'admin' %}active{% endif %}">
-										<a href="{{ app.Urls.admin }}">Projekt</a>
+										<a href="{{ app.Urls.admin }}">Admin</a>
 									</li>
 									{% endif %}
 									{% endif %}

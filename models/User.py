@@ -1,5 +1,7 @@
 #/usr/bin/env python
 
+import time
+
 from utils import Session, Database, Compression, Log
 from config import Roles
 
@@ -13,6 +15,10 @@ class User() :
 		self.username = username
 		self.password = password
 		self.role = role
+		self.refresh()
+
+	def refresh(self) :
+		self.timestamp = time.time() 
 
 	def isAdmin(self) :
 		return self.role == Roles.admin

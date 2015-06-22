@@ -4,6 +4,7 @@ import os
 from flask import Flask, request
 
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
+from models import User
 from utils.Interface import ViewInterface
 from config import Urls
 
@@ -61,6 +62,10 @@ def admin() :
 	if request.method == "POST" :
 		return AdminController.execute(request.form)
 	return AdminController.view()
+
+@app.before_request
+def refresh() :
+	User.session.refresh()
 
 @app.errorhandler(403)
 @app.errorhandler(404)
