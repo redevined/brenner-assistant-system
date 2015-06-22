@@ -67,11 +67,18 @@ def admin() :
 def refresh() :
 	User.session.refresh()
 
+
 @app.errorhandler(403)
+def error403(e) :
+	return HomeController.error(403)
+
 @app.errorhandler(404)
+def error404(e) :
+	return HomeController.error(404)
+
 @app.errorhandler(500)
-def throw(error) :
-	return HomeController.error(error.code)
+def error500(e) :
+	return HomeController.error(500)
 
 
 if __name__ == "__main__" :
