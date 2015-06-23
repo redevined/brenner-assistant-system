@@ -37,7 +37,8 @@ class SessionCleaner() :
 		self.run = False
 
 	def __del__(self) :
-		self.stop()
+		if self.run :
+			self.stop()
 
 	def start(self, interval = 60) :
 		Log.info("Starting cleaner thread", check_interval = interval, session_timeout = self.timeout)
