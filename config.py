@@ -3,14 +3,18 @@
 
 import os, urlparse
 
-from utils import ConfigObject
+from utils import ConfigObject, Log
 
 
 # Database connection
-urlparse.uses_netloc.append("postgres")
-Connection = urlparse.urlparse(
-	os.environ["DATABASE_URL"]
-)
+try :
+	urlparse.uses_netloc.append("postgres")
+	Connection = urlparse.urlparse(
+		os.environ["DATABASE_URL"]
+	)
+except Exception as e :
+	Log.error("No environment variable with the name 'DATABASE_URL' found", exception = str(e).replace("\n", " "))
+	Connection = None
 
 # Routing URLS
 Urls = ConfigObject.create(

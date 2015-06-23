@@ -22,14 +22,12 @@ def checkTables() :
 		createCourseTable()
 
 def createUserTable() :
-	Log.warn("No table 'users' found")
+	Log.warn("No table 'users' found, creating new")
 	exeq("CREATE TABLE users (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255));")
-	Log.info("New table 'users' created")
 
 def createCourseTable() :
-	Log.warn("No table 'courses' found")
+	Log.warn("No table 'courses' found, creating new")
 	exeq("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
-	Log.info("New table 'courses' created")
 
 
 def loadUser(un, pw) :

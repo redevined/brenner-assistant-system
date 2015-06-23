@@ -4,7 +4,6 @@ import time
 from threading import Thread
 from flask import session as cookie
 
-from utils.Compression import decode, encode
 from utils import Log
 
 

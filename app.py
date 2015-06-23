@@ -1,17 +1,17 @@
 #/usr/bin/env python
 
-import os
+import date
 from flask import Flask, request
 
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from models import User
-from utils.Interface import ViewInterface
+from utils import Interface, KeyGen
 from config import Urls
 
 
 app = Flask(__name__)
-app.secret_key = os.urandom(32)
-app.jinja_env.globals.update(app = ViewInterface())
+app.secret_key = "\xf5f\x92\xa9-,\xd6`\x1fvaa_\xed\xc0\xff\x8c\xd0\xb8\xac\xa6\xcb0\xa1"
+app.jinja_env.globals.update(app = Interface.ViewInterface())
 
 
 @app.route(Urls.home)

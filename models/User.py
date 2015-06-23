@@ -1,8 +1,8 @@
 #/usr/bin/env python
 
-import time
+import time, hashlib
 
-from utils import Session, Database, Compression
+from utils import Session, Database
 from config import Roles
 
 
@@ -24,8 +24,13 @@ class User() :
 		return self.role == Roles.admin
 
 
+def _hash(pw) :
+	hashed = hashlib.sha1(pw)
+	return hashed.hexdigest()
+
+
 def getByLogin(credentials) :
-	data = Database.loadUser(credentials.get("username"), Compression.hash(credentials.get("password")))
+	data = Database.loadUser(credentials.get("username"), _hash(credentials.get("password")))
 	if data :
 		user = User(*data)
 		return user
@@ -33,6 +38,6 @@ def getByLogin(credentials) :
 def getByRegister(credentials) :
 	username, password = credentials.get("username"), credentials.get("password")
 	if not Database.existsUser(username) :
-		user = User(username, Compression.hash(password))
+		user = User(username, _hash(password))
 		Database.storeUser(user)
 		return user
