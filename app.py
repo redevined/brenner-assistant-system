@@ -13,8 +13,6 @@ app = Flask(__name__)
 app.secret_key = "this is a really secret key"
 app.jinja_env.globals.update(app = ViewInterface())
 
-Log.debug(secretkey = app.secret_key)
-
 
 @app.route(Urls.home)
 def home() :
@@ -67,20 +65,23 @@ def admin() :
 
 @app.before_request
 def refresh() :
-	Log.debug(app_session = session, user_session_cookie = User.session.cookie, user_session_sessions = User.session.sessions)
+	Log.debug(app_session = session, user_session_cookie = User.Session.cookie, user_session_sessions = User.session.sessions)
 	User.session.refresh()
 
 
 @app.errorhandler(403)
 def error403(e) :
+	Log.error(exception = str(e).replace("\n", " "))
 	return HomeController.error(403)
 
 @app.errorhandler(404)
 def error404(e) :
+	Log.error(exception = str(e).replace("\n", " "))
 	return HomeController.error(404)
 
 @app.errorhandler(500)
 def error500(e) :
+	Log.error(exception = str(e).replace("\n", " "))
 	return HomeController.error(500)
 
 
