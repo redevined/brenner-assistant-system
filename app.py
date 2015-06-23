@@ -12,7 +12,6 @@ from config import Urls
 app = Flask(__name__)
 app.secret_key = "this is a really secret key"
 app.jinja_env.globals.update(app = ViewInterface())
-User.session.remove()
 
 
 @app.route(Urls.home)
