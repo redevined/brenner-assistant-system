@@ -3,12 +3,8 @@
 import time, hashlib
 from flask import session as cookie
 
-#from utils import Session, Database
-from utils import Database
+from utils import Session, Database
 from config import Roles
-
-
-#session = Session.UserSession("user")
 
 
 class User() :
@@ -17,40 +13,12 @@ class User() :
 		self.username = username
 		self.password = password
 		self.role = role
-		self.refresh()
-
-	def refresh(self) :
-		self.timestamp = time.time() 
 
 	def isAdmin(self) :
 		return self.role == Roles.admin
 
 
-class Session() :
-
-	def __init__(self, key) :
-		self.key = key
-
-	def get(self) :
-		if self.exists() :
-			username = cookie.get(self.key)
-			data = Database.loadUserFromSession(username)
-			return User(*data)
-
-	def set(self, user) :
-		cookie[self.key] = user.username
-
-	def remove(self) :
-		cookie.pop(self.key, None)
-
-	def exists(self) :
-		return cookie.has_key(self.key)
-
-	def remember(self, val = True) :
-		cookie.permanent = val
-
-
-session = Session("user")
+session = Session.UserSession(User)
 
 
 def _hash(pw) :

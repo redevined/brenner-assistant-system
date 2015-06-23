@@ -9,7 +9,7 @@ from config import Connection
 def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
-		if "SELECT" in query :
+		if "SELECT" in query : # TODO: check if fetch is available
 			return cursor.fetchall()
 
 

@@ -12,6 +12,7 @@ from config import Urls
 app = Flask(__name__)
 app.secret_key = "this is a really secret key"
 app.jinja_env.globals.update(app = ViewInterface())
+User.session.remove()
 
 
 @app.route(Urls.home)
@@ -64,9 +65,8 @@ def admin() :
 	return AdminController.view()
 
 @app.before_request
-def refresh() :
+def debug() :
 	Log.debug(app_session = session, user_session = User.cookie)
-	User.session.refresh()
 
 
 @app.errorhandler(403)
