@@ -41,6 +41,15 @@ Roles = ConfigObject.create(
 	}
 )
 
+# Flash message categories
+Msgs = ConfigObject.create(
+	{
+		"success"			: 	"success",
+		"warn"				: 	"warn",
+		"error"				: 	"error"
+	}
+)
+
 # Localized month names
 Months = ConfigObject.create(
 	{

@@ -11,8 +11,8 @@
 	<form class="form-signin" method="POST">
 		<h2 class="form-signin-heading">Melde dich an</h2>
 
-		{% for msg in get_flashed_messages() %}
-		<p class="flash flash-warn"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
+		{% for cat, msg in get_flashed_messages(with_categories=true) %}
+		<p class="flash flash-{{ cat }}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
 		{% endfor %}
 
 		<label for="username" class="sr-only">Benutzername</label>
