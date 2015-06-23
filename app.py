@@ -1,16 +1,19 @@
 #/usr/bin/env python
 
-from flask import Flask, request
+from flask import Flask, request, session
 
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from models import User
+from utils import Log
 from utils.Interface import ViewInterface
 from config import Urls
 
 
 app = Flask(__name__)
-app.secret_key = "\xf5f\x92\xa9-,\xd6`\x1fvaa_\xed\xc0\xff\x8c\xd0\xb8\xac\xa6\xcb0\xa1"
+app.secret_key = "this is a really secret key"
 app.jinja_env.globals.update(app = ViewInterface())
+
+Log.debug(secretkey = app.secret_key)
 
 
 @app.route(Urls.home)
@@ -64,6 +67,7 @@ def admin() :
 
 @app.before_request
 def refresh() :
+	Log.debug(session = session)
 	User.session.refresh()
 
 
