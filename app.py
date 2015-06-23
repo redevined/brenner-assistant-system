@@ -65,7 +65,7 @@ def admin() :
 
 @app.before_request
 def refresh() :
-	Log.debug(app_session = session, user_session_cookie = User.Session.cookie, user_session_sessions = User.session.sessions)
+	Log.debug(app_session = session, user_session = User.cookie)
 	User.session.refresh()
 
 
