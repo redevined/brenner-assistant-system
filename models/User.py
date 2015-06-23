@@ -32,9 +32,10 @@ class Session() :
 		self.key = key
 
 	def get(self) :
-		username = cookie.get(self.key)
-		data = Database.loadUserFromSession(username)
-		return User(*data)
+		if self.exists() :
+			username = cookie.get(self.key)
+			data = Database.loadUserFromSession(username)
+			return User(*data)
 
 	def set(self, user) :
 		cookie[self.key] = user.username
