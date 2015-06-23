@@ -63,10 +63,6 @@ def admin() :
 		return AdminController.execute(request.form)
 	return AdminController.view()
 
-@app.before_request
-def debug() :
-	Log.debug(app_session = session, user_session = User.cookie)
-
 
 @app.errorhandler(403)
 def error403(e) :
