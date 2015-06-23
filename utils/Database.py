@@ -50,7 +50,7 @@ def existsUser(un) :
 
 
 def loadCourses(un) :
-	data = exeq("SELECT id, name, date, time, role FROM courses WHERE username=%s;", un)
+	data = exeq("SELECT name, date, time, role, id FROM courses WHERE username=%s;", un)
 	return data
 
 def storeCourse(un, course) :

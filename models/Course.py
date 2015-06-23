@@ -6,8 +6,8 @@ from config import Months
 
 class Course() :
 
-	def __init__(self, name, date, time, role) :
-		self.id = None
+	def __init__(self, name, date, time, role, id = None) :
+		self.id = id
 		self.name = name
 		self.date = date
 		self.time = time
