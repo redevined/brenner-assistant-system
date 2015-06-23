@@ -13,7 +13,7 @@ try :
 		os.environ["DATABASE_URL"]
 	)
 except Exception as e :
-	Log.error("No environment variable with the name 'DATABASE_URL' found", exception = str(e).replace("\n", " "))
+	Log.error("No environment variable with the name 'DATABASE_URL' found", exception = e.message)
 	Connection = None
 
 # Routing URLS

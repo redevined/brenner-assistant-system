@@ -14,7 +14,7 @@ class UserSession() :
 	def get(self) :
 		if self.exists() :
 			username = cookie.get(self.key)
-			data = Database.loadUserFromSession(username)
+			data = Database.loadUser(username)
 			return self.UserCls(*data)
 
 	def set(self, user) :

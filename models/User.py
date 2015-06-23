@@ -27,7 +27,7 @@ def _hash(pw) :
 
 
 def getByLogin(credentials) :
-	data = Database.loadUser(credentials.get("username"), _hash(credentials.get("password")))
+	data = Database.loadUserByLogin(credentials.get("username"), _hash(credentials.get("password")))
 	if data :
 		user = User(*data)
 		return user

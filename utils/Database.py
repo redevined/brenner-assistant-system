@@ -30,11 +30,11 @@ def createCourseTable() :
 	exeq("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
 
 
-def loadUser(un, pw) :
+def loadUserByLogin(un, pw) :
 	data = exeq("SELECT username, password, role FROM users WHERE username=%s AND password=%s;", un, pw)
 	return data[0] if data else None
 
-def loadUserFromSession(un) :
+def loadUser(un) :
 	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", un)
 	return data[0] if data else None
 
@@ -75,6 +75,6 @@ try :
 	try :
 		checkTables()
 	except Exception as e :
-		Log.error("Exception during table check", exception = str(e).replace("\n", " "))
+		Log.error("Exception during table check", exception = e.message)
 except Exception as e :
-	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings", exception = str(e).replace("\n", " "))
+	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings", exception = e.message)

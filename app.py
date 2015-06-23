@@ -70,17 +70,17 @@ def debug() :
 
 @app.errorhandler(403)
 def error403(e) :
-	Log.error(exception = str(e).replace("\n", " "))
+	Log.error(exception = e.message)
 	return HomeController.error(403)
 
 @app.errorhandler(404)
 def error404(e) :
-	Log.error(exception = str(e).replace("\n", " "))
+	Log.error(exception = e.message)
 	return HomeController.error(404)
 
 @app.errorhandler(500)
 def error500(e) :
-	Log.error(exception = str(e).replace("\n", " "))
+	Log.error(exception = e.message)
 	return HomeController.error(500)
 
 
