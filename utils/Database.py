@@ -54,7 +54,7 @@ def loadCourses(un) :
 	return data
 
 def storeCourse(un, course) :
-	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, user.role)
+	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
 
 def deleteCourse(un, id) :
 	exeq("DELETE FROM courses WHERE username=%s and id=%s;", un, id)
