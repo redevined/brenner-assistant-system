@@ -19,7 +19,8 @@ class UserSession() :
 
 	def set(self, user) :
 		Log.info("Setting user session", user = user.username)
-		cookie[self.key] = user.username
+		if user :
+			cookie[self.key] = user.username
 
 	def remove(self) :
 		Log.info("Removing user session")

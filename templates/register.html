@@ -12,7 +12,7 @@
 		<h2 class="form-signin-heading">Erstelle einen Account</h2>
 
 		{% for msg in get_flashed_messages() %}
-		<p class="flash"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
+		<p class="flash flash-warn"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
 		{% endfor %}
 
 		<label for="username" class="sr-only">Benutzername</label>

@@ -22,7 +22,7 @@ def execute(form) :
 	try :
 		res = Database.exeq(query)
 	except Exception as e :
-		flash(e, "danger")
+		flash(e, "error")
 	else :
 		flash(u"Befehl erfolgreich ausgeführt!", "success")
 	return view(query, res)

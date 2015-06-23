@@ -57,10 +57,23 @@ h1, h2, h3 {
 
 .flash {
   color: #fff;
-  background-color: #d83;
   border: 1px solid transparent;
-  border-color: #c72;
   border-radius: 6px;
   padding: 15px;
   font-weight: bold;
+}
+
+.flash-success {
+  background-color: #0c0;
+  border-color: #0b0;
+}
+
+.flash-warn {
+  background-color: #d83;
+  border-color: #c72;
+}
+
+.flash-error {
+  background-color: #c00;
+  border-color: #b00;
 }

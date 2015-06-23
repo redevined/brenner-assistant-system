@@ -24,7 +24,7 @@
 	<br />
 
 	{% for cat, msg in get_flashed_messages(with_categories=true) %}
-	<p class="flash bg-{{ cat }}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
+	<p class="flash flash-{{ cat }}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
 	{% endfor %}
 	<br />
 
