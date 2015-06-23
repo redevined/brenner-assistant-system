@@ -4,7 +4,7 @@ import time
 from threading import Thread
 from flask import session as cookie
 
-from utils import Log
+from utils import Database, Log
 
 
 class SessionContainer(dict) :

@@ -34,6 +34,10 @@ def loadUser(un, pw) :
 	data = exeq("SELECT username, password, role FROM users WHERE username=%s AND password=%s;", un, pw)
 	return data[0] if data else None
 
+def loadUserFromSession(un) :
+	data = exeq("SELECT username, password, role FROM users WHERE username=%s;", un)
+	return data[0] if data else None
+
 def storeUser(user) :
 	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
 

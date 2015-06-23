@@ -1,12 +1,14 @@
 #/usr/bin/env python
 
 import time, hashlib
+from flask import session as cookie
 
-from utils import Session, Database
+#from utils import Session, Database
+from utils import Database
 from config import Roles
 
 
-session = Session.UserSession("user")
+#session = Session.UserSession("user")
 
 
 class User() :
@@ -22,6 +24,32 @@ class User() :
 
 	def isAdmin(self) :
 		return self.role == Roles.admin
+
+
+class Session() :
+
+	def __init__(self, key) :
+		self.key = key
+
+	def get(self) :
+		username = cookie.get(self.key)
+		data = Database.loadUserFromSession(username)
+		return User(*data)
+
+	def set(self, user) :
+		cookie[self.key] = user.username
+
+	def remove(self) :
+		cookie.pop(self.key, None)
+
+	def exists(self) :
+		return cookie.has_key(self.key)
+
+	def remember(self, val = True) :
+		cookie.permanent = val
+
+
+session = Session("user")
 
 
 def _hash(pw) :
