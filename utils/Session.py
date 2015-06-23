@@ -18,8 +18,8 @@ class UserSession() :
 			return self.UserCls(*data)
 
 	def set(self, user) :
-		Log.info("Setting user session", user = user.username)
 		if user :
+			Log.info("Setting user session", user = user.username)
 			cookie[self.key] = user.username
 
 	def remove(self) :
