@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-from flask import Flask, request, session
+from flask import Flask, request
 
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from models import User
@@ -21,6 +21,12 @@ def home() :
 @app.route(Urls.about)
 def about() :
 	return HomeController.about()
+
+@app.route(Urls.admin, methods = ["GET", "POST"])
+def admin() :
+	if request.method == "POST" :
+		return AdminController.execute(request.form)
+	return AdminController.view()
 
 
 @app.route(Urls.login, methods = ["GET", "POST"])
@@ -48,20 +54,9 @@ def courseAdd() :
 def courseDelete(id) :
 	return CourseController.delete(id)
 
-@app.route(Urls.courseUpdate + "/<int:id>", methods = ["POST"])
-def courseUpdate(id) :
-	return CourseController.update(id, request.form)
-
-@app.route(Urls.courseSubmit)
+@app.route(Urls.courseSubmit, methods = ["POST"])
 def courseSubmit() :
-	return CourseController.submit()
-
-
-@app.route(Urls.admin, methods = ["GET", "POST"])
-def admin() :
-	if request.method == "POST" :
-		return AdminController.execute(request.form)
-	return AdminController.view()
+	return CourseController.submit(request.form)
 
 
 @app.errorhandler(403)

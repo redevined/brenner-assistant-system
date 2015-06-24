@@ -50,6 +50,16 @@ thead .functions {
   display: inline;
 }
 
+.form-inline .multi-select label.checkbox,
+.form-inline .multi-select label.radio {
+    padding: 3px 20px 3px 40px;
+}
+.form-inline .multi-select li a label.checkbox input[type="checkbox"],
+.form-inline .multi-select li a label.radio input[type="radio"] {
+    margin-left: -20px;
+    margin-right: 0px;
+}
+
 @media (min-width: 992px) {
   .cover-head, .cover-foot, .cover-container {
     width: 900px;

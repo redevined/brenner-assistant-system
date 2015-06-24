@@ -13,7 +13,9 @@
     </head>
     <body>
         
-        <p class="lead">BASys Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</p>
+        {% for year, monthly_courses in all_courses.items() %}
+        {% for month, courses in monthly_courses.items() %}
+        <p class="lead">Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</p>
 
         <table class="table table-striped">
             <thead>
@@ -29,12 +31,16 @@
                 <tr>
                     <td>{{ course.name }}</td>
                     <td>{{ course.date }}</td>
-                    <td>{{ '{0} - {1}'.format(*course.time) }}</td>
+                    <td>{{ course.time }}</td>
                     <td>{{ course.role }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        <p style="page-break-after: always;">Erstellt mit BASys - http://basys.herokuapp.com</p>
+        {% endfor %}
+        {% endfor %}
 
     </body>
 </html>

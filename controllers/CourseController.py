@@ -2,14 +2,16 @@
 
 from flask import redirect, render_template
 
-from models import User, Course
-from config import Urls
+from models import User, Course, Sheet
+from config import Urls, Months
 
 
 def view() :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
-	return render_template("courses.html", user = user, courses = courses)
+	day, month, year = course.date.split(".")
+	months = { "{0} {1}".format(Months.get[int(month) - 1], year) for course in courses }
+	return render_template("courses.html", user = user, courses = courses, months = months)
 
 def add(form) :
 	if User.session.exists() :
@@ -23,20 +25,10 @@ def delete(id) :
 		Course.delete(user.username, id)
 	return redirect(Urls.home)
 
-def update(id, form) :
+def submit(form) :
 	if User.session.exists() :
 		user = User.session.get()
-		Course.delete(user.username, id)
-		Course.add(user.username, form)
-	return redirect(Urls.home)
-
-def submit() :
-	if User.session.exists() :
-		user = User.session.get()
-		grouped_courses = Course.getAllGrouped(user.username)
-		for year, months in grouped_courses.items() :
-			for month, courses in months.items() :
-				sheet = render_template("sheet.html", user = user, courses = courses, year = year, month = month)
-				# Some cool magic...
-				# Course.deleteAll(user.username)
+		courses = Course.getAll(user.username)
+		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.get("selected") ])
+		return pdf.render()
 	return redirect(Urls.home)

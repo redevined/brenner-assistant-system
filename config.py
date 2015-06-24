@@ -21,14 +21,13 @@ Urls = ConfigObject.create(
 	{
 		"home" 				: 	"/",
 		"about"				:	"/about",
+		"admin"				:	"/admin",
 		"login" 			: 	"/login",
 		"logout"			:	"/logout",
 		"register"			:	"/register",
 		"courseAdd"			:	"/course/add",
 		"courseDelete"		:	"/course/delete",
-		"courseUpdate"		:	"/course/update",
 		"courseSubmit"		:	"/course/submit",
-		"admin"				:	"/admin",
 		"github"			:	"https://github.com/redevined/brenner-assistants-system"
 	}
 )

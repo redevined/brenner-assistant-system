@@ -38,18 +38,6 @@ def getAll(username) :
 	courses = [Course(*obj) for obj in data]
 	return sorted(courses, key = _sortDate)
 
-def getAllGrouped(username) :
-	courses = dict()
-	for course in getAll(username) :
-		day, month, year = course.date.split(".")
-		month = Months.get[int(month) - 1]
-		if not courses.has_key(year) :
-			courses[year] = dict()
-		if not courses[year].has_key(month) :
-			courses[year][month] = list()
-		courses[year][month].append(course)
-	return courses
-
 def delete(username, id) :
 	Database.deleteCourse(username, id)
 

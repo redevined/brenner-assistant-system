@@ -3,7 +3,22 @@
 {% block title %}Deine Kurse{% endblock %}
 
 {% block style %}
+<link href="../static/css/bootstrap-multiselect.css" rel="stylesheet">
 <link href="../static/css/courses.css" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+<script src="../static/js/bootstrap-multiselect.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#selected').multiselect({
+			disableIfEmpty: true,
+			enableClickableOptGroups: true,
+			maxHeight: 200,
+			nonSelectedText: 'Monate auswählen'
+		});
+	});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -69,7 +84,7 @@
 								<a href="{{ app.Urls.courseDelete }}/{{ course.id }}" class="btn btn-primary">
 									<span class="glyphicon glyphicon-minus-sign"></span>
 								</a>
-						</div>
+							</div>
 						</td>
 					</tr>
 					{% endfor %}
@@ -77,8 +92,18 @@
 			</table>
 		</form>
 	</div>
-	<a href="{{ app.Urls.courseSubmit }}" class="btn btn-lg btn-primary btn-block {% if not courses %}disabled{% endif %}">
-		Auflistung erstellen
-	</a>
+	<form method="POST" action="{{ app.Urls.courseSubmit }}" class="form-inline">
+		<div class="form-group">
+			<label for="selected" class="sr-only">Monate</label>
+			<select id="selected" name="selected" class="form-control multi-select" multiple="multiple">
+				<optgroup label="Alle">
+					{% for month in months %}
+					<option value="{{ month }}" selected>{{ month }}</option>
+					{% endfor %}
+				</optgroup>
+			</select>
+			<button class="btn btn-primary {% if not courses %}disabled{% endif %}" type="submit">Auflistung erstellen</button>
+		</div>
+	</form>
 </div>
 {% endblock %}
