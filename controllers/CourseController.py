@@ -29,7 +29,7 @@ def submit(form) :
 	if User.session.exists() :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
-		Log.debug(months = form.get("selected"), form = form)
+		Log.debug(months = form.get("selected[]"), form = form, form_attrs = dir(form))
 		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.get("selected") ])
 		return pdf.render()
 	return redirect(Urls.home)
