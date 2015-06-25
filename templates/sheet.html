@@ -10,14 +10,29 @@
 
     	<!-- Bootstrap core and template CSS -->
         <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- PDF rendering styles -->
+        <style>
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+            .heading {
+                margin-bottom: 1cm;
+            }
+            .next-page {
+                page-break-after: always;
+                margin-top: 1cm;
+            }
+        </style>
     </head>
     <body>
         
         {% for year, monthly_courses in all_courses.items() %}
         {% for month, courses in monthly_courses.items() %}
-        <p class="lead">Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</p>
+        <h3 class="heading">Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</h3>
 
-        <table class="table table-striped">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Kurs</th>
@@ -38,7 +53,7 @@
             </tbody>
         </table>
 
-        <p style="page-break-after: always;">Erstellt mit BASys - http://basys.herokuapp.com</p>
+        <p class="next-page">Erstellt mit BASys - http://basys.herokuapp.com</p>
         {% endfor %}
         {% endfor %}
 
