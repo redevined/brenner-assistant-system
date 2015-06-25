@@ -1,7 +1,7 @@
 #/usr/bin/env python
 
 from flask import render_template, url_for
-from flask_weasyprint import HTML, render_pdf
+from flask_weasyprint import HTML, CSS, render_pdf
 
 from utils import Database, Log
 from config import Months
@@ -23,9 +23,8 @@ class Sheet() :
 			all_courses = self.courses
 		))
 		Log.debug(rendered_html = html)
-		css = [ url_for("static", filename = "css/bootstrap.min.css") ]
-		Log.debug(css = css)
-		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
+		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
+		doc = render_pdf(html, stylesheets = css)#, download_filename = self.filename)
 		log.debug(rendered_pdf = doc)
 		return doc
 
