@@ -26,6 +26,7 @@ class Sheet() :
 
 
 def generate(user, courses, selected) :
+	Log.info("Generating sheet for", user = user.username)
 	grouped = dict()
 	for course in courses :
 		day, month, year = course.date.split(".")

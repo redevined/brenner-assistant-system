@@ -72,6 +72,7 @@ def error404(e) :
 @app.errorhandler(500)
 def error500(e) :
 	Log.error(exception = e.message)
+	raise e
 	return HomeController.error(500)
 
 
