@@ -15,12 +15,17 @@
         <style>
             @page {
                 size: A4;
-                margin: 1cm;
+                margin: 2cm;
             }
             .heading {
                 margin-bottom: 1cm;
             }
-            .next-page {
+            .user{
+                color: #37b;
+            }
+            .footnote {
+                color: #555;
+                font-size: 8px;
                 page-break-after: always;
                 margin-top: 1cm;
             }
@@ -30,7 +35,7 @@
         
         {% for year, monthly_courses in all_courses.items() %}
         {% for month, courses in monthly_courses.items() %}
-        <h3 class="heading">Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</h3>
+        <h3 class="heading">Kursübersicht {{ month }} {{ year }} für <span class="user">{{ user.username }}</span>.</h3>
 
         <table class="table">
             <thead>
@@ -53,7 +58,7 @@
             </tbody>
         </table>
 
-        <p class="next-page">Erstellt mit BASys - http://basys.herokuapp.com</p>
+        <p class="footnote">Erstellt mit BASys - http://basys.herokuapp.com</p>
         {% endfor %}
         {% endfor %}
 

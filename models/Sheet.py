@@ -22,11 +22,11 @@ class Sheet() :
 			all_courses = self.courses
 		))
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
-		doc = render_pdf(html, stylesheets = css)#, download_filename = self.filename)
+		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
 		return doc
 
 
-def generate(user, courses, selected) :
+def generate(user, courses, selected, destructive) :
 	Log.info("Generating sheet for", user = user.username)
 	grouped = dict()
 	for course in courses :
@@ -38,6 +38,7 @@ def generate(user, courses, selected) :
 			if not grouped[year].has_key(month) :
 				grouped[year][month] = list()
 			grouped[year][month].append(course)
-			#Database.deleteCourse(user.username, course.id)
+			if destructive :
+				Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped)
 	return sheet
