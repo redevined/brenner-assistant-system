@@ -30,5 +30,5 @@ def submit(form) :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
 		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.getlist("selected[]") ], form.get("destructive"))
-		return pdf.render()
+		return pdf.render() # TODO: refresh after download
 	return redirect(Urls.home)

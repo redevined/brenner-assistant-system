@@ -20,12 +20,8 @@
             .heading {
                 margin-bottom: 1cm;
             }
-            .user{
-                color: #37b;
-            }
             .footnote {
-                color: #555;
-                font-size: 8px;
+                font-size: 12px;
                 page-break-after: always;
                 margin-top: 1cm;
             }
@@ -33,9 +29,9 @@
     </head>
     <body>
         
-        {% for year, monthly_courses in all_courses.items() %}
+        {% for year, monthly_courses in all_courses.items() %} <!-- TODO: sort -->
         {% for month, courses in monthly_courses.items() %}
-        <h3 class="heading">Kursübersicht {{ month }} {{ year }} für <span class="user">{{ user.username }}</span>.</h3>
+        <h3 class="heading">Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</h3>
 
         <table class="table">
             <thead>
