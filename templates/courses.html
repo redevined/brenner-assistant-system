@@ -98,7 +98,7 @@
 	<form method="POST" action="{{ app.Urls.courseSubmit }}" class="form-inline">
 		<div class="form-group">
 			<label for="selected" class="sr-only">Monate</label>
-			<select id="selected" name="selected[]" class="form-control multi-select" multiple="multiple">
+			<select id="selected" name="selected[]" class="form-control" multiple="multiple">
 				<optgroup label="Alle">
 					{% for month in months %}
 					<option value="{{ month }}" selected>{{ month }}</option>
