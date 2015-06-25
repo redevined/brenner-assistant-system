@@ -4,6 +4,7 @@ from flask import render_template, url_for
 from flask_weasyprint import HTML, render_pdf
 
 from utils import Database, Log
+from config import Months
 
 
 class Sheet() :
@@ -27,6 +28,7 @@ class Sheet() :
 
 def generate(user, courses, selected) :
 	Log.info("Generating sheet for", user = user.username)
+	Log.debug(courses = courses, selected_months = selected)
 	grouped = dict()
 	for course in courses :
 		day, month, year = course.date.split(".")
