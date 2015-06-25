@@ -29,7 +29,8 @@ def submit(form) :
 	if User.session.exists() :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
-		Log.debug("Returned form -", form = form, values = form.values(), keys = form.keys(), items = form.items())
-		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.values() ])
+		Log.debug("Returned form -", form = form, values = form.getlist("selected[]"))
+		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.getlist("selected[]") ])
+		Log.debug("Now render!")
 		return pdf.render()
 	return redirect(Urls.home)
