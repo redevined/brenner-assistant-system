@@ -3,6 +3,7 @@
 from flask import redirect, render_template
 
 from models import User, Course, Sheet
+from utils import Log
 from config import Urls, Months
 
 
@@ -28,6 +29,7 @@ def submit(form) :
 	if User.session.exists() :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
+		Log.debug(months = form.get("selected"))
 		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.get("selected") ])
 		return pdf.render()
 	return redirect(Urls.home)
