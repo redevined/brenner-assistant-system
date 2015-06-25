@@ -2,31 +2,28 @@
 
 
 # Basic log function, uses stdout
-def log(level, msg, *args, **kwargs) :
-	objs = " ".join(
-		"[{arg}]".format(arg = arg) for arg in args
-	)
-	nobjs = " ".join(
-		"[{name}: {arg}]".format(name = name, arg = arg) for name, arg in kwargs.items()
-	)
-	print "[{level}] {msgs}".format(level = level, msgs = " ".join(s for s in (msg, obj, nobj) if s))
+def log(level, *msgs, **vals) :
+	level = "[{level}]".format(level = level)
+	msgs = " ".join(msgs)
+	vals = " ".join( "[{key}: {val}]".format(key = key, val = val) for key, val in vals.items() )
+	print " ".join( part for part in (level, msgs, vals) if part )
 
 # Log function with loglevel INFO
-def info(msg = "", *args, **kwargs) :
+def info(*msgs, **vals) :
 	level = "INFO"
-	log(level, msg, *args, **kwargs)
+	log(level, *msgs, **vals)
 
 # Log function with loglevel WARN
-def warn(msg = "", *args, **kwargs) :
+def warn(*msgs, **vals) :
 	level = "WARN"
-	log(level, msg, *args, **kwargs)
+	log(level, *msgs, **vals)
 
 # Log function with loglevel ERROR
-def error(msg = "", *args, **kwargs) :
+def error(*msgs, **vals) :
 	level = "ERROR"
-	log(level, msg, *args, **kwargs)
+	log(level, *msgs, **vals)
 
 # Log function with loglevel DEBUG
-def debug(msg = "", *args, **kwargs) :
+def debug(*msgs, **vals) :
 	level = "DEBUG"
-	log(level, msg, *args, **kwargs)
+	log(level, *msgs, **vals)
