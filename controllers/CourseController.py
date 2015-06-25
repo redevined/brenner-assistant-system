@@ -9,8 +9,7 @@ from config import Urls, Months
 def view() :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
-	day, month, year = course.date.split(".")
-	months = { "{0} {1}".format(Months.get[int(month) - 1], year) for course in courses }
+	months = { "{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
 	return render_template("courses.html", user = user, courses = courses, months = months)
 
 def add(form) :
