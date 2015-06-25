@@ -38,6 +38,6 @@ def generate(user, courses, selected) :
 			if not grouped[year].has_key(month) :
 				grouped[year][month] = list()
 			grouped[year][month].append(course)
-			Database.deleteCourse(user.username, course.id)
+			#Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped, selected)
 	return sheet
