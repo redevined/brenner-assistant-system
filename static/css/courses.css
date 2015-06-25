@@ -50,8 +50,8 @@ thead .functions {
   display: inline;
 }
 
-#selected, .multiselect-container {
-  color: #000;
+.multiselect-container {
+  color: #555;
   text-shadow: none;
 }
 

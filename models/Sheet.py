@@ -16,13 +16,17 @@ class Sheet() :
 		self.template = "sheet.html"
 
 	def render(self) :
+		Log.debug("Rendering...")
 		html = HTML(string = render_template(
 			self.template,
 			user = self.user,
 			all_courses = self.courses
 		))
+		Log.debug(rendered_html = html)
 		css = [ url_for("static", filename = "css/bootstrap.min.css") ]
+		Log.debug(css = css)
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
+		log.debug(rendered_pdf = doc)
 		return doc
 
 
