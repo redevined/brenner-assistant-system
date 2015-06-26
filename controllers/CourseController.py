@@ -29,6 +29,6 @@ def submit(form) :
 	if User.session.exists() :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
-		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.getlist("selected[]") ], form.get("destructive"))
+		pdf = Sheet.generate(user, courses, [ pair.split() for pair in form.getlist("selected[]") ], form.get("destructive")) # TODO: length selected > 0
 		return pdf.render() # TODO: refresh after download
-	return redirect(Urls.home)
+	return redirect(Urls.home) # TODO: FLashes
