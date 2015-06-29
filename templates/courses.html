@@ -23,13 +23,22 @@
 		});
 		{% if pdf %}
 		// Post rendered pdf to download afterwards
-		$.post('{{ app.Urls.downloadSheet }}', { "pdf" : "{{ pdf }}" });
+		//$.post('{{ app.Urls.downloadSheet }}', { "pdf" : "{{ pdf }}" });
+		$('#download').submit();
 		{% endif %}
 	});
 </script>
 {% endblock %}
 
 {% block content %}
+{% if pdf %}
+<div id="download" style="display: none;">
+	<form method="POST" action="{{ app.Urls.downloadSheet }}">
+		<input type="text" name="pdf" value="{{ pdf }}">
+	</form>
+</div>
+{% endif %}
+
 <div class="inner cover">
 	<h2>Deine Kurse.</h2>
 	<br />
