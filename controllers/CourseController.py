@@ -1,18 +1,19 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-from flask import flash, redirect, render_template
+from flask import abort, flash, redirect, render_template
 
 from models import User, Course, Sheet
 from utils import Log
 from config import Urls, Months, Msgs
 
 
-def view() :
+def view(pdf = "") :
+	Log.debug(pdf = pdf)
 	user = User.session.get()
 	courses = Course.getAll(user.username)
 	months = { "{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
-	return render_template("courses.html", user = user, courses = courses, months = months)
+	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
 	if User.session.exists() :
@@ -34,7 +35,18 @@ def submit(form) :
 		if selected :
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
 			flash("Kurs-Auflistung erfolgreich erstellt.", Msgs.success)
-			return pdf.render() # TODO: refresh after download
+			Log.debug(json = Sheet.toJson(pdf))
+			return view(Sheet.toJson(pdf))
 		else :
 			flash(u"Keine Monate ausgewählt!", Msgs.warn)
+	else :
+		return abort(403)
 	return redirect(Urls.home)
+
+def download(form) :
+	if User.session.exists() :
+		Log.debug(**form)
+		pdf = Sheet.fromJson(form)
+		return pdf.render()
+	else :
+		return abort(403)

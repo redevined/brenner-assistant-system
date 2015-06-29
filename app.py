@@ -58,6 +58,10 @@ def courseDelete(id) :
 def courseSubmit() :
 	return CourseController.submit(request.form)
 
+@app.route(Urls.downloadSheet, methods = ["POST"])
+def downloadSheet() :
+	return CourseController.download(request.form)
+
 
 @app.errorhandler(403)
 def error403(e) :

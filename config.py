@@ -28,6 +28,7 @@ Urls = ConfigObject.create(
 		"courseAdd"			:	"/course/add",
 		"courseDelete"		:	"/course/delete",
 		"courseSubmit"		:	"/course/submit",
+		"downloadSheet"		:	"/course/download",
 		"github"			:	"https://github.com/redevined/brenner-assistants-system",
 		"mail"				:	"wirtholiv@gmail.com"
 	}

@@ -1,5 +1,6 @@
 #/usr/bin/env python
 
+import json
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
@@ -50,3 +51,9 @@ def generate(user, courses, selected, destructive) :
 				Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped)
 	return sheet
+
+def toJson(sheet) :
+	return json.dumps(sheet.__dict__)
+
+def fromJson(data) :
+	return Sheet(**data)
