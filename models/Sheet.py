@@ -55,11 +55,9 @@ def generate(user, courses, selected, destructive) :
 
 def encode(sheet) :
 	data = pickle.dumps(sheet)
-	data2 = data.replace("\n", "\\n")
-	Log.debug(data = data, data2 = data2)
-	return data2
+	Log.debug(data = data)
+	return data
 
 def decode(data) :
-	data2 = data.replace("&#39;", "'")
-	Log.debug(data = data, data2 = data2)
-	return pickle.loads(data2)
+	Log.debug(data = data)
+	return pickle.loads(data)
