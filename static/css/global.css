@@ -64,16 +64,16 @@ h1, h2, h3 {
 }
 
 .flash-success {
-  background-color: #0c0;
-  border-color: #0b0;
+  background-color: #33b771;
+  border-color: #23a761;
 }
 
 .flash-warn {
-  background-color: #d83;
-  border-color: #c72;
+  background-color: #b77133;
+  border-color: #a76123;
 }
 
 .flash-error {
-  background-color: #c00;
-  border-color: #b00;
+  background-color: #b73337;
+  border-color: #a72327;
 }
