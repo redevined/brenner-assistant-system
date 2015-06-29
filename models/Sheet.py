@@ -1,6 +1,7 @@
 #/usr/bin/env python
 
-import json
+import pickle
+from base64 import b64encode, b64decode
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
@@ -53,9 +54,10 @@ def generate(user, courses, selected, destructive) :
 	Log.debug("Returning sheet")
 	return sheet
 
-def toJson(sheet) :
-	Log.debug(dict = sheet.__dict__, **sheet.__dict__)
-	return json.dumps(sheet.__dict__)
+def encode(sheet) :
+	data = b64decode(pickle.dumps(sheet))
+	return data
 
-def fromJson(data) :
-	return Sheet(**data)
+def decode(data) :
+	sheet = pickle.loads(b64decode(data))
+	return sheet

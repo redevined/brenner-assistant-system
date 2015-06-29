@@ -35,8 +35,8 @@ def submit(form) :
 		if selected :
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
 			flash("Kurs-Auflistung erfolgreich erstellt.", Msgs.success)
-			Log.debug(json = Sheet.toJson(pdf))
-			return view(Sheet.toJson(pdf))
+			Log.debug(data = Sheet.encode(pdf))
+			return view(Sheet.encode(pdf))
 		else :
 			flash(u"Keine Monate ausgewählt!", Msgs.warn)
 	else :
@@ -46,7 +46,7 @@ def submit(form) :
 def download(form) :
 	if User.session.exists() :
 		Log.debug(**form)
-		pdf = Sheet.fromJson(form)
+		pdf = Sheet.decode(form.get("pdf"))
 		return pdf.render()
 	else :
 		return abort(403)
