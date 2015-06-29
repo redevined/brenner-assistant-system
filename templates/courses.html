@@ -21,22 +21,18 @@
 			nSelectedText: ' Monate ausgewählt',
 			allSelectedText: 'Alle ausgewählt'
 		});
-		{% if pdf %}
-		// Post rendered pdf to download afterwards
-		//$.post('{{ app.Urls.downloadSheet }}', { "pdf" : "{{ pdf }}" });
+		// Post artificial form with serialized pdf if present
 		$('#download').submit();
-		{% endif %}
+		$('#download').remove();
 	});
 </script>
 {% endblock %}
 
 {% block content %}
 {% if pdf %}
-<div style="display: none;">
-	<form id="download" method="POST" action="{{ app.Urls.downloadSheet }}">
-		<input type="text" name="pdf" value="{{ pdf }}">
-	</form>
-</div>
+<form id="download" method="POST" action="{{ app.Urls.downloadSheet }}" style="display: none;">
+	<input type="text" name="pdf" value="{{ pdf }}">
+</form>
 {% endif %}
 
 <div class="inner cover">
