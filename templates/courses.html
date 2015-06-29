@@ -21,11 +21,10 @@
 			nSelectedText: ' Monate ausgewählt',
 			allSelectedText: 'Alle ausgewählt'
 		});
-		// Download rendered pdf if given
-		if ('{{ pdf }}') {
-			alert('{{ pdf }}');
-			$.post({{ app.Urls.downloadSheet }}, { "pdf" : "{{ pdf }}" });
-		}
+		{% if pdf %}
+		// Post rendered pdf to download afterwards
+		$.post('{{ app.Urls.downloadSheet }}', { "pdf" : "{{ pdf }}" });
+		{% endif %}
 	});
 </script>
 {% endblock %}
