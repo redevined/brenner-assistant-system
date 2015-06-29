@@ -35,7 +35,6 @@ def submit(form) :
 		if selected :
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
 			flash("Kurs-Auflistung erfolgreich erstellt.", Msgs.success)
-			Log.debug(data = Sheet.encode(pdf))
 			return view(Sheet.encode(pdf))
 		else :
 			flash(u"Keine Monate ausgewählt!", Msgs.warn)

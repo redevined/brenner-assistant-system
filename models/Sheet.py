@@ -54,11 +54,9 @@ def generate(user, courses, selected, destructive) :
 	return sheet
 
 def encode(sheet) :
-	Log.debug(sheet = sheet, pickled_sheet = pickle.dumps(sheet))
-	data = b64decode(pickle.dumps(sheet))
-	Log.debug(data = data)
+	data = pickle.dumps(sheet)
 	return data
 
 def decode(data) :
-	sheet = pickle.loads(b64decode(data))
+	sheet = pickle.loads(data)
 	return sheet
