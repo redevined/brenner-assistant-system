@@ -59,6 +59,6 @@ def encode(sheet) :
 	return data.replace("\n", "\\n")
 
 def decode(data) :
-	data = data.replace("&#39", "'")
+	data = data.replace("&#39;", "'")
 	Log.debug(data = data.replace("\n", "\\n"))
 	return pickle.loads(data)
