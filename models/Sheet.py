@@ -51,11 +51,12 @@ def generate(user, courses, selected, destructive) :
 			if destructive :
 				Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped)
-	Log.debug("Returning sheet")
 	return sheet
 
 def encode(sheet) :
+	Log.debug(sheet = sheet, pickled_sheet = pickle.dumps(sheet))
 	data = b64decode(pickle.dumps(sheet))
+	Log.debug(data = data)
 	return data
 
 def decode(data) :
