@@ -26,18 +26,26 @@ class Sheet() :
 		return doc
 
 
+def _keys(li) :
+	return [ item[0] for item in li ]
+
+def _values(li, key) :
+	for item in li :
+		if item[0] == key :
+			return item[1]
+
 def generate(user, courses, selected, destructive) :
 	Log.info("Generating sheet for", user = user.username)
-	grouped = dict()
+	grouped = list()
 	for course in courses :
 		day, month, year = course.date.split(".")
 		month = Months.get[int(month) - 1]
 		if [month, year] in selected :
-			if not grouped.has_key(year) :
-				grouped[year] = dict()
-			if not grouped[year].has_key(month) :
-				grouped[year][month] = list()
-			grouped[year][month].append(course)
+			if year not in _keys(grouped) :
+				grouped.append((year, list()))
+			if month not in _keys(_values(grouped, year)) :
+				_values(grouped, year).append((month, list()))
+			_values(_values(grouped, year), month).append(course)
 			if destructive :
 				Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped)

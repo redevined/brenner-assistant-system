@@ -15,6 +15,7 @@ def login(form) :
 	if User.session.exists() :
 		if form.get("remember") :
 			User.session.remember(True)
+		flash("Willkommen, {name}.".format(name = User.session.get().username), Msgs.success)
 		return redirect(Urls.home)
 	else :
 		flash(u"Ungültige Anmeldedaten.", Msgs.error)

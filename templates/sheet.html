@@ -29,8 +29,8 @@
     </head>
     <body>
         
-        {% for year, monthly_courses in all_courses.items() %} <!-- TODO: sort -->
-        {% for month, courses in monthly_courses.items() %}
+        {% for year, monthly_courses in all_courses %}
+        {% for month, courses in monthly_courses %}
         <h3 class="heading">Kursübersicht {{ month }} {{ year }} für {{ user.username }}.</h3>
 
         <table class="table">
