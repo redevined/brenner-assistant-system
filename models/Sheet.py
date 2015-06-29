@@ -55,7 +55,7 @@ def generate(user, courses, selected, destructive) :
 
 def encode(sheet) :
 	data = pickle.dumps(sheet)
-	Log.debug(date_before = data, data_after = data.replace("\n", "\\n"))
+	Log.debug(data_before = data, data_after = data.replace("\n", "\\n"))
 	return data.replace("\n", "\\n")
 
 def decode(data) :
