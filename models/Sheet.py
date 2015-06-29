@@ -50,9 +50,11 @@ def generate(user, courses, selected, destructive) :
 			if destructive :
 				Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped)
+	Log.debug("Returning sheet")
 	return sheet
 
 def toJson(sheet) :
+	Log.debug(dict = sheet.__dict__, **sheet.__dict__)
 	return json.dumps(sheet.__dict__)
 
 def fromJson(data) :

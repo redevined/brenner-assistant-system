@@ -23,6 +23,7 @@
 		});
 		// Download rendered pdf if given
 		if ('{{ pdf }}') {
+			alert('{{ pdf }}');
 			$.post({{ app.Urls.downloadSheet }}, {{ pdf }});
 		}
 	});
