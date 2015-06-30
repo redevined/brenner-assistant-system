@@ -10,22 +10,87 @@
 <div class="inner cover">
 	<h2>Über das Projekt</h2>
 	<br />
-	<p class="lead">
+	<p>
 		BASys ist ein unabhängiges Projekt und wird von mir entwickelt und administriert.
+		Die Nutzung ist ausschließlich Angestellten der Tanzschule Brenner Heilbronn vorbehalten!
 	</p>
-	<p class="lead">
-		Mit der Erstellung eines Benutzerkontos stimmst du den Nutzungsbedingungen dieser Seite zu.
-		Du benötigst zur Anmeldung weder deinen echten Namen noch deine E-Mail-Adresse, trotzdem solltest du zumindest deinen Vornamen zu verwenden, da dieser auch auf den Abrechnungen erscheint.
-	</p>
-	<p class="lead">
+	<p>
 		Das Brenner Assistenten System wird von Heroku gehostet.
 		Dadurch kann es zu unbeeinflussbaren Ausfallzeiten des Servers, sowie der Datenbank kommen.
 		Ich übernehme daher keinerlei Haftung für den Verlust deiner gespeicherten Daten.
 	</p>
-	<p class="lead">
+	<p>
 		Der Quellcode der App kann <a href="{{ app.Urls.github }}">auf Github</a> gefunden werden.
 		Solltest du irgendwelche Bugs oder Logikfehler finden, sende bitte eine Fehlerbeschreibung an <a href="mailto:{{ app.Urls.mail }}">{{ app.Urls.mail }}</a>.
 		Eventuelle Verbesserungsvorschläge sind ebenfalls willkommen.
 	</p>
+
+	<h2>FAQ</h2>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="q1">
+				<h4 class="panel-title">
+					<a role="button" data-toggle="collapse" data-parent="#accordion" href="#a1" aria-expanded="true" aria-controls="a1">
+						Wie kann ich loslegen?
+					</a>
+				</h4>
+			</div>
+			<div id="a1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="q1">
+				<div class="panel-body">
+					Zur Nutzung von BASys benötigst du lediglich einen Account den du <a href="{{ app.Urls.register }}">hier</a> erstellen kannst.
+					Bitte beachte dass dein Benutzername auch später auf den Kurs-Auflistungen erscheinen wird, daher solltest du zumindest deinen echten Vornamen verwenden.
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="q2">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#a2" aria-expanded="false" aria-controls="a2">
+						Kann ich meinen Benutzernamen oder mein Passwort selbst ändern?
+					</a>
+				</h4>
+			</div>
+			<div id="a2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="q2">
+				<div class="panel-body">
+					Momentan ist das leider nicht möglich.
+					Sollte eine Kontodaten-Änderung jedoch notwendig sein, schreibe mir eine <a href="mailto:{{ app.Urls.mail }}">E-Mail</a> und ich werde mich darum kümmern.
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="q3">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#a3" aria-expanded="false" aria-controls="a3">
+						Wie füge ich meine Kurse hinzu?
+					</a>
+				</h4>
+			</div>
+			<div id="a3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="q3">
+				<div class="panel-body">
+					Sobald du einen Account erstellt hast und angemeldet bist, findest du auf der Startseite eine Tabelle mit deinen Kursen.
+					Trage in die erste Reihe der Tabelle den Kursnamen, das Datum, die Start- und End-Uhrzeit, sowie deine Rolle während des Kurses ein.
+					Mit einem Klick auf das <span class="glyphicon glyphicon-plus"></span> trägst du den Kurs schließlich ein.
+					Durch das <span class="glyphicon glyphicon-minus"></span> kannst du einen eingetragenen Kurs wieder entfernen.
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="q4">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#a4" aria-expanded="false" aria-controls="a4">
+						Wo erstelle ich eine Auflistung meiner Kurse?
+					</a>
+				</h4>
+			</div>
+			<div id="a4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="q4">
+				<div class="panel-body">
+					Unter der Tabelle auf der Startseite findest du ein Formular über das du deine Auflistung generieren kannst.
+					Dazu wählst du die Monate, die du nachher in der Auflistung wieder finden willst, aus und klickst auf den dazugehörigen Button.
+					Falls du alle ausgewählten Kurse gleich noch aus deinen Kursen entfernen möchtest, kannst du die Option "Ausgewählte Kurse löschen" wählen.
+					Anschließend wird ein PDF-Dokument erstellt, dass alle Kurse deiner ausgewählten Monate enthält.
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

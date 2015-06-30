@@ -13,7 +13,7 @@ def view() :
 def register(form) :
 	User.session.set(User.getByRegister(form))
 	if User.session.exists() :
-		flash(u"Willkommen, {name}. Hier findest du eine Übersicht deiner Kurse. Bei Fragen wende dich bitte an <a href=\"mailto:{mail}\">{mail}</a>.".format(name = User.session.get().username, mail = Urls.mail), Msgs.success)
+		flash(u"Willkommen, {name}. Hier findest du eine Übersicht deiner Kurse. Bevor du beginnst, lies dir bitte das <a href=\"{link}\">FAQ</a> durch!".format(name = User.session.get().username, link = Urls.about), Msgs.success)
 		return redirect(Urls.home)
 	else :
 		flash("Der Benutzername ist bereits vergeben.", Msgs.warn)
