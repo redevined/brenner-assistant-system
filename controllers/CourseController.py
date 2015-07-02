@@ -12,6 +12,12 @@ def view(pdf = "") :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
 	months = { "{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
+	Log.debug(
+		user = user.username,
+		courses = [c.__dict__ for c in courses],
+		months = months,
+		pdf = pdf
+	)
 	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
