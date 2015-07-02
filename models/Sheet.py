@@ -1,7 +1,7 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import pickle
-from base64 import b64encode, b64decode
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
@@ -18,6 +18,7 @@ class Sheet() :
 		self.template = "sheet.html"
 
 	def render(self) :
+		Log.debug("Rendering")
 		html = HTML(string = render_template(
 			self.template,
 			user = self.user,
@@ -25,6 +26,7 @@ class Sheet() :
 		))
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
+		Log.debug("Rendered")
 		return doc
 
 
@@ -51,6 +53,7 @@ def generate(user, courses, selected, destructive) :
 			if destructive :
 				Database.deleteCourse(user.username, course.id)
 	sheet = Sheet(user, grouped)
+	Log.debug("Generated")
 	return sheet
 
 def encode(sheet) :

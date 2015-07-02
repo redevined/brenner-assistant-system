@@ -36,7 +36,7 @@ def add(username, info) :
 def getAll(username) :
 	data = Database.loadCourses(username)
 	courses = [Course(*obj) for obj in data]
-	return sorted(courses, key = _sortDate)
+	return sorted(courses, key = _sortDate, reverse = True)
 
 def delete(username, id) :
 	Database.deleteCourse(username, id)
