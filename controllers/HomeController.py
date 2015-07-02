@@ -4,11 +4,9 @@ from flask import render_template
 
 from controllers import CourseController
 from models import User
-from utils import Log
 
 
 def view() :
-	Log.debug("HomeController::view")
 	if User.session.exists() :
 		return CourseController.view()
 	return render_template("home.html")
