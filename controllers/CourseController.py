@@ -9,13 +9,9 @@ from config import Urls, Months, Msgs
 
 
 def view(pdf = "") :
-	Log.debug(pdf = pdf)
 	user = User.session.get()
-	Log.debug(user = user.username)
 	courses = Course.getAll(user.username)
-	Log.debug(courses = [c.__dict__ for c in courses])
-	months = { "{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
-	Log.debug(months = months)
+	months = { u"{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
 	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
