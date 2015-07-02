@@ -6,3 +6,24 @@
   padding: 10px 20px;
   font-weight: bold;
 }
+
+.panel {
+	background-color: #222;
+}
+
+.panel-default {
+	border-color: #111;
+}
+
+.panel-default > .panel-heading {
+	background-color: #2a2a2a;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+	border-top-color: #111;
+}
+
+.panel-heading a, .panel-heading a:hover, .panel-heading a:focus {
+	color: #fff;
+	text-decoration: none;
+}
