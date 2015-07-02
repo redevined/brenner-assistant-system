@@ -27,6 +27,7 @@ def delete(id) :
 	return redirect(Urls.home)
 
 def submit(form) :
+	Log.debug("Submitting")
 	if User.session.exists() :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
@@ -34,6 +35,7 @@ def submit(form) :
 		if selected :
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
+			Log.debug("Submitted")
 			return view(Sheet.encode(pdf))
 		else :
 			flash(u"Keine Monate ausgewählt!", Msgs.warn)
@@ -42,8 +44,10 @@ def submit(form) :
 	return redirect(Urls.home)
 
 def download(form) :
+	Log.debug("Downloading")
 	if User.session.exists() :
 		pdf = Sheet.decode(form.get("pdf"))
+		Log.debug("Downloaded")
 		return pdf.render()
 	else :
 		return abort(403)
