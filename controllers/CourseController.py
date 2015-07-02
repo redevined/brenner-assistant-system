@@ -13,7 +13,7 @@ def view(pdf = "") :
 	courses = Course.getAll(user.username)
 	months = { u"{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
 	if pdf :
-		return dowload({ "pdf" : pdf })
+		return download({ "pdf" : pdf })
 	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
