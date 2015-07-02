@@ -22,8 +22,8 @@
 			allSelectedText: 'Alle ausgewählt'
 		});
 		// Post artificial form with serialized pdf if present
-		$('#download').submit();
-		$('#download').remove();
+		//$('#download').submit();
+		//$('#download').remove();
 	});
 </script>
 {% endblock %}
@@ -31,7 +31,7 @@
 {% block content %}
 {% if pdf %}
 <form id="download" method="POST" action="{{ app.Urls.downloadSheet }}" style="display: none;">
-	<input type="text" name="pdf" value="{{ pdf|string }}">
+	<input type="text" name="pdf" value="">
 </form>
 {% endif %}
 
