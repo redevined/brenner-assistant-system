@@ -54,7 +54,7 @@ def generate(user, courses, selected, destructive) :
 	return sheet
 
 def encode(sheet) :
-	return pickle.dumps(sheet).replace("\n", "\\n")
+	return pickle.dumps(sheet).replace("\n", "\\n").decode("utf-8")
 
 def decode(data) :
-	return pickle.loads(data.replace("\\n", "\n"))
+	return pickle.loads(data.encode("utf-8").replace("\\n", "\n"))

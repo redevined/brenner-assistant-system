@@ -31,7 +31,7 @@
 {% block content %}
 {% if pdf %}
 <form id="download" method="POST" action="{{ app.Urls.downloadSheet }}" style="display: none;">
-	<input type="text" name="pdf" value="">
+	<input type="text" name="pdf" value="{{ pdf }}">
 </form>
 {% endif %}
 
