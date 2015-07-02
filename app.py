@@ -16,6 +16,7 @@ app.jinja_env.globals.update(app = ViewInterface())
 
 @app.route(Urls.home)
 def home() :
+	Log.debug("app::home")
 	return HomeController.view()
 
 @app.route(Urls.about)
@@ -75,6 +76,7 @@ def error404(e) :
 
 @app.errorhandler(500)
 def error500(e) :
+	Log.debug("Oh no!")
 	Log.error(exception = e.message)
 	return HomeController.error(500)
 

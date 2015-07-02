@@ -9,6 +9,7 @@ from config import Urls, Months, Msgs
 
 
 def view(pdf = "") :
+	Log.debug("CourseController::view")
 	user = User.session.get()
 	courses = Course.getAll(user.username)
 	months = { "{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
