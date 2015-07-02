@@ -33,7 +33,6 @@ thead .functions {
 }
 
 .table > tbody > tr > td {
-  white-space: nowrap;
   vertical-align: middle;
 }
 
