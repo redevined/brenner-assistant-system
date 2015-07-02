@@ -73,6 +73,11 @@ def error404(e) :
 	Log.error(exception = e.message)
 	return HomeController.error(404)
 
+@app.errorhandler(405)
+def error405(e) :
+	Log.error(exception = e.message)
+	return HomeController.error(405)
+
 @app.errorhandler(500)
 def error500(e) :
 	Log.error(exception = e.message)

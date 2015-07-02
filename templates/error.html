@@ -10,9 +10,11 @@
 <div class="inner cover center">
 	<h1>Error {{ code }} :(</h1>
 	{% if code == 404 %}
-	<p>Diese Seite existiert nicht. Probiers mit einer anderen.</p>
-	{% elif code == 403 %}
 	<p>Zugriff verweigert.</p>
+	{% elif code == 404 %}
+	<p>Diese Seite existiert nicht. Probiers mit einer anderen.</p>
+	{% elif code == 405 %}
+	<p>Dieser Zugriff ist hier nicht möglich.</p>
 	{% elif code == 500 %}
 	<p>Irgendwas lief hier schief. Sorry!</p>
 	{% endif %}
