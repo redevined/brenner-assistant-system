@@ -9,9 +9,11 @@ from config import Urls, Months, Msgs
 
 
 def view(pdf = "") :
+	Log.debug(pdf = pdf)
 	user = User.session.get()
 	courses = Course.getAll(user.username)
 	months = { u"{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
+	Log.debug("Now rendering...")
 	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
@@ -27,7 +29,6 @@ def delete(id) :
 	return redirect(Urls.home)
 
 def submit(form) :
-	Log.debug("Submitting")
 	if User.session.exists() :
 		user = User.session.get()
 		courses = Course.getAll(user.username)
@@ -35,7 +36,6 @@ def submit(form) :
 		if selected :
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
-			Log.debug("Submitted")
 			return view(Sheet.encode(pdf))
 		else :
 			flash(u"Keine Monate ausgewählt!", Msgs.warn)
@@ -44,10 +44,8 @@ def submit(form) :
 	return redirect(Urls.home)
 
 def download(form) :
-	Log.debug("Downloading")
 	if User.session.exists() :
 		pdf = Sheet.decode(form.get("pdf"))
-		Log.debug("Downloaded")
 		return pdf.render()
 	else :
 		return abort(403)
