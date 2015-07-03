@@ -30,7 +30,7 @@ def add(username, info) :
 		Log.debug(name = info.get("name"))
 		Log.debug(type_name = type(info.get("name")))
 	except Exception as e :
-		Log.debug(exception = e.message)
+		Log.debug(exception = e, str = str(e))
 	course = Course(
 		info.get("name"),
 		_formatDate(info.get("date")),
