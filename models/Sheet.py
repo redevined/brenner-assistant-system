@@ -14,7 +14,7 @@ class Sheet() :
 	def __init__(self, user, courses) :
 		self.user = user
 		self.courses = courses
-		self.filename = "Auflistung_{0}.pdf".format(user.username)
+		self.filename = u"Auflistung_{0}.pdf".format(user.username)
 		self.template = "sheet.html"
 
 	def render(self) :
@@ -54,7 +54,7 @@ def generate(user, courses, selected, destructive) :
 	return sheet
 
 def encode(sheet) :
-	return pickle.dumps(sheet).replace("\n", "\\n").decode("utf-8")
+	return pickle.dumps(sheet).replace("\n", "\\n")
 
 def decode(data) :
-	return pickle.loads(data.encode("utf-8").replace("\\n", "\n"))
+	return pickle.loads(data.replace("\\n", "\n"))

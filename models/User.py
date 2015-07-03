@@ -10,7 +10,7 @@ from config import Roles
 class User() :
 
 	def __init__(self, username, password, role = Roles.user) :
-		self.username = username
+		self.username = username.decode("utf-8")
 		self.password = password
 		self.role = role
 

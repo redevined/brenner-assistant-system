@@ -8,7 +8,7 @@ class Course() :
 
 	def __init__(self, name, date, time, role, id = None) :
 		self.id = id
-		self.name = name
+		self.name = name.decode("utf-8")
 		self.date = date
 		self.time = time
 		self.role = role
