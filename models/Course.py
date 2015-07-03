@@ -25,7 +25,7 @@ def _sortDate(course) :
 
 
 def add(username, info) :
-	Log.debug("Course::add" name = info.get("name"), name_type = type(info.get("name")))
+	Log.debug("Course::add", name = info.get("name"), name_type = type(info.get("name")))
 	course = Course(
 		info.get("name"),
 		_formatDate(info.get("date")),
