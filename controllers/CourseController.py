@@ -32,9 +32,8 @@ def submit(form) :
 		courses = Course.getAll(user.username)
 		selected = [ pair.split() for pair in form.getlist("selected[]") ]
 		if selected :
-			Log.debug("Generating sheet...")
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
-			Log.debug("Generated.")
+			Log.debug(pdf = pdf, pdf_type = type(pdf))
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
 			return view(Sheet.encode(pdf))
 		else :
@@ -47,7 +46,6 @@ def download(form) :
 	Log.debug("Downloading sheet...")
 	if User.session.exists() :
 		pdf = Sheet.decode(form.get("pdf"))
-		Log.debug("Now really downloading...")
 		return pdf.render()
 	else :
 		return abort(403)
