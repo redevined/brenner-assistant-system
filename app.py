@@ -1,10 +1,10 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 from flask import Flask, request
 
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from models import User
-from utils import Log
 from utils.Interface import ViewInterface
 from config import Urls
 
@@ -65,23 +65,19 @@ def downloadSheet() :
 
 @app.errorhandler(403)
 def error403(e) :
-	Log.error(exception = e.message)
-	return HomeController.error(403)
+	return HomeController.error(403, e)
 
 @app.errorhandler(404)
 def error404(e) :
-	Log.error(exception = e.message)
-	return HomeController.error(404)
+	return HomeController.error(404, e)
 
 @app.errorhandler(405)
 def error405(e) :
-	Log.error(exception = e.message)
-	return HomeController.error(405)
+	return HomeController.error(405, e)
 
 @app.errorhandler(500)
 def error500(e) :
-	Log.error(exception = e.message)
-	return HomeController.error(500)
+	return HomeController.error(500, e)
 
 
 if __name__ == "__main__" :

@@ -1,4 +1,5 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import psycopg2 as pgsql
 
@@ -10,7 +11,7 @@ def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
 		if "SELECT" in query.upper().split() :
-			return cursor.fetchall()
+			return [ [str(field).decode("utf-8") for field in record] for record in cursor.fetchall() ]
 
 
 def checkTables() :
@@ -61,7 +62,7 @@ def storeCourse(un, course) :
 
 def deleteCourse(un, id) :
 	Log.info("Deleting course", user = un, course_id = id)
-	exeq("DELETE FROM courses WHERE username=%s and id=%s;", un, id)
+	exeq("DELETE FROM courses WHERE username=%s AND id=%s;", un, id)
 
 def deleteCourses(un) :
 	Log.info("Deleting all courses", user = un)

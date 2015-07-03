@@ -1,4 +1,5 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 from utils import Database, Log
 from config import Months
@@ -8,29 +9,23 @@ class Course() :
 
 	def __init__(self, name, date, time, role, id = None) :
 		self.id = id
-		self.name = name.decode("utf-8")
+		self.name = name
 		self.date = date
 		self.time = time
 		self.role = role
 
 
 def _formatDate(date) :
-	return ".".join(date.split("-")[::-1])
+	return u".".join(date.split("-")[::-1])
 
 def _formatTime(start, end) :
-	return "{0} - {1}".format(start, end)
+	return u"{0} - {1}".format(start, end)
 
 def _sortDate(course) :
 	return map(int, course.date.split(".")[::-1])
 
 
 def add(username, info) :
-	Log.debug("Course::add")
-	try :
-		Log.debug(name = info.get("name"))
-		Log.debug(type_name = type(info.get("name")))
-	except Exception as e :
-		Log.debug(exception = e, str = str(e))
 	course = Course(
 		info.get("name"),
 		_formatDate(info.get("date")),

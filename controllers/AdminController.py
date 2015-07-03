@@ -8,11 +8,9 @@ from utils import Database, Log
 from config import Urls, Msgs
 
 
-def view(query = "SELECT table_name FROM information_schema.tables;", res = None) :
+def view(query = u"SELECT table_name FROM information_schema.tables;", res = None) :
 	if User.session.exists() :
 		if User.session.get().isAdmin() :
-			if res :
-				res = ((str(field).decode("utf-8") for field in record) for record in res)
 			return render_template("admin.html", query = query, result = res)
 		else :
 			abort(403)

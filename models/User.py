@@ -1,4 +1,5 @@
 #/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import time, hashlib
 from flask import session as cookie
@@ -10,7 +11,7 @@ from config import Roles
 class User() :
 
 	def __init__(self, username, password, role = Roles.user) :
-		self.username = username.decode("utf-8")
+		self.username = username
 		self.password = password
 		self.role = role
 
@@ -22,7 +23,7 @@ session = Session.UserSession(User)
 
 
 def _hash(pw) :
-	hashed = hashlib.sha1(pw)
+	hashed = hashlib.sha1(pw.encode("utf-8"))
 	return hashed.hexdigest()
 
 
