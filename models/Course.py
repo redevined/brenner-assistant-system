@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-from utils import Database
+from utils import Database, Log
 from config import Months
 
 
@@ -25,13 +25,16 @@ def _sortDate(course) :
 
 
 def add(username, info) :
+	Log.debug("Course::add")
 	course = Course(
 		info.get("name"),
 		_formatDate(info.get("date")),
 		_formatTime(info.get("time_start"), info.get("time_end")),
 		info.get("role")
 	)
+	Log.debug("Storing course...")
 	Database.storeCourse(username, course)
+	Log.debug("Course stored.")
 
 def getAll(username) :
 	data = Database.loadCourses(username)
