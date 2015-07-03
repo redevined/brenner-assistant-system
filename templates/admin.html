@@ -31,10 +31,10 @@
 	{% if result %}
 	<div class="scroll-body">
 		<table class="table table-hover">
-			{% for row in result %}
+			{% for record in result %}
 			<tr>
-				{% for field in row %}
-				<td>{{ field|string }}</td>
+				{% for field in record %}
+				<td>{{ field }}</td>
 				{% endfor %}
 			</tr>
 			{% endfor %}

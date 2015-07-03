@@ -11,6 +11,8 @@ from config import Urls, Msgs
 def view(query = "SELECT table_name FROM information_schema.tables;", res = None) :
 	if User.session.exists() :
 		if User.session.get().isAdmin() :
+			if res :
+				res = ((str(field).decode("utf-8") for field in record) for record in res)
 			return render_template("admin.html", query = query, result = res)
 		else :
 			abort(403)
@@ -25,10 +27,4 @@ def execute(form) :
 		flash(e.message, Msgs.error)
 	else :
 		flash(u"Befehl erfolgreich ausgeführt!", Msgs.success)
-	temporary_debugging(res)
 	return view(query, res)
-
-def temporary_debugging(res) :
-	for record in res :
-		sid, username, name, date, time, role = record
-		Log.debug(id = sid, name = name, name_type = type(name))
