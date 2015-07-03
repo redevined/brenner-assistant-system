@@ -4,10 +4,10 @@
 
 # Basic log function, uses stdout
 def log(level, *msgs, **vals) :
-	level = "[{level}]".format(level = level)
-	msgs = " ".join(msgs)
-	vals = " ".join( "[{key}: {val}]".format(key = key, val = val) for key, val in vals.items() )
-	print " ".join( part for part in (level, msgs, vals) if part )
+	level = u"[{level}]".format(level = level)
+	msgs = u" ".join(msgs)
+	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = val) for key, val in vals.items() )
+	print u" ".join( part for part in (level, msgs, vals) if part )
 
 # Log function with loglevel INFO
 def info(*msgs, **vals) :
