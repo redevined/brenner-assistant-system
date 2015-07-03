@@ -34,7 +34,7 @@
 			{% for row in result %}
 			<tr>
 				{% for field in row %}
-				<td>{{ field }}</td>
+				<td>{{ field|string }}</td>
 				{% endfor %}
 			</tr>
 			{% endfor %}
