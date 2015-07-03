@@ -37,8 +37,8 @@ Urls = ConfigObject.create(
 # User roles
 Roles = ConfigObject.create(
 	{
-		"user" 				: 	"USER",
-		"admin" 			: 	"ADMIN"
+		"user" 				: 	u"USER",
+		"admin" 			: 	u"ADMIN"
 	}
 )
 
@@ -55,18 +55,18 @@ Msgs = ConfigObject.create(
 Months = ConfigObject.create(
 	{
 		"get" 				: 	[
-									"Januar",
-									"Februar",
+									u"Januar",
+									u"Februar",
 									u"März",
-									"April",
-									"Mai",
-									"Juni",
-									"Juli",
-									"August",
-									"September",
-									"Oktober",
-									"November",
-									"Dezember"
+									u"April",
+									u"Mai",
+									u"Juni",
+									u"Juli",
+									u"August",
+									u"September",
+									u"Oktober",
+									u"November",
+									u"Dezember"
 								]
 	}
 )

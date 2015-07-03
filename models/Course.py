@@ -32,9 +32,7 @@ def add(username, info) :
 		_formatTime(info.get("time_start"), info.get("time_end")),
 		info.get("role")
 	)
-	Log.debug("Storing course...")
 	Database.storeCourse(username, course)
-	Log.debug("Course stored.")
 
 def getAll(username) :
 	data = Database.loadCourses(username)
