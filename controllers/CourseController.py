@@ -42,7 +42,6 @@ def submit(form) :
 	return redirect(Urls.home)
 
 def download(form) :
-	Log.debug("Downloading sheet...")
 	if User.session.exists() :
 		pdf = Sheet.decode(form.get("pdf"))
 		return pdf.render()

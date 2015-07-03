@@ -19,7 +19,6 @@ class Sheet() :
 		self.template = "sheet.html"
 
 	def render(self) :
-		Log.debug("Welcome to rendering!")
 		html = HTML(string = render_template(
 			self.template,
 			user = self.user,
@@ -27,7 +26,6 @@ class Sheet() :
 		))
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
-		Log.debug("Finished rendering")
 		return doc
 
 
@@ -57,9 +55,7 @@ def generate(user, courses, selected, destructive) :
 	return sheet
 
 def encode(sheet) :
-	#return cp.dumps(sheet).replace("\n", "\\n").decode("latin1")
 	return b64encode(cp.dumps(sheet, -1))
 
 def decode(data) :
-	#return cp.loads(data.encode("latin1").replace("\\n", "\n"))
 	return cp.loads(b64decode(data))

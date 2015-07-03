@@ -57,7 +57,7 @@ def loadCourses(un) :
 	return data
 
 def storeCourse(un, course) :
-	#Log.info("Saving course", user = un, course = course.name)
+	Log.info("Saving course", user = un, course = course.name)
 	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
 
 def deleteCourse(un, id) :
