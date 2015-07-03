@@ -19,12 +19,16 @@ def view(query = "SELECT table_name FROM information_schema.tables;", res = None
 def execute(form) :
 	query = form.get("query")
 	res = None
-	Log.debug("Before:", query = query, result = res)
 	try :
 		res = Database.exeq(query)
 	except Exception as e :
-		raise e #flash(e.message, Msgs.error)
+		flash(e.message, Msgs.error)
 	else :
 		flash(u"Befehl erfolgreich ausgeführt!", Msgs.success)
-	Log.debug("After:", query = query, result = res)
+	temporary_debugging(res)
 	return view(query, res)
+
+def temporary_debugging(res) :
+	for record in res :
+		sid, username, name, date, time, role = record
+		Log.debug(id = sid, name = name, name_type = type(name))
