@@ -33,7 +33,7 @@ def submit(form) :
 		selected = [ pair.split() for pair in form.getlist("selected[]") ]
 		if selected :
 			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
-			Log.debug(pdf = pdf, pdf_type = type(pdf))
+			Log.debug(pdf = pdf, pdf_type = type(Sheet.encode(pdf)))
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
 			return view(Sheet.encode(pdf))
 		else :
