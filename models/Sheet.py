@@ -1,7 +1,8 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import pickle
+import cPickle as cp
+from base64 import b64encode, b64decode
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
@@ -56,7 +57,9 @@ def generate(user, courses, selected, destructive) :
 	return sheet
 
 def encode(sheet) :
-	return pickle.dumps(sheet, -1).replace("\n", "\\n")
+	#return cp.dumps(sheet).replace("\n", "\\n").decode("latin1")
+	return b64encode(cp.dumps(sheet, -1))
 
 def decode(data) :
-	return pickle.loads(data.replace("\\n", "\n"), -1)
+	#return cp.loads(data.encode("latin1").replace("\\n", "\n"))
+	return cp.loads(b64decode(data))
