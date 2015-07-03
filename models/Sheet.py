@@ -18,6 +18,7 @@ class Sheet() :
 		self.template = "sheet.html"
 
 	def render(self) :
+		Log.debug("Welcome to rendering!")
 		html = HTML(string = render_template(
 			self.template,
 			user = self.user,
@@ -25,6 +26,7 @@ class Sheet() :
 		))
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
+		Log.debug("Finished rendering")
 		return doc
 
 
@@ -54,7 +56,7 @@ def generate(user, courses, selected, destructive) :
 	return sheet
 
 def encode(sheet) :
-	return pickle.dumps(sheet).replace("\n", "\\n")
+	return pickle.dumps(sheet).replace("\n", "\\n").decode("utf-8")
 
 def decode(data) :
-	return pickle.loads(data.replace("\\n", "\n"))
+	return pickle.loads(data.encode("utf-8").replace("\\n", "\n"))
