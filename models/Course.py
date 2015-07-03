@@ -25,7 +25,12 @@ def _sortDate(course) :
 
 
 def add(username, info) :
-	Log.debug("Course::add", name = info.get("name"), name_type = type(info.get("name")))
+	Log.debug("Course::add")
+	try :
+		Log.debug(name = info.get("name"))
+		Log.debug(type_name = type(info.get("name")))
+	except Exception as e :
+		Log.debug(exception = e.message)
 	course = Course(
 		info.get("name"),
 		_formatDate(info.get("date")),
