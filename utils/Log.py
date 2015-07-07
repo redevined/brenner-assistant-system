@@ -6,11 +6,11 @@
 def log(level, *msgs, **vals) :
 	level = "[{level}]".format(level = level)
 	msgs = " ".join(msgs)
-	print vals
-	stuff = (u"[{key}: {val}]".format(key = key, val = val) for key, val in vals.items())
-	print stuff
+	print "vals:", vals
+	stuff = list(u"[{key}: {val}]".format(key = key, val = val) for key, val in vals.items())
+	print "stuff:", stuff
 	vals = " ".join( stuff )
-	print vals
+	print "vals2.0:", vals
 	print " ".join( part for part in (level, msgs, vals) if part )
 
 # Log function with loglevel INFO
