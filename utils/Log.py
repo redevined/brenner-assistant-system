@@ -1,6 +1,8 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+from config import System
+
 
 # Basic log function, uses stdout
 def log(level, *msgs, **vals) :
@@ -27,4 +29,5 @@ def error(*msgs, **vals) :
 # Log function with loglevel DEBUG
 def debug(*msgs, **vals) :
 	level = "DEBUG"
-	log(level, *msgs, **vals)
+	if System.debug :
+		log(level, *msgs, **vals)

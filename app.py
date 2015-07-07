@@ -6,7 +6,7 @@ from flask import Flask, request
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from models import User
 from utils.Interface import ViewInterface
-from config import Urls
+from config import System, Urls
 
 
 app = Flask(__name__)
@@ -81,4 +81,4 @@ def error500(e) :
 
 
 if __name__ == "__main__" :
-	app.run(debug = True)
+	app.run(debug = System.debug)

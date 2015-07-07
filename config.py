@@ -3,7 +3,7 @@
 
 import os, urlparse
 
-from utils import ConfigObject, Log
+from utils import ConfigObject
 
 
 # Database connection
@@ -13,7 +13,6 @@ try :
 		os.environ["DATABASE_URL"]
 	)
 except Exception as e :
-	Log.error("No environment variable with the name 'DATABASE_URL' found", exception = e.message)
 	Connection = None
 
 # Routing URLS
@@ -31,6 +30,13 @@ Urls = ConfigObject.create(
 		"downloadSheet"		:	"/course/download",
 		"github"			:	"https://github.com/redevined/brenner-assistants-system",
 		"mail"				:	"wirtholiv@gmail.com"
+	}
+)
+
+System = ConfigObject.create(
+	{
+		"debug"				:	True,
+		"update"			:	False
 	}
 )
 

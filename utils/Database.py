@@ -40,11 +40,9 @@ def loadUser(un) :
 	return data[0] if data else None
 
 def storeUser(user) :
-	Log.info("Creating user", user = user.username)
 	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
 
 def deleteUser(un) :
-	Log.info("Deleting user", user = un)
 	exeq("DELETE FROM users WHERE username=%s;", un)
 	deleteCourses(un)
 
@@ -57,19 +55,18 @@ def loadCourses(un) :
 	return data
 
 def storeCourse(un, course) :
-	Log.info("Saving course", user = un, course = course.name)
 	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
 
 def deleteCourse(un, id) :
-	Log.info("Deleting course", user = un, course_id = id)
 	exeq("DELETE FROM courses WHERE username=%s AND id=%s;", un, id)
 
 def deleteCourses(un) :
-	Log.info("Deleting all courses", user = un)
 	exeq("DELETE FROM courses WHERE username=%s;", un)
 
 
 try :
+	if not Connection :
+		Log.error("No environment variable with the name 'DATABASE_URL' found")
 	db = pgsql.connect(
 		database = Connection.path[1:],
 		user = Connection.username,

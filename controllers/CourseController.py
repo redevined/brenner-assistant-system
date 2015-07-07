@@ -5,13 +5,15 @@ from flask import abort, flash, redirect, render_template
 
 from models import User, Course, Sheet
 from utils import Log
-from config import Urls, Months, Msgs
+from config import Urls, Msgs, System
 
 
 def view(pdf = "") :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
-	months = { u"{0} {1}".format(Months.get[int(course.date.split(".")[1]) - 1], course.date.split(".")[2]) for course in courses }
+	months = Course.calcMonths(courses)
+	if System.update :
+		flash(u"Zurzeit werden Updates an BASys vorgenommen, daher kann diese Webseite jederzeit kurz ausfallen!", Msgs.warn)
 	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
@@ -32,7 +34,7 @@ def submit(form) :
 		courses = Course.getAll(user.username)
 		selected = [ pair.split() for pair in form.getlist("selected[]") ]
 		if selected :
-			pdf = Sheet.generate(user, courses, selected, form.get("destructive"))
+			pdf = Sheet.generate(user, courses, selected, form.get("destructive")) # TODO: Save sheets in database
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
 			return view(Sheet.encode(pdf))
 		else :
