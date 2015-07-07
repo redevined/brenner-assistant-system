@@ -3,7 +3,7 @@
 
 from flask import session as cookie
 
-from utils import Database, Log
+from utils import Database
 
 
 class UserSession() :
@@ -20,11 +20,9 @@ class UserSession() :
 
 	def set(self, user) :
 		if user :
-			Log.info("Setting user session", user = user.username)
 			cookie[self.key] = user.username
 
 	def remove(self) :
-		Log.info("Removing user session")
 		cookie.pop(self.key, None)
 
 	def exists(self) :

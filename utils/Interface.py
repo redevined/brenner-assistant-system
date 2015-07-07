@@ -9,4 +9,4 @@ class ViewInterface() :
 
 	import models
 	import utils
-	from config import *
+	from config import Urls, Roles, CourseRoles
