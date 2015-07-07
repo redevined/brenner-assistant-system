@@ -29,26 +29,26 @@
 
 					<div class="cover-head clearfix">
 						<div class="inner sevenhundred">
-							<a href="{{ app.Urls.home }}"><span class="cover-head-brand"><img src="../static/img/logo.png" alt="BASys" /></span></a>
+							<a href="{{ _.Urls.home }}"><span class="cover-head-brand"><img src="../static/img/logo.png" alt="BASys" /></span></a>
 							<nav>
 								<ul class="nav cover-head-nav">
-									{% if app.User.session.exists() %}
-									{% if app.User.session.get().isAdmin() %}
-									<li class="{% if app.request.endpoint == 'admin' %}active{% endif %}">
-										<a href="{{ app.Urls.admin }}">Admin</a>
+									{% if _.models.User.session.exists() %}
+									{% if _.models.User.session.get().isAdmin() %}
+									<li class="{% if _.flask.request.endpoint == 'admin' %}active{% endif %}">
+										<a href="{{ _.Urls.admin }}">Admin</a>
 									</li>
 									{% endif %}
 									{% endif %}
-									<li class="{% if app.request.endpoint == 'about' %}active{% endif %}">
-										<a href="{{ app.Urls.about }}">Projekt</a>
+									<li class="{% if _.flask.request.endpoint == 'about' %}active{% endif %}">
+										<a href="{{ _.Urls.about }}">Projekt</a>
 									</li>
-									{% if app.User.session.exists() %}
+									{% if _.models.User.session.exists() %}
 									<li>
-										<a href="{{ app.Urls.logout }}">Abmelden <span class="glyphicon glyphicon-log-out"></span></a>
+										<a href="{{ _.Urls.logout }}">Abmelden <span class="glyphicon glyphicon-log-out"></span></a>
 									</li>
 									{% else %}
-									<li class="{% if app.request.endpoint in ('login', 'register') %}active{% endif %}">
-										<a href="{{ app.Urls.login }}">Anmelden <span class="glyphicon glyphicon-log-in"></span></a>
+									<li class="{% if _.flask.request.endpoint in ('login', 'register') %}active{% endif %}">
+										<a href="{{ _.Urls.login }}">Anmelden <span class="glyphicon glyphicon-log-in"></span></a>
 									</li>
 									{% endif %}
 								</ul>
@@ -60,7 +60,7 @@
 
 					<div class="cover-foot lighter">
 						<div class="inner">
-							<p>BASys ist ein Projekt von <a href="{{ app.Urls.github }}"><span class="glyphicon glyphicon-link"></span>redevined</a>.</p>
+							<p>BASys ist ein Projekt von <a href="{{ _.Urls.github }}"><span class="glyphicon glyphicon-link"></span>redevined</a>.</p>
 						</div>
 					</div>
 

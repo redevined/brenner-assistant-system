@@ -33,6 +33,7 @@ Urls = ConfigObject.create(
 	}
 )
 
+# System state flags
 System = ConfigObject.create(
 	{
 		"debug"				:	True,
@@ -45,6 +46,14 @@ Roles = ConfigObject.create(
 	{
 		"user" 				: 	u"USER",
 		"admin" 			: 	u"ADMIN"
+	}
+)
+
+# Course roles
+CourseRoles = ConfigObject.create(
+	{
+		"assistant" 		: 	u"Assistent",
+		"trainer" 			: 	u"Lehrer"
 	}
 )
 

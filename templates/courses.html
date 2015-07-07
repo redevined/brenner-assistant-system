@@ -30,7 +30,7 @@
 
 {% block content %}
 {% if pdf %}
-<form id="download" method="POST" action="{{ app.Urls.downloadSheet }}" style="display: none;">
+<form id="download" method="POST" action="{{ _.Urls.downloadSheet }}" style="display: none;">
 	<input type="text" name="pdf" value="{{ pdf }}">
 </form>
 {% endif %}
@@ -45,7 +45,7 @@
 	{% endfor %}
 
 	<div class="scroll-body">
-		<form method="POST" action="{{ app.Urls.courseAdd }}">
+		<form method="POST" action="{{ _.Urls.courseAdd }}">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -66,25 +66,24 @@
 							<label for="date" class="sr-only">Datum</label>
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-								<input type="date" id="date" name="date" class="form-control" value="{{ app.datetime.today().strftime('%Y-%m-%d') }}" required>
+								<input type="date" id="date" name="date" class="form-control" value="{{ _.datetime.today().strftime('%Y-%m-%d') }}" required>
 							</div>
 						</td>
 						<td>
 							<span class="left">
 								<label for="time_start" class="sr-only">Start</label>
-								<input type="time" id="time_start" name="time_start" class="form-control" value="{{ app.datetime.today().strftime('%H:%M') }}" required>
+								<input type="time" id="time_start" name="time_start" class="form-control" value="{{ _.datetime.today().strftime('%H:%M') }}" required>
 							</span>
 							<span class="right">
 								<label for="time_end" class="sr-only">Ende</label>
-								<input type="time" id="time_end" name="time_end" class="form-control" value="{{ app.datetime.today().replace(hour = app.datetime.today().hour + 1).strftime('%H:%M') }}" required>
+								<input type="time" id="time_end" name="time_end" class="form-control" value="{{ _.datetime.today().replace(hour = _.datetime.today().hour + 1).strftime('%H:%M') }}" required>
 							</span>
 						</td>
 						<td>
 							<label for="role" class="sr-only">Rolle</label>
 							<select id="role" name="role" class="form-control">
-								<option value="Assistent" selected>Assistent</option>
-								<option value="Lehrer">Lehrer</option>
-								<option value="Teilnehmer">Teilnehmer</option>
+								<option value="{{ _.CourseRoles.assistant }}" selected>{{ _.CourseRoles.assistant }}</option>
+								<option value="{{ _.CourseRoles.trainer }}">{{ _.CourseRoles.trainer }}</option>
 							</select>
 						</td>
 						<td>
@@ -103,7 +102,7 @@
 						<td>{{ course.role }}</td>
 						<td>
 							<div class="right">
-								<a href="{{ app.Urls.courseDelete }}/{{ course.id }}" class="btn btn-primary">
+								<a href="{{ _.Urls.courseDelete }}/{{ course.id }}" class="btn btn-primary">
 									<span class="glyphicon glyphicon-minus-sign"></span>
 								</a>
 							</div>
@@ -116,7 +115,7 @@
 	</div>
 	<br />
 	
-	<form method="POST" action="{{ app.Urls.courseSubmit }}" class="form-inline">
+	<form method="POST" action="{{ _.Urls.courseSubmit }}" class="form-inline">
 		<div class="form-group">
 			<div class="col-sm-4">
 				<label for="selected" class="sr-only">Monate</label>

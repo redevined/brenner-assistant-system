@@ -4,8 +4,9 @@
 
 class ViewInterface() :
 
-	from flask import request
+	import flask
 	from datetime import datetime
 
-	from models import User, Course
-	from config import Urls
+	import models
+	import utils
+	from config import *

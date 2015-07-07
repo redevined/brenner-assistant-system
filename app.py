@@ -11,7 +11,7 @@ from config import System, Urls
 
 app = Flask(__name__)
 app.secret_key = "/\xfa-\x84\xfeW\xc3\xda\x11%/\x0c\xa0\xbaY\xa3\x89\x93$\xf5\x92\x9eW}"
-app.jinja_env.globals.update(app = ViewInterface())
+app.jinja_env.globals.update(_ = ViewInterface())
 
 
 @app.route(Urls.home)
