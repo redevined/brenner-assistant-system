@@ -42,7 +42,7 @@ def generate(user, courses, selected, destructive) :
 	grouped = list()
 	for course in courses :
 		day, month, year = course.date.split(".")
-		month = Months.get[int(month) - 1]
+		month = Months[month]
 		if [month, year] in selected :
 			if year not in _keys(grouped) :
 				grouped.append((year, list()))

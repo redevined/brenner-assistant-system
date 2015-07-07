@@ -60,19 +60,17 @@ Msgs = ConfigObject.create(
 # Localized month names
 Months = ConfigObject.create(
 	{
-		"get" 				: 	[
-									u"Januar",
-									u"Februar",
-									u"März",
-									u"April",
-									u"Mai",
-									u"Juni",
-									u"Juli",
-									u"August",
-									u"September",
-									u"Oktober",
-									u"November",
-									u"Dezember"
-								]
+		"01" 				: 	u"Januar",
+		"02"				:	u"Februar",
+		"03"				:	u"März",
+		"04"				:	u"April",
+		"05"				:	u"Mai",
+		"06"				:	u"Juni",
+		"07"				:	u"Juli",
+		"08"				:	u"August",
+		"09"				:	u"September",
+		"10"				:	u"Oktober",
+		"11"				:	u"November",
+		"12"				:	u"Dezember"
 	}
 )

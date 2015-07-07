@@ -48,7 +48,7 @@ def deleteAll(username) :
 def calcMonths(courses) :
 	return {
 		u"{0} {1}".format(
-			Months.get[int(course.date.split(".")[1]) - 1],
+			Months[course.date.split(".")[1]],
 			course.date.split(".")[2]
 		) for course in courses
 	}
