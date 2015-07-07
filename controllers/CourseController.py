@@ -44,7 +44,9 @@ def submit(form) :
 
 def download(form) :
 	if User.session.exists() :
-		pdf = Sheet.getById(User.session.get(), form.get("pdf"))
+		id = form.get("pdf")
+		pdf = Sheet.getById(User.session.get(), id)
+		Sheet.deleteById(id)
 		return pdf.render()
 	else :
 		return abort(403)

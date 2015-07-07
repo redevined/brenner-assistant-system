@@ -58,6 +58,9 @@ def getById(user, id) :
 	sheet = Sheet(user, cp.loads(cdata), id)
 	return sheet
 
+def deleteById(id) :
+	Database.deleteSheet(id)
+
 def encode(sheet) :
 	return b64encode(cp.dumps(sheet, -1))
 
