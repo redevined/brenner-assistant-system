@@ -15,7 +15,7 @@ def login(form) :
 	if User.session.exists() :
 		if form.get("remember") :
 			User.session.remember(True)
-		flash("Willkommen, {name}.".format(name = User.session.get().username), Msgs.success)
+		flash(u"Willkommen, {name}.".format(name = User.session.get().username), Msgs.success)
 		return redirect(Urls.home)
 	else :
 		flash(u"Ungültige Anmeldedaten.", Msgs.error)
@@ -24,5 +24,5 @@ def login(form) :
 def logout() :
 	if User.session.exists() :
 		User.session.remove()
-		flash("Du wurdest erfolgreich abgemeldet.", Msgs.success)
+		flash(u"Du wurdest erfolgreich abgemeldet.", Msgs.success)
 	return redirect(Urls.login)

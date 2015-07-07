@@ -78,6 +78,6 @@ try :
 	try :
 		checkTables()
 	except Exception as e :
-		Log.error("Exception during table check", exception = e.message)
+		Log.error("Exception during table check", exception = e)
 except Exception as e :
-	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings", exception = e.message)
+	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings", exception = e)
