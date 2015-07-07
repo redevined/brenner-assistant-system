@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import psycopg2 as pgsql
+import cPickle as cp
 
 from utils import Log
 from config import Connection
@@ -10,7 +11,7 @@ from config import Connection
 def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
-		if "SELECT" in query.upper().split() :
+		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
 			return [ [str(field).decode("utf-8") for field in record] for record in cursor.fetchall() ]
 
 
@@ -21,6 +22,8 @@ def checkTables() :
 		createUserTable()
 	if "courses" not in tables :
 		createCourseTable()
+	if "sheets" not in tables :
+		createSheetTable()
 
 def createUserTable() :
 	Log.warn("No table 'users' found, creating new")
@@ -29,6 +32,10 @@ def createUserTable() :
 def createCourseTable() :
 	Log.warn("No table 'courses' found, creating new")
 	exeq("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
+
+def createSheetTable() :
+	Log.warn("No table 'sheets' found, creating new")
+	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), courses varchar(max));")
 
 
 def loadUserByLogin(un, pw) :
@@ -62,6 +69,18 @@ def deleteCourse(un, id) :
 
 def deleteCourses(un) :
 	exeq("DELETE FROM courses WHERE username=%s;", un)
+
+
+def loadSheet(id) :
+	data = exeq("SELECT courses, id FROM sheets WHERE id=%s;", id)
+	return data[0] if data else None
+
+def storeSheetAndGetId(un, courses) :
+	id = exeq("INSERT INTO sheets (username, courses) VALUES (%s, %s) RETURNING id;", un, courses)
+	return id[0] if id else None
+
+def deleteSheet(id) :
+	exeq("DELETE FROM sheets WHERE id=%s;", id)
 
 
 try :

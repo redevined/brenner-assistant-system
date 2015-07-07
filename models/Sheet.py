@@ -12,7 +12,8 @@ from config import Months
 
 class Sheet() :
 
-	def __init__(self, user, courses) :
+	def __init__(self, user, courses, id = None) :
+		self.id = id
 		self.user = user
 		self.courses = courses
 		self.filename = u"Auflistung_{0}.pdf".format(user.username)
@@ -38,7 +39,6 @@ def _values(li, key) :
 			return item[1]
 
 def generate(user, courses, selected, destructive) :
-	Log.info("Generating sheet for", user = user.username)
 	grouped = list()
 	for course in courses :
 		day, month, year = course.date.split(".")
@@ -51,7 +51,11 @@ def generate(user, courses, selected, destructive) :
 			_values(_values(grouped, year), month).append(course)
 			if destructive :
 				Database.deleteCourse(user.username, course.id)
-	sheet = Sheet(user, grouped)
+	return Database.storeSheetAndGetId(user.username, cp.dumps(grouped))
+
+def getById(user, id) :
+	cdata, id = Database.loadSheet(id)
+	sheet = Sheet(user, cp.loads(cdata), id)
 	return sheet
 
 def encode(sheet) :

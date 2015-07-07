@@ -7,7 +7,7 @@ from models import User, Course, Sheet
 from config import Urls, Msgs, System
 
 
-def view(pdf = "") :
+def view(pdf = u"") :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
 	months = Course.calcMonths(courses)
@@ -33,9 +33,9 @@ def submit(form) :
 		courses = Course.getAll(user.username)
 		selected = [ pair.split() for pair in form.getlist("selected[]") ]
 		if selected :
-			pdf = Sheet.generate(user, courses, selected, form.get("destructive")) # TODO: Save sheets in database
+			sid = Sheet.generate(user, courses, selected, form.get("destructive"))
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
-			return view(Sheet.encode(pdf))
+			return view(sid)
 		else :
 			flash(u"Keine Monate ausgewählt!", Msgs.warn)
 	else :
@@ -44,7 +44,7 @@ def submit(form) :
 
 def download(form) :
 	if User.session.exists() :
-		pdf = Sheet.decode(form.get("pdf"))
+		pdf = Sheet.getById(User.session.get(), form.get("pdf"))
 		return pdf.render()
 	else :
 		return abort(403)
