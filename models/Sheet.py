@@ -1,7 +1,7 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import cPickle as cp
+import pickle
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
@@ -53,13 +53,13 @@ def generate(user, courses, selected, destructive) :
 	return storeWithId(user, grouped)
 
 def storeWithId(user, courses) :
-	data = cp.dumps(courses)
+	data = pickle.dumps(courses)
 	id = Database.storeSheetWithId(user.username, data)
 	return id
 
 def getById(user, id) :
 	data, id = Database.loadSheet(id)
-	sheet = Sheet(user, cp.loads(data), id)
+	sheet = Sheet(user, pickle.loads(data), id)
 	return sheet
 
 def deleteById(id) :
