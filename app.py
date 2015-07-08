@@ -75,9 +75,9 @@ def error404(e) :
 def error405(e) :
 	return HomeController.error(405, e)
 
-@app.errorhandler(500)
+"""@app.errorhandler(500)
 def error500(e) :
-	return HomeController.error(500, e)
+	return HomeController.error(500, e)"""
 
 
 if __name__ == "__main__" :
