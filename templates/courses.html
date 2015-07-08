@@ -24,7 +24,6 @@
 		{% if pdf %}
 		// Redirect to download if PDF is present
 		var url = '{{ _.Urls.downloadSheet }}/{{ pdf }}';
-		alert(url);
 		window.location.replace(url);
 		{% endif %}
 	});
