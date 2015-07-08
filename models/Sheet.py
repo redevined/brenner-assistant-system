@@ -53,7 +53,7 @@ def generate(user, courses, selected, destructive) :
 	return storeWithId(user, grouped)
 
 def storeWithId(user, courses) :
-	data = pickle.dumps(courses).decode("UTF-8")
+	data = pickle.dumps(courses).decode("latin-1")
 	id = Database.storeSheetWithId(user.username, data)
 	return id
 
