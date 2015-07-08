@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import pickle
+from base64 import b64decode, b64encode
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
@@ -55,7 +56,7 @@ def generate(user, courses, selected, destructive) :
 
 def storeWithId(user, courses) :
 	Log.debug()
-	data = pickle.dumps(courses).decode(System.encoding)
+	data = b64encode(pickle.dumps(courses)).decode(System.encoding)
 	Log.debug(data)
 	id = Database.storeSheetWithId(user.username, data)
 	Log.debug(id)
@@ -66,7 +67,7 @@ def getById(user, id) :
 	data, id = Database.loadSheet(id)
 	Log.debug(data)
 	Log.debug(id)
-	courses = pickle.loads(data)
+	courses = pickle.loads(b64decode(data))
 	Log.debug(courses)
 	sheet = Sheet(user, courses, id)
 	return sheet
