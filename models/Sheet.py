@@ -68,7 +68,7 @@ def getById(user, id) :
 	Log.debug(data)
 	Log.debug(id)
 	courses = pickle.loads(b64decode(data))
-	Log.debug(courses)
+	Log.debug(str(courses))
 	sheet = Sheet(user, courses, id)
 	return sheet
 
