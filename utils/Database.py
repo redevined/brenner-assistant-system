@@ -9,11 +9,9 @@ from config import Connection, System
 
 def exeq(query, *params) :
 	with db.cursor() as cursor :
-		Log.debug(query)
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
 			res = [ [str(field).decode(System.encoding) for field in record] for record in cursor.fetchall() ]
-			Log.debug(str(res))
 			return res
 
 
@@ -60,11 +58,15 @@ def existsUser(un) :
 
 
 def loadCourses(un) :
+	Log.debug("Loading")
 	data = exeq("SELECT name, date, time, role, id FROM courses WHERE username=%s;", un)
+	Log.debug("Loaded")
 	return data
 
 def storeCourse(un, course) :
+	Log.debug("Storing")
 	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
+	Log.debug("Stored")
 
 def deleteCourse(un, id) :
 	exeq("DELETE FROM courses WHERE username=%s AND id=%s;", un, id)
