@@ -38,7 +38,8 @@ System = ConfigObject.create(
 	{
 		"debug"				:	True,
 		"update"			:	False,
-		"keep"				:	True
+		"keep"				:	True,
+		"encoding"			:	"ISO-8859-1"
 	}
 )
 

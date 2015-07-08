@@ -4,14 +4,14 @@
 import psycopg2 as pgsql
 
 from utils import Log
-from config import Connection
+from config import Connection, System
 
 
 def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
-			return [ [str(field).decode("utf-8") for field in record] for record in cursor.fetchall() ]
+			return [ [str(field).decode(System.encoding) for field in record] for record in cursor.fetchall() ]
 
 
 def checkTables() :

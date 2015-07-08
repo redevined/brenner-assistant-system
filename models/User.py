@@ -5,7 +5,7 @@ import time, hashlib
 from flask import session as cookie
 
 from utils import Session, Database
-from config import Roles
+from config import Roles, System
 
 
 class User() :
@@ -23,7 +23,7 @@ session = Session.UserSession(User)
 
 
 def _hash(pw) :
-	hashed = hashlib.sha1(pw.encode("utf-8"))
+	hashed = hashlib.sha1(pw.encode(System.encoding))
 	return hashed.hexdigest()
 
 
