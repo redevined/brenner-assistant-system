@@ -6,6 +6,7 @@ from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
 from utils import Database
+from utils import Log
 from config import Months, System
 
 
@@ -53,13 +54,20 @@ def generate(user, courses, selected, destructive) :
 	return storeWithId(user, grouped)
 
 def storeWithId(user, courses) :
+	Log.debug()
 	data = pickle.dumps(courses).decode(System.encoding)
+	Log.debug(data)
 	id = Database.storeSheetWithId(user.username, data)
+	Log.debug(id)
 	return id
 
 def getById(user, id) :
+	Log.debug()
 	data, id = Database.loadSheet(id)
+	Log.debug(data)
+	Log.debug(id)
 	courses = pickle.loads(data)
+	Log.debug(courses)
 	sheet = Sheet(user, courses, id)
 	return sheet
 

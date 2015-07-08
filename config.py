@@ -3,7 +3,7 @@
 
 import os, urlparse
 
-from utils import ConfigObject
+from utils import ConfigObject # TODO: Combine to one object
 
 
 # Database connection
