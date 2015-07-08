@@ -23,7 +23,7 @@ session = Session.UserSession(User)
 
 
 def _hash(pw) :
-	hashed = hashlib.sha1(pw.encode("latin-1"))
+	hashed = hashlib.sha1(pw.encode("utf-8"))
 	return hashed.hexdigest()
 
 

@@ -11,7 +11,7 @@ def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
-			return [ [str(field).decode("latin-1") for field in record] for record in cursor.fetchall() ]
+			return [ [str(field).decode("utf-8") for field in record] for record in cursor.fetchall() ]
 
 
 def checkTables() :
