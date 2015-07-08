@@ -21,20 +21,15 @@
 			nSelectedText: ' Monate ausgewählt',
 			allSelectedText: 'Alle ausgewählt'
 		});
-		// Post artificial form with serialized pdf if present
-		$('#download').submit();
-		$('#download').remove();
+		{% if pdf %}
+		// Redirect to download if PDF is present
+		window.location.replace('{{ _.Urls.downloadSheet }}/{{ pdf }}' )
+		{% endif %}
 	});
 </script>
 {% endblock %}
 
 {% block content %}
-{% if pdf %}
-<form id="download" method="POST" action="{{ _.Urls.downloadSheet }}" style="display: none;">
-	<input type="text" name="pdf" value="{{ pdf }}">
-</form>
-{% endif %}
-
 <div class="inner cover">
 	<h2>Deine Kurse.</h2>
 	<br />

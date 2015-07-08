@@ -42,9 +42,8 @@ def submit(form) :
 		return abort(403)
 	return redirect(Urls.home)
 
-def download(form) :
+def download(id) :
 	if User.session.exists() :
-		id = form.get("pdf")
 		pdf = Sheet.getById(User.session.get(), id)
 		if not System.keep :
 			Sheet.deleteById(id)

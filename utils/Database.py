@@ -65,7 +65,6 @@ def storeCourse(un, course) :
 	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
 
 def deleteCourse(un, id) :
-	Log.debug(id = id, type_id = type(id))
 	exeq("DELETE FROM courses WHERE username=%s AND id=%s;", un, id)
 
 def deleteCourses(un) :
@@ -73,11 +72,10 @@ def deleteCourses(un) :
 
 
 def loadSheet(id) :
-	Log.debug(id = id, type_id = type(id))
 	data = exeq("SELECT courses, id FROM sheets WHERE id=%s;", id)
 	return data[0] if data else None
 
-def storeSheetAndGetId(un, courses) :
+def storeSheetWithId(un, courses) :
 	id = exeq("INSERT INTO sheets (username, courses) VALUES (%s, %s) RETURNING id;", un, courses)
 	return id[0][0] if id else None
 

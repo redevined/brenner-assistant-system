@@ -51,11 +51,16 @@ def generate(user, courses, selected, destructive) :
 			_values(_values(grouped, year), month).append(course)
 			if destructive :
 				Database.deleteCourse(user.username, course.id)
-	return Database.storeSheetAndGetId(user.username, cp.dumps(grouped))
+	return storeWithId(user, grouped)
+
+def storeWithId(user, courses) :
+	data = cp.dumps(courses)
+	id = Database.storeSheetWithId(user.username, data)
+	return id
 
 def getById(user, id) :
-	cdata, id = Database.loadSheet(id)
-	sheet = Sheet(user, cp.loads(cdata), id)
+	data, id = Database.loadSheet(id)
+	sheet = Sheet(user, cp.loads(data), id)
 	return sheet
 
 def deleteById(id) :
