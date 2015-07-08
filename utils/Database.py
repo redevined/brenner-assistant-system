@@ -72,6 +72,7 @@ def deleteCourses(un) :
 
 
 def loadSheet(id) :
+	Log.debug(id = id, type_id = type(id))
 	data = exeq("SELECT courses, id FROM sheets WHERE id=%s;", id)
 	return data[0] if data else None
 

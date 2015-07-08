@@ -23,7 +23,9 @@
 		});
 		{% if pdf %}
 		// Redirect to download if PDF is present
-		window.location.replace('{{ _.Urls.downloadSheet }}/{{ pdf }}' )
+		var url = '{{ _.Urls.downloadSheet }}/{{ pdf }}';
+		alert(url);
+		window.location.replace(url);
 		{% endif %}
 	});
 </script>

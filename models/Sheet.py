@@ -2,11 +2,10 @@
 # -*- coding: UTF-8 -*-
 
 import cPickle as cp
-from base64 import b64encode, b64decode
 from flask import render_template, url_for
 from flask_weasyprint import HTML, CSS, render_pdf
 
-from utils import Database, Log
+from utils import Database
 from config import Months
 
 
@@ -65,9 +64,3 @@ def getById(user, id) :
 
 def deleteById(id) :
 	Database.deleteSheet(id)
-
-def encode(sheet) :
-	return b64encode(cp.dumps(sheet, -1))
-
-def decode(data) :
-	return cp.loads(b64decode(data))

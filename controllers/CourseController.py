@@ -4,6 +4,7 @@
 from flask import abort, flash, redirect, render_template
 
 from models import User, Course, Sheet
+from utils import Log
 from config import Urls, Msgs, System
 
 
@@ -43,6 +44,7 @@ def submit(form) :
 	return redirect(Urls.home)
 
 def download(id) :
+	Log.debug(id = id, type_id = type(id))
 	if User.session.exists() :
 		pdf = Sheet.getById(User.session.get(), id)
 		if not System.keep :
