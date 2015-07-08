@@ -9,9 +9,12 @@ from config import Connection, System
 
 def exeq(query, *params) :
 	with db.cursor() as cursor :
+		Log.debug(query)
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
-			return [ [str(field).decode(System.encoding) for field in record] for record in cursor.fetchall() ]
+			res = [ [str(field).decode(System.encoding) for field in record] for record in cursor.fetchall() ]
+			Log.debug(res)
+			return res
 
 
 def checkTables() :
