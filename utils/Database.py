@@ -77,7 +77,7 @@ def loadSheet(id) :
 
 def storeSheetAndGetId(un, courses) :
 	id = exeq("INSERT INTO sheets (username, courses) VALUES (%s, %s) RETURNING id;", un, courses)
-	return id[0] if id else None
+	return id[0][0] if id else None
 
 def deleteSheet(id) :
 	exeq("DELETE FROM sheets WHERE id=%s;", id)

@@ -37,7 +37,8 @@ Urls = ConfigObject.create(
 System = ConfigObject.create(
 	{
 		"debug"				:	True,
-		"update"			:	False
+		"update"			:	False,
+		"keep"				:	True
 	}
 )
 

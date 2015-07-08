@@ -46,7 +46,8 @@ def download(form) :
 	if User.session.exists() :
 		id = form.get("pdf")
 		pdf = Sheet.getById(User.session.get(), id)
-		Sheet.deleteById(id)
+		if not System.keep :
+			Sheet.deleteById(id)
 		return pdf.render()
 	else :
 		return abort(403)
