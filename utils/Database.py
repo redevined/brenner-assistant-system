@@ -13,7 +13,7 @@ def exeq(query, *params) :
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
 			res = [ [str(field).decode(System.encoding) for field in record] for record in cursor.fetchall() ]
-			Log.debug(res)
+			Log.debug(str(res))
 			return res
 
 
