@@ -72,15 +72,11 @@ def deleteCourses(un) :
 
 
 def loadSheet(id) :
-	Log.debug("Loading")
 	data = exeq("SELECT courses, id FROM sheets WHERE id=%s;", id)
-	Log.debug("Loaded")
 	return data[0] if data else None
 
 def storeSheetWithId(un, courses) :
-	Log.debug("Storing")
 	id = exeq("INSERT INTO sheets (username, courses) VALUES (%s, %s) RETURNING id;", un, courses)
-	Log.debug("Stored")
 	return id[0][0] if id else None
 
 def deleteSheet(id) :

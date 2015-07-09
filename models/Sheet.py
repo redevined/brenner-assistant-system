@@ -55,18 +55,15 @@ def generate(user, courses, selected, destructive) :
 	return storeWithId(user, grouped)
 
 def storeWithId(user, courses) :
-	Log.debug()
 	data = b64encode(pickle.dumps(courses)).decode(System.encoding)
-	Log.debug(data)
 	id = Database.storeSheetWithId(user.username, data)
-	Log.debug(id)
 	return id
 
 def getById(user, id) :
 	Log.debug()
 	data, id = Database.loadSheet(id)
-	Log.debug(data)
-	Log.debug(id)
+	Log.debug(id = id)
+	Log.debug(data = data)
 	courses = pickle.loads(b64decode(data))
 	Log.debug(str(courses))
 	sheet = Sheet(user, courses, id)

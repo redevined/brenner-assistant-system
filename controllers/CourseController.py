@@ -4,7 +4,6 @@
 from flask import abort, flash, redirect, render_template
 
 from models import User, Course, Sheet
-from utils import Log
 from config import Urls, Msgs, System
 
 
@@ -34,7 +33,7 @@ def submit(form) :
 		courses = Course.getAll(user.username)
 		selected = [ pair.split() for pair in form.getlist("selected[]") ]
 		if selected :
-			sid = Sheet.generate(user, courses, selected, form.get("destructive"))
+			sid = Sheet.generate(user, courses, selected, form.get("destructive")) # TODO: Save in session cookie
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Msgs.success)
 			return view(sid)
 		else :

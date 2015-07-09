@@ -7,9 +7,9 @@ from config import System
 
 
 # Basic log function, uses stdout
-def log(level, *msgs, **vals) :
+def log(level, *msgs, **vals) : # TODO: Fix unicode bullshit
 	level = u"[{level}]".format(level = level)
-	caller = u"{1}::{3}".format(*inspect.stack()[2])
+	caller = u"({1}::{3})".format(*inspect.stack()[2])
 	msgs = u" ".join(msgs)
 	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = val) for key, val in vals.items() )
 	print u" ".join( part for part in (level, caller, msgs, vals) if part )
