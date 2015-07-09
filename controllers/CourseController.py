@@ -44,7 +44,9 @@ def submit(form) :
 
 def download(id) :
 	if User.session.exists() :
+		Lof.debug("Create PDF")
 		pdf = Sheet.getById(User.session.get(), id)
+		Log.debug(pdf = pdf)
 		if not System.keep :
 			Sheet.deleteById(id)
 		return pdf.render()

@@ -60,12 +60,8 @@ def storeWithId(user, courses) :
 	return id
 
 def getById(user, id) :
-	Log.debug()
 	data, id = Database.loadSheet(id)
-	Log.debug(id = id)
-	Log.debug(data = data)
 	courses = pickle.loads(b64decode(data))
-	Log.debug(str(courses))
 	sheet = Sheet(user, courses, id)
 	return sheet
 
