@@ -3,7 +3,7 @@
 
 import inspect
 
-from config import System
+from config import Config
 
 
 # Basic log function, uses stdout
@@ -16,21 +16,21 @@ def log(level, *msgs, **vals) : # TODO: Fix unicode bullshit
 
 # Log function with loglevel INFO
 def info(*msgs, **vals) :
-	level = "INFO"
+	level = Config.Log.info
 	log(level, *msgs, **vals)
 
 # Log function with loglevel WARN
 def warn(*msgs, **vals) :
-	level = "WARN"
+	level = Config.Log.warn
 	log(level, *msgs, **vals)
 
 # Log function with loglevel ERROR
 def error(*msgs, **vals) :
-	level = "ERROR"
+	level = Config.Log.error
 	log(level, *msgs, **vals)
 
 # Log function with loglevel DEBUG
 def debug(*msgs, **vals) :
-	level = "DEBUG"
-	if System.debug :
+	level = Config.Log.debug
+	if Config.debug :
 		log(level, *msgs, **vals)

@@ -4,11 +4,11 @@
 import pickle
 from base64 import b64decode, b64encode
 from flask import render_template, url_for
-from flask_weasyprint import HTML, CSS, render_pdf
+#from flask_weasyprint import HTML, CSS, render_pdf
 
 from utils import Database
 from utils import Log
-from config import Months, System
+from config import Config
 
 
 class Sheet() :
@@ -43,7 +43,7 @@ def generate(user, courses, selected, destructive) :
 	grouped = list()
 	for course in courses :
 		day, month, year = course.date.split(".")
-		month = Months[month]
+		month = Config.Months[month]
 		if [month, year] in selected :
 			if year not in _keys(grouped) :
 				grouped.append((year, list()))
@@ -55,7 +55,7 @@ def generate(user, courses, selected, destructive) :
 	return storeWithId(user, grouped)
 
 def storeWithId(user, courses) :
-	data = b64encode(pickle.dumps(courses)).decode(System.encoding)
+	data = b64encode(pickle.dumps(courses)).decode(Config.coding)
 	id = Database.storeSheetWithId(user.username, data)
 	return id
 

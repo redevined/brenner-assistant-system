@@ -5,25 +5,25 @@ import time, hashlib
 from flask import session as cookie
 
 from utils import Session, Database
-from config import Roles, System
+from config import Config
 
 
 class User() :
 
-	def __init__(self, username, password, role = Roles.user) :
+	def __init__(self, username, password, role = Config.User.Roles.user) :
 		self.username = username
 		self.password = password
 		self.role = role
 
 	def isAdmin(self) :
-		return self.role == Roles.admin
+		return self.role == Config.User.Roles.admin
 
 
 session = Session.UserSession(User)
 
 
 def _hash(pw) :
-	hashed = hashlib.sha1(pw.encode(System.encoding))
+	hashed = hashlib.sha1(pw.encode(Config.coding))
 	return hashed.hexdigest()
 
 

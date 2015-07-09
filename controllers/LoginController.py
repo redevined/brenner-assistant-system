@@ -4,7 +4,7 @@
 from flask import flash, redirect, render_template
 
 from models import User
-from config import Urls, Msgs
+from config import Config
 
 
 def view() :
@@ -15,14 +15,14 @@ def login(form) :
 	if User.session.exists() :
 		if form.get("remember") :
 			User.session.remember(True)
-		flash(u"Willkommen, {name}.".format(name = User.session.get().username), Msgs.success)
-		return redirect(Urls.home)
+		flash(u"Willkommen, {name}.".format(name = User.session.get().username), Config.Flash.success)
+		return redirect(Config.Urls.App.home)
 	else :
-		flash(u"Ungültige Anmeldedaten.", Msgs.error)
-	return redirect(Urls.login)
+		flash(u"Ungültige Anmeldedaten.", Config.Flash.error)
+	return redirect(Config.Urls.App.login)
 
 def logout() :
 	if User.session.exists() :
 		User.session.remove()
-		flash(u"Du wurdest erfolgreich abgemeldet.", Msgs.success)
-	return redirect(Urls.login)
+		flash(u"Du wurdest erfolgreich abgemeldet.", Config.Flash.success)
+	return redirect(Config.Urls.App.login)

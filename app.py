@@ -6,59 +6,59 @@ from flask import Flask, request
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
 from models import User
 from utils.Interface import ViewInterface
-from config import System, Urls
+from config import Config
 
 
 app = Flask(__name__)
-app.secret_key = "/\xfa-\x84\xfeW\xc3\xda\x11%/\x0c\xa0\xbaY\xa3\x89\x93$\xf5\x92\x9eW}"
+app.secret_key = Config.secret_key
 app.jinja_env.globals.update(_ = ViewInterface())
 
 
-@app.route(Urls.home)
+@app.route(Config.Urls.App.home)
 def home() :
 	return HomeController.view()
 
-@app.route(Urls.about)
+@app.route(Config.Urls.App.about)
 def about() :
 	return HomeController.about()
 
-@app.route(Urls.admin, methods = ["GET", "POST"])
+@app.route(Config.Urls.App.admin, methods = ["GET", "POST"])
 def admin() :
 	if request.method == "POST" :
 		return AdminController.execute(request.form)
 	return AdminController.view()
 
 
-@app.route(Urls.login, methods = ["GET", "POST"])
+@app.route(Config.Urls.App.login, methods = ["GET", "POST"])
 def login() :
 	if request.method == "POST" :
 		return LoginController.login(request.form)
 	return LoginController.view()
 
-@app.route(Urls.register, methods = ["GET", "POST"])
+@app.route(Config.Urls.App.register, methods = ["GET", "POST"])
 def register() :
 	if request.method == "POST" :
 		return RegisterController.register(request.form)
 	return RegisterController.view()
 
-@app.route(Urls.logout)
+@app.route(Config.Urls.App.logout)
 def logout() :
 	return LoginController.logout()
 
 
-@app.route(Urls.courseAdd, methods = ["POST"])
+@app.route(Config.Urls.App.course_add, methods = ["POST"])
 def courseAdd() :
 	return CourseController.add(request.form)
 
-@app.route(Urls.courseDelete + "/<int:id>")
+@app.route(Config.Urls.App.course_delete + "/<int:id>")
 def courseDelete(id) :
 	return CourseController.delete(id)
 
-@app.route(Urls.courseSubmit, methods = ["POST"])
+@app.route(Config.Urls.App.course_submit, methods = ["POST"])
 def courseSubmit() :
 	return CourseController.submit(request.form)
 
-@app.route(Urls.downloadSheet + "/<int:id>")
+@app.route(Config.Urls.App.download_sheet + "/<int:id>")
 def downloadSheet(id) :
 	return CourseController.download(id)
 
@@ -81,4 +81,4 @@ def error500(e) :
 
 
 if __name__ == "__main__" :
-	app.run(debug = System.debug)
+	app.run(debug = Config.debug)

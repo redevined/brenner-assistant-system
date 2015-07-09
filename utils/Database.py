@@ -4,14 +4,14 @@
 import psycopg2 as pgsql
 
 from utils import Log
-from config import Connection, System
+from config import Config
 
 
 def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
-			res = [ [str(field).decode(System.encoding) for field in record] for record in cursor.fetchall() ]
+			res = [ [str(field).decode(Config.coding) for field in record] for record in cursor.fetchall() ]
 			return res
 
 
@@ -84,19 +84,17 @@ def deleteSheet(id) :
 
 
 try :
-	if not Connection :
-		Log.error("No environment variable with the name 'DATABASE_URL' found")
+	if not Config.Db.Connection :
+		raise OSError("No environment variable 'DATABASE_URL' found")
 	db = pgsql.connect(
-		database = Connection.path[1:],
-		user = Connection.username,
-		password = Connection.password,
-		host = Connection.hostname,
-		port = Connection.port
+		database = Config.Db.Connection.path[1:],
+		user = Config.Db.Connection.username,
+		password = Config.Db.Connection.password,
+		host = Config.Db.Connection.hostname,
+		port = Config.Db.Connection.port
 	)
-	db.autocommit = True
-	try :
-		checkTables()
-	except Exception as e :
-		Log.error("Exception during table check", exception = e)
 except Exception as e :
 	Log.error("Connection to PostgreSQL database could not be established, please check your connection settings", exception = e)
+else :
+	db.autocommit = True
+	checkTables()

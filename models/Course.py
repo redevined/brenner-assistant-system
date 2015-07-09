@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from utils import Database, Log
-from config import Months
+from config import Config
 
 
 class Course() :
@@ -48,7 +48,7 @@ def deleteAll(username) :
 def calcMonths(courses) :
 	return {
 		u"{0} {1}".format(
-			Months[course.date.split(".")[1]],
+			Config.Months[course.date.split(".")[1]],
 			course.date.split(".")[2]
 		) for course in courses
 	}

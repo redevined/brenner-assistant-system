@@ -23,7 +23,7 @@
 		});
 		{% if pdf %}
 		// Redirect to download if PDF is present
-		var url = '{{ _.Urls.downloadSheet }}/{{ pdf }}';
+		var url = '{{ _.Config.Urls.App.download_sheet }}/{{ pdf }}';
 		window.location.replace(url);
 		{% endif %}
 	});
@@ -41,7 +41,7 @@
 	{% endfor %}
 
 	<div class="scroll-body">
-		<form method="POST" action="{{ _.Urls.courseAdd }}">
+		<form method="POST" action="{{ _.Config.Urls.App.course_add }}">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -78,8 +78,8 @@
 						<td>
 							<label for="role" class="sr-only">Rolle</label>
 							<select id="role" name="role" class="form-control">
-								<option value="{{ _.CourseRoles.assistant }}" selected>{{ _.CourseRoles.assistant }}</option>
-								<option value="{{ _.CourseRoles.trainer }}">{{ _.CourseRoles.trainer }}</option>
+								<option value="{{ _.Config.Course.Roles.assistant }}" selected>{{ _.Config.Course.Roles.assistant }}</option>
+								<option value="{{ _.Config.Course.Roles.trainer }}">{{ _.Config.Course.Roles.trainer }}</option>
 							</select>
 						</td>
 						<td>
@@ -98,7 +98,7 @@
 						<td>{{ course.role }}</td>
 						<td>
 							<div class="right">
-								<a href="{{ _.Urls.courseDelete }}/{{ course.id }}" class="btn btn-primary">
+								<a href="{{ _.Config.Urls.App.course_delete }}/{{ course.id }}" class="btn btn-primary">
 									<span class="glyphicon glyphicon-minus-sign"></span>
 								</a>
 							</div>
@@ -111,7 +111,7 @@
 	</div>
 	<br />
 	
-	<form method="POST" action="{{ _.Urls.courseSubmit }}" class="form-inline">
+	<form method="POST" action="{{ _.Config.Urls.App.course_submit }}" class="form-inline">
 		<div class="form-group">
 			<div class="col-sm-4">
 				<label for="selected" class="sr-only">Monate</label>
