@@ -4,7 +4,6 @@
 from flask import abort, flash, redirect, render_template
 
 from models import User, Course, Sheet
-from utils import Log
 from config import Config
 
 
@@ -43,9 +42,7 @@ def submit(form) :
 
 def download(id) :
 	if User.session.exists() :
-		Log.debug("Create PDF")
 		pdf = Sheet.getById(User.session.get(), id)
-		Log.debug(pdf = pdf)
 		if not Config.Course.keep_sheets :
 			Sheet.deleteById(id)
 		return pdf.render()

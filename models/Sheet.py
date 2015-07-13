@@ -4,7 +4,7 @@
 import pickle
 from base64 import b64decode, b64encode
 from flask import render_template, url_for
-#from flask_weasyprint import HTML, CSS, render_pdf
+from flask_weasyprint import HTML, CSS, render_pdf
 
 from utils import Database
 from utils import Log
