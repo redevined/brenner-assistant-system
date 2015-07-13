@@ -45,6 +45,8 @@ def download(id) :
 		pdf = Sheet.getById(User.session.get(), id)
 		if not Config.Course.keep_sheets :
 			Sheet.deleteById(id)
-		return pdf.render()
+		resp = pdf.render()
+		Log.debug("got response")
+		return resp
 	else :
 		return abort(403)
