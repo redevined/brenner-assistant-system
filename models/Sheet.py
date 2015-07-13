@@ -22,10 +22,12 @@ class Sheet() :
 
 	def render(self) :
 		html = HTML(string = render_template(
-			self.template,
-			user = self.user,
-			all_courses = self.courses
-		))
+				self.template,
+				user = self.user,
+				all_courses = self.courses
+			),
+			encoding = Config.coding
+		)
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
 		Log.debug("---------------")
 		Log.debug(str(html))
