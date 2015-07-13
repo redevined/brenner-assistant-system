@@ -28,7 +28,8 @@ class Sheet() :
 		))
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
 		Log.debug("---------------")
-		Log.debug(html)
+		Log.debug(str(html))
+		Log.debug(dir(html))
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
 		return doc
 

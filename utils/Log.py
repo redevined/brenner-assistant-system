@@ -6,12 +6,17 @@ import inspect
 from config import Config
 
 
+def _unify(s) :
+	if not isinstance(s, unicode) :
+		s = unicode(str(s), Config.coding)
+	return s
+
 # Basic log function, uses stdout
 def log(level, *msgs, **vals) : # TODO: Fix unicode bullshit
 	level = u"[{level}]".format(level = level)
 	caller = u"({1}::{3})".format(*inspect.stack()[2])
-	msgs = u" ".join(msgs)
-	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = val) for key, val in vals.items() )
+	msgs = u" ".join( _unify(msg) for msg in msgs )
+	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = _unify(val)) for key, val in vals.items() )
 	print u" ".join( part for part in (level, caller, msgs, vals) if part )
 
 # Log function with loglevel INFO
