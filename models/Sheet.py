@@ -25,8 +25,10 @@ class Sheet() :
 			self.template,
 			user = self.user,
 			all_courses = self.courses
-		).encode(Config.coding))
+		))
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
+		Log.debug("---------------")
+		Log.debug(html)
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
 		return doc
 
