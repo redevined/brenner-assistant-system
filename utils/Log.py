@@ -1,7 +1,7 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import inspect
+from inspect import stack as getSysStack
 
 from config import Config
 
@@ -14,7 +14,7 @@ def _unify(s) :
 # Basic log function, uses stdout
 def log(level, *msgs, **vals) : # TODO: Fix unicode bullshit
 	level = u"[{level}]".format(level = level)
-	caller = u"({1}::{3})".format(*inspect.stack()[2])
+	caller = u"({1}::{3})".format(*getSysStack()[2])
 	msgs = u" ".join( _unify(msg) for msg in msgs )
 	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = _unify(val)) for key, val in vals.items() )
 	print u" ".join( part for part in (level, caller, msgs, vals) if part )
