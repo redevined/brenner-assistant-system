@@ -29,12 +29,7 @@ class Sheet() :
 			encoding = Config.coding
 		)
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
-
-		pdf = html.write_pdf(stylesheets = css)
-		doc = current_app.response_class(pdf, mimetype = 'application/pdf')
-		doc.headers.add('Content-Disposition', 'attachment', filename = self.filename)
-		Log.debug("document + response completely rendered")
-		#doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
+		doc = render_pdf(html, stylesheets = css, download_filename = self.filename.encode(Config.coding))
 		return doc
 
 
