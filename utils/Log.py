@@ -39,3 +39,12 @@ def debug(*msgs, **vals) :
 	level = Config.Log.debug
 	if Config.debug :
 		log(level, *msgs, **vals)
+
+def inspect(obj) :
+	level = Config.Log.debug
+	if Config.debug :
+		indent = max(map(len, dir(obj)))
+		for attr in dir(obj) :
+			val = getattr(obj, attr)
+			attr = attr.ljust(indent) + " :"
+			log(level, attr, val) 

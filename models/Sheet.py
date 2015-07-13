@@ -30,6 +30,7 @@ class Sheet() :
 		Log.debug("---------------")
 		Log.debug(str(html))
 		Log.debug(dir(html))
+		Log.inspect(html)
 		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
 		return doc
 
