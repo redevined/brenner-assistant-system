@@ -10,6 +10,7 @@ class UserSession() :
 
 	def __init__(self, cls) :
 		self.key = cls.__name__
+		self.temp_key = "temp"
 		self.UserCls = cls
 
 	def get(self) :
@@ -30,3 +31,12 @@ class UserSession() :
 
 	def remember(self, val = True) :
 		cookie.permanent = val
+
+	def getTemp(self) :
+		return cookie.pop(self.temp_key, None)
+
+	def setTemp(self, obj) :
+		cookie[self.temp_key] = obj
+
+	def hasTemp(self) :
+		return cookie.has_key(self.temp_key)

@@ -7,10 +7,11 @@ from models import User, Course, Sheet
 from config import Config
 
 
-def view(pdf = u"") :
+def view() :
 	user = User.session.get()
 	courses = Course.getAll(user.username)
 	months = Course.calcMonths(courses)
+	pdf = User.session.hasTemp()
 	return render_template("courses.html", user = user, courses = courses, months = months, pdf = pdf)
 
 def add(form) :
@@ -31,22 +32,21 @@ def submit(form) :
 		courses = Course.getAll(user.username)
 		selected = [ pair.split() for pair in form.getlist("selected[]") ]
 		if selected :
-			sid = Sheet.generate(user, courses, selected, form.get("destructive")) # TODO: Save in session cookie
+			sid = Sheet.generate(user, courses, selected, form.get("destructive"))
+			User.session.setTemp(sid)
 			flash(u"Kurs-Auflistung erfolgreich erstellt, der Download beginnt in Kürze.", Config.Flash.success)
-			return view(sid)
 		else :
 			flash(u"Keine Monate ausgewählt!", Config.Flash.warn)
 	else :
 		return abort(403)
 	return redirect(Config.Urls.App.home)
 
-def download(id) :
+def download() :
 	if User.session.exists() :
-		pdf = Sheet.getById(User.session.get(), id)
-		if not Config.Course.keep_sheets :
-			Sheet.deleteById(id)
-		resp = pdf.render()
-		Log.debug("got response")
-		return resp
-	else :
-		return abort(403)
+		sid = User.session.getTemp()
+		if sid :
+			pdf = Sheet.getById(User.session.get(), sid)
+			if not Config.Course.keep_sheets :
+				Sheet.deleteById(sid)
+			return pdf.render()
+	return abort(403)

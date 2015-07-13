@@ -58,9 +58,9 @@ def courseDelete(id) :
 def courseSubmit() :
 	return CourseController.submit(request.form)
 
-@app.route(Config.Urls.App.download_sheet + "/<int:id>")
-def downloadSheet(id) :
-	return CourseController.download(id)
+@app.route(Config.Urls.App.download_sheet)
+def downloadSheet() :
+	return CourseController.download()
 
 
 @app.errorhandler(403)
