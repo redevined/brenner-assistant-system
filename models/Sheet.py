@@ -3,7 +3,7 @@
 
 import pickle
 from base64 import b64decode, b64encode
-from flask import render_template, url_for
+from flask import render_template, url_for, current_app
 from flask_weasyprint import HTML, CSS, render_pdf
 
 from utils import Database
@@ -29,11 +29,15 @@ class Sheet() :
 			encoding = Config.coding
 		)
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
-		Log.debug("---------------")
-		Log.debug(str(html))
-		Log.debug(dir(html))
-		Log.inspect(html)
-		doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
+
+		Log.debug()
+		pdf = html.write_pdf(stylesheets = css)
+		Log.debug("pdf rendered")
+		doc = current_app.response_class(pdf, mimetype = 'application/pdf')
+		Log.debug("response created")
+        doc.headers.add('Content-Disposition', 'attachment', filename = self.filename)
+
+		#doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
 		return doc
 
 
