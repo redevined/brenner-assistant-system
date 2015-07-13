@@ -12,7 +12,7 @@
 }
 
 .panel-default {
-	border-color: #eee;
+	border-color: #ddd;
 }
 
 .panel-default > .panel-heading {
@@ -20,10 +20,11 @@
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-	border-top-color: #eee;
+	border-top-color: #ddd;
 }
 
 .panel-heading a, .panel-heading a:hover, .panel-heading a:focus {
 	color: #222;
 	text-decoration: none;
+	text-shadow: none;
 }
