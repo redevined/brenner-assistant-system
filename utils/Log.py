@@ -6,13 +6,14 @@ from inspect import stack as getSysStack
 from config import Config
 
 
+# Cast strings to unicode
 def _unify(s) :
 	if not isinstance(s, unicode) :
 		s = unicode(str(s), Config.coding)
 	return s
 
 # Basic log function, uses stdout
-def log(level, *msgs, **vals) : # TODO: Fix unicode bullshit
+def log(level, *msgs, **vals) :
 	level = u"[{level}]".format(level = level)
 	caller = u"({1}::{3})".format(*getSysStack()[2])
 	msgs = u" ".join( _unify(msg) for msg in msgs )
@@ -40,6 +41,7 @@ def debug(*msgs, **vals) :
 	if Config.debug :
 		log(level, *msgs, **vals)
 
+# Debug function that prints all attributes of an object
 def inspect(obj) :
 	level = Config.Log.debug
 	if Config.debug :
