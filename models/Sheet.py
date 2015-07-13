@@ -35,8 +35,7 @@ class Sheet() :
 		Log.debug("pdf rendered")
 		doc = current_app.response_class(pdf, mimetype = 'application/pdf')
 		Log.debug("response created")
-        doc.headers.add('Content-Disposition', 'attachment', filename = self.filename)
-
+		doc.headers.add('Content-Disposition', 'attachment', filename = self.filename)
 		#doc = render_pdf(html, stylesheets = css, download_filename = self.filename)
 		return doc
 
