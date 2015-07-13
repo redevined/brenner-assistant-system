@@ -4,6 +4,7 @@
 from flask import abort, flash, redirect, render_template
 
 from models import User, Course, Sheet
+from utils import Log
 from config import Config
 
 
