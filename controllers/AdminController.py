@@ -17,9 +17,7 @@ def view(query = u"SELECT * FROM users; -- or courses, sheets", res = None) :
 	return redirect(Config.Urls.App.home)
 
 def execute(form) :
-	Log.debug("New query incoming")
 	query = form.get("query")
-	Log.debug("Got new query")
 	Log.debug(query = query, type_query = type(query))
 	res = None
 	try :

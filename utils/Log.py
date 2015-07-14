@@ -8,7 +8,6 @@ from config import Config
 
 # Cast strings to unicode
 def _unify(s) :
-	print "_UNIFY: ", s
 	if not isinstance(s, unicode) :
 		s = unicode(str(s), Config.coding)
 	return s
@@ -19,7 +18,9 @@ def log(level, *msgs, **vals) :
 	caller = u"({1}::{3})".format(*getSysStack()[2])
 	msgs = u" ".join( _unify(msg) for msg in msgs )
 	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = _unify(val)) for key, val in vals.items() )
-	print u" ".join( part for part in (level, caller, msgs, vals) if part )
+	out = u" ".join( part for part in (level, caller, msgs, vals) if part )
+	print "built out string"
+	print out
 
 # Log function with loglevel INFO
 def info(*msgs, **vals) :
