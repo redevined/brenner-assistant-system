@@ -24,9 +24,7 @@ def checkTables() :
 		createCourseTable()
 	if "sheets" not in tables :
 		createSheetTable()
-	# Only once
-	exeq("INSERT INTO sheets (username, courses) VALUES (%s, %s);", u"Miriam Dörzbach", "KGxwMAooVjIwMTUKcDEKKGxwMgooVkp1bGkKcDMKKGxwNAooaW1vZGVscy5Db3Vyc2UKQ291cnNlCnA1CihkcDYKUydyb2xlJwpwNwpWQXNzaXN0ZW50CnA4CnNTJ3RpbWUnCnA5ClYxNTo1OCAtIDE2OjU4CnAxMApzUyduYW1lJwpwMTEKVldDUyAKcDEyCnNTJ2lkJwpwMTMKVjEzOQpwMTQKc1MnZGF0ZScKcDE1ClYxMy4wNy4yMDE1CnAxNgpzYmF0cDE3CmF0cDE4CmEu")
-
+	
 def createUserTable() :
 	Log.warn("No table 'users' found, creating new")
 	exeq("CREATE TABLE users (username varchar(255) PRIMARY KEY, password varchar(255), role varchar(255));")
