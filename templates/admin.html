@@ -6,17 +6,26 @@
 <link href="../static/css/courses.css" rel="stylesheet">
 {% endblock %}
 
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		// Select last query
+		$('#query').select();
+	});
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="inner cover center">
 	<h2>BASys Admin Bereich</h2>
 	<br />
 
-	<form method="POST" class="form-inline">
+	<form method="POST" class="form-inline" autocomplete="off">
 		<div class="form-group">
 			<label for="query" class="sr-only">SQL Befehl</label>
 			<div class="input-group">
 				<div class="input-group-addon"><span class="glyphicon glyphicon-console"></span></div>
-				<input type="text" id="query" name="query" class="form-control code" value="{{ query }}" required autofocus>
+				<input type="text" id="query" name="query" class="form-control code" value="{{ query }}" autocomplete="off" required autofocus>
 			</div>
 			<button class="btn btn-primary" type="submit">Go!</button>
 		</div>

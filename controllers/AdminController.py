@@ -8,7 +8,7 @@ from utils import Database, Log
 from config import Config
 
 
-def view(query = u"SELECT table_name FROM information_schema.tables;", res = None) :
+def view(query = u"SELECT * FROM users; -- or courses, sheets", res = None) :
 	if User.session.exists() :
 		if User.session.get().isAdmin() :
 			return render_template("admin.html", query = query, result = res)
@@ -20,7 +20,7 @@ def execute(form) :
 	query = form.get("query")
 	res = None
 	try :
-		res = Database.exeq(query)
+		res = Database.exeq(query.encode(Config.coding))
 	except Exception as e :
 		flash(e.message, Config.Flash.error)
 	else :
