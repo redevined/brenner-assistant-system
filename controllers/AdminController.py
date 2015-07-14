@@ -20,10 +20,7 @@ def execute(form) :
 	query = form.get("query")
 	res = None
 	try :
-		Log.debug("Executing sql")
-		Log.debug(query = query, byte_query = query.encode(Config.coding))
-		res = Database.exeq(query.encode(Config.coding))
-		Log.debug(result = res)
+		res = Database.exeq(query)
 	except Exception as e :
 		flash(e, Config.Flash.error)
 	else :
