@@ -35,7 +35,7 @@ def createCourseTable() :
 
 def createSheetTable() :
 	Log.warn("No table 'sheets' found, creating new")
-	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), courses varchar(1023));")
+	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), courses text);")
 
 
 def loadUserByLogin(un, pw) :
