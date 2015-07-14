@@ -18,10 +18,12 @@ def view(query = u"SELECT * FROM users; -- or courses, sheets", res = None) :
 
 def execute(form) :
 	query = form.get("query")
-	Log.debug(query = query, type_query = type(query))
 	res = None
 	try :
-		res = Database.exeq(query)
+		Log.debug("Executing sql")
+		Log.debug(query = query, byte_query = query.encode(Config.coding))
+		res = Database.exeq(query.encode(Config.coding))
+		Log.debug(result = res)
 	except Exception as e :
 		flash(e, Config.Flash.error)
 	else :
