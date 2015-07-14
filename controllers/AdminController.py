@@ -19,17 +19,13 @@ def view(query = u"SELECT * FROM users; -- or courses, sheets", res = None) :
 def execute(form) :
 	Log.debug("New query incoming")
 	query = form.get("query")
-	Log.debug(query)
-	Log.debug(query = query)
-	Log.debug(type_query = type(query))
+	Log.debug("Got new query")
+	Log.debug(query = query, type_query = type(query))
 	res = None
 	try :
-		Log.debug("Executing SQL...")
 		res = Database.exeq(query)
-		Log.debug(result = res)
 	except Exception as e :
 		flash(e, Config.Flash.error)
 	else :
 		flash(u"Befehl erfolgreich ausgeführt!", Config.Flash.success)
-	Log.debug("Returning to view")
 	return view(query, res)

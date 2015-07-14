@@ -8,6 +8,7 @@ from config import Config
 
 # Cast strings to unicode
 def _unify(s) :
+	print "_UNIFY: ", s
 	if not isinstance(s, unicode) :
 		s = unicode(str(s), Config.coding)
 	return s
