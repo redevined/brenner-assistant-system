@@ -19,8 +19,7 @@ def log(level, *msgs, **vals) :
 	msgs = u" ".join( _unify(msg) for msg in msgs )
 	vals = u" ".join( u"[{key}: {val}]".format(key = key, val = _unify(val)) for key, val in vals.items() )
 	out = u" ".join( part for part in (level, caller, msgs, vals) if part )
-	print "built out string"
-	print out
+	print out.encode(Config.coding)
 
 # Log function with loglevel INFO
 def info(*msgs, **vals) :
