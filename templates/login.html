@@ -12,7 +12,11 @@
 		<h2 class="form-signin-heading">Melde dich an</h2>
 
 		{% for cat, msg in get_flashed_messages(with_categories=true) %}
-		<p class="flash flash-{{ cat }}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}</p>
+		<p class="flash flash-{{ cat }} alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}
+		</p>
+		<br />
 		{% endfor %}
 
 		<label for="username" class="sr-only">Benutzername</label>

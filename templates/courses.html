@@ -21,6 +21,27 @@
 			nSelectedText: ' Monate ausgewählt',
 			allSelectedText: 'Alle ausgewählt'
 		});
+
+		// Copy contents of clicked row into input row
+		$('.course-row').click(function(e) {
+			if (!$(e.target).is(':button')) {
+				$('#name').val(
+					$(this).find('.course-name').text()
+				);
+				$('#date').val(
+					$(this).find('.course-date').text().split('.').reverse().join('-')
+				);
+				$('#time_start').val(
+					$(this).find('.course-time').text().split(' - ')[0]
+				);
+				$('#time_end').val(
+					$(this).find('.course-time').text().split(' - ')[1]
+				);
+				var role = $(this).find('.course-role option:selected').text();
+				$("#role option[value='" + role + "']").attr('selected', true);
+			}
+		});
+
 		{% if pdf %}
 		// Redirect to download if PDF is present
 		var url = '{{ _.Config.Urls.App.download_sheet }}';
@@ -36,7 +57,10 @@
 	<br />
 
 	{% for cat, msg in get_flashed_messages(with_categories=true) %}
-	<p class="flash flash-{{ cat }}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg|safe }}</p>
+	<p class="flash flash-{{ cat }} alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg|safe }}
+	</p>
 	<br />
 	{% endfor %}
 
@@ -91,11 +115,11 @@
 						</td>
 					</tr>
 					{% for course in courses %}
-					<tr>
-						<td>{{ course.name }}</td>
-						<td>{{ course.date }}</td>
-						<td>{{ course.time }}</td>
-						<td>{{ course.role }}</td>
+					<tr class="course-row">
+						<td class="course-name">{{ course.name }}</td>
+						<td class="course-date">{{ course.date }}</td>
+						<td class="course-time">{{ course.time }}</td>
+						<td class="course-role">{{ course.role }}</td>
 						<td>
 							<div class="right">
 								<a href="{{ _.Config.Urls.App.course_delete }}/{{ course.id }}" class="btn btn-primary">

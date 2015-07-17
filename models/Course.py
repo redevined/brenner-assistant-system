@@ -14,6 +14,16 @@ class Course() :
 		self.time = time
 		self.role = role
 
+	def duration(self) :
+		start, end = map(_toHours, self.time.split(" - "))
+		if start > end :
+			end += 24
+		return end - start
+
+
+def _toHours(time) :
+	h, m = time.split(":")
+	return int(h) + (float(m) / 60)
 
 def _formatDate(date) :
 	return u".".join(date.split("-")[::-1])
