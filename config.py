@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import os, urlparse
@@ -17,7 +17,7 @@ def _getDbConnection(key) :
 Config = Struct(
 	{
 		"debug" 					:	True,
-		"coding"					:	"UTF-8",
+		"encoding"					:	"UTF-8",
 		"secret_key"				:	"/\xfa-\x84\xfeW\xc3\xda\x11%/\x0c\xa0\xbaY\xa3\x89\x93$\xf5\x92\x9eW}",
 		"Db" : {
 			"Connection"			:	_getDbConnection("postgres")

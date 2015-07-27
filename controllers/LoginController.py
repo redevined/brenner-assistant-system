@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 from flask import flash, redirect, render_template

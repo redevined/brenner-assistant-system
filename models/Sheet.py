@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import pickle
@@ -26,10 +26,10 @@ class Sheet() :
 				user = self.user,
 				all_courses = self.courses
 			),
-			encoding = Config.coding
+			encoding = Config.encoding
 		)
 		css = [ CSS(url_for("static", filename = "css/bootstrap.min.css")) ]
-		doc = render_pdf(html, stylesheets = css, download_filename = self.filename.encode(Config.coding))
+		doc = render_pdf(html, stylesheets = css, download_filename = self.filename.encode(Config.encoding))
 		return doc
 
 
@@ -57,7 +57,7 @@ def generate(user, courses, selected, destructive) :
 	return storeWithId(user, grouped)
 
 def storeWithId(user, courses) :
-	data = b64encode(pickle.dumps(courses)).decode(Config.coding)
+	data = b64encode(pickle.dumps(courses)).decode(Config.encoding)
 	id = Database.storeSheetWithId(user.username, data)
 	return id
 

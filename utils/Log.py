@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 from inspect import stack as getSysStack
@@ -9,7 +9,7 @@ from config import Config
 # Cast strings to unicode
 def _unify(s) :
 	if not isinstance(s, unicode) :
-		s = unicode(str(s), Config.coding)
+		s = unicode(str(s), Config.encoding)
 	return s
 
 # Basic log function, uses stdout

@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import psycopg2 as pgsql
@@ -11,7 +11,7 @@ def exeq(query, *params) :
 	with db.cursor() as cursor :
 		cursor.execute(query, params)
 		if set(query.upper().split()) & {"SELECT", "RETURNING"} :
-			res = [ [str(field).decode(Config.coding) for field in record] for record in cursor.fetchall() ]
+			res = [ [str(field).decode(Config.encoding) for field in record] for record in cursor.fetchall() ]
 			return res
 
 

@@ -1,10 +1,10 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import time, hashlib
 from flask import session as cookie
 
-from utils import Session, Database
+from utils import Session, Database, Hash
 from config import Config
 
 
@@ -22,13 +22,8 @@ class User() :
 session = Session.UserSession(User)
 
 
-def _hash(pw) :
-	hashed = hashlib.sha1(pw.encode(Config.coding))
-	return hashed.hexdigest()
-
-
 def getByLogin(credentials) :
-	data = Database.loadUserByLogin(credentials.get("username"), _hash(credentials.get("password")))
+	data = Database.loadUserByLogin(credentials.get("username"), Hash.hash(credentials.get("password")))
 	if data :
 		user = User(*data)
 		return user
@@ -36,6 +31,6 @@ def getByLogin(credentials) :
 def getByRegister(credentials) :
 	username, password = credentials.get("username"), credentials.get("password")
 	if not Database.existsUser(username) :
-		user = User(username, _hash(password))
+		user = User(username, Hash.hash(password))
 		Database.storeUser(user)
 		return user
