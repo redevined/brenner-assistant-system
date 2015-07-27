@@ -63,75 +63,74 @@
 	<br />
 	{% endfor %}
 
-	<div class="scroll-body">
-		<form method="POST" action="{{ _.Config.Urls.App.course_add }}">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th class="course">Kurs</th>
-						<th class="date">Datum</th>
-						<th class="time">Uhrzeit</th>
-						<th class="role">Rolle</th>
-						<th class="functions"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="input-row">
-						<td>
-							<label for="name" class="sr-only">Kurs</label>
-							<input type="text" id="name" name="name" class="form-control" placeholder="Kurs" required autofocus>
-						</td>
-						<td>
-							<label for="date" class="sr-only">Datum</label>
-							<div class="input-group">
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-								<input type="date" id="date" name="date" class="form-control" value="{{ _.datetime.today().strftime('%Y-%m-%d') }}" required>
-							</div>
-						</td>
-						<td>
-							<span class="left">
-								<label for="time_start" class="sr-only">Start</label>
-								<input type="time" id="time_start" name="time_start" class="form-control" value="{{ _.datetime.today().strftime('%H:%M') }}" required>
-							</span>
-							<span class="right">
-								<label for="time_end" class="sr-only">Ende</label>
-								<input type="time" id="time_end" name="time_end" class="form-control" value="{{ _.datetime.today().replace(hour = _.datetime.today().hour + 1).strftime('%H:%M') }}" required>
-							</span>
-						</td>
-						<td>
-							<label for="role" class="sr-only">Rolle</label>
-							<select id="role" name="role" class="form-control">
-								<option value="{{ _.Config.Course.Roles.assistant }}" selected>{{ _.Config.Course.Roles.assistant }}</option>
-								<option value="{{ _.Config.Course.Roles.trainer }}">{{ _.Config.Course.Roles.trainer }}</option>
-							</select>
-						</td>
-						<td>
-							<div class="right">
-								<button class="btn btn-primary" type="submit">
-									<span class="glyphicon glyphicon-plus-sign"></span>
-								</button>
-							</div>
-						</td>
-					</tr>
-					{% for course in courses %}
-					<tr class="course-row">
-						<td class="course-name">{{ course.name }}</td>
-						<td class="course-date">{{ course.date }}</td>
-						<td class="course-time">{{ course.time }}</td>
-						<td class="course-role">{{ course.role }}</td>
-						<td>
-							<div class="right">
-								<a href="{{ _.Config.Urls.App.course_delete }}/{{ course.id }}" class="btn btn-primary">
-									<span class="glyphicon glyphicon-minus-sign"></span>
-								</a>
-							</div>
-						</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</form>
-	</div>
+
+	<form method="POST" action="{{ _.Config.Urls.App.course_add }}">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="course">Kurs</th>
+					<th class="date">Datum</th>
+					<th class="time">Uhrzeit</th>
+					<th class="role">Rolle</th>
+					<th class="functions"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="input-row">
+					<td>
+						<label for="name" class="sr-only">Kurs</label>
+						<input type="text" id="name" name="name" class="form-control" placeholder="Kurs" required autofocus>
+					</td>
+					<td>
+						<label for="date" class="sr-only">Datum</label>
+						<div class="input-group">
+							<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<input type="date" id="date" name="date" class="form-control" value="{{ _.datetime.today().strftime('%Y-%m-%d') }}" required>
+						</div>
+					</td>
+					<td>
+						<span class="left">
+							<label for="time_start" class="sr-only">Start</label>
+							<input type="time" id="time_start" name="time_start" class="form-control" value="{{ _.datetime.today().strftime('%H:%M') }}" required>
+						</span>
+						<span class="right">
+							<label for="time_end" class="sr-only">Ende</label>
+							<input type="time" id="time_end" name="time_end" class="form-control" value="{{ _.datetime.today().replace(hour = _.datetime.today().hour + 1).strftime('%H:%M') }}" required>
+						</span>
+					</td>
+					<td>
+						<label for="role" class="sr-only">Rolle</label>
+						<select id="role" name="role" class="form-control">
+							<option value="{{ _.Config.Course.Roles.assistant }}" selected>{{ _.Config.Course.Roles.assistant }}</option>
+							<option value="{{ _.Config.Course.Roles.trainer }}">{{ _.Config.Course.Roles.trainer }}</option>
+						</select>
+					</td>
+					<td>
+						<div class="right">
+							<button class="btn btn-primary" type="submit">
+								<span class="glyphicon glyphicon-plus-sign"></span>
+							</button>
+						</div>
+					</td>
+				</tr>
+				{% for course in courses %}
+				<tr class="course-row">
+					<td class="course-name">{{ course.name }}</td>
+					<td class="course-date">{{ course.date }}</td>
+					<td class="course-time">{{ course.time }}</td>
+					<td class="course-role">{{ course.role }}</td>
+					<td>
+						<div class="right">
+							<a href="{{ _.Config.Urls.App.course_delete }}/{{ course.id }}" class="btn btn-primary">
+								<span class="glyphicon glyphicon-minus-sign"></span>
+							</a>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</form>
 	<br />
 	
 	<form method="POST" action="{{ _.Config.Urls.App.course_submit }}" class="form-inline">

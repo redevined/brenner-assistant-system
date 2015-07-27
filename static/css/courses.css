@@ -7,11 +7,6 @@ table {
   overflow: hidden;
 }
 
-.scroll-body {
-  max-height: 700px;
-  overflow: auto;
-}
-
 thead .course {
   width: 33%;
 }
