@@ -7,24 +7,8 @@ table {
   overflow: hidden;
 }
 
-thead .course {
-  width: 33%;
-}
-
 thead .date {
-  width: 17%;
-}
-
-thead .time {
-  width: 28%;
-}
-
-thead .role {
-  width: 15%;
-}
-
-thead .functions {
-  width: 7%;
+  width: 1%;
 }
 
 .table > tbody > tr > td {
