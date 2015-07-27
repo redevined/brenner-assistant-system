@@ -64,9 +64,3 @@ thead .functions {
     margin-left: -20px;
     margin-right: 0px;
 }
-
-@media (min-width: 992px) {
-  .cover-head, .cover-foot, .cover-container {
-    width: 900px;
-  }
-}

@@ -3,12 +3,16 @@
 
 import pickle
 from base64 import b64decode, b64encode
-from flask import render_template, url_for, current_app
-#from flask_weasyprint import HTML, CSS, render_pdf
+from flask import render_template, url_for
 
 from utils import Database
 from utils import Log
 from config import Config
+
+try :
+	from flask_weasyprint import HTML, CSS, render_pdf
+except ImportError as e :
+	Log.error("Could not import flask_weasyprint", exception = e)
 
 
 class Sheet() :

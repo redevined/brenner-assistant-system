@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="inner cover">
+<div class="cover-content inner">
 	<form class="form-signin" method="POST">
-		<h2 class="form-signin-heading">Erstelle einen Account</h2>
+		<h2 class="form-signin-heading">Erstelle einen Account.</h2>
 
 		{% for cat, msg in get_flashed_messages(with_categories=true) %}
 		<p class="flash flash-{{ cat }}">
@@ -29,7 +29,7 @@
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Erstellen</button>
 
-		<p class="lighter">Bereits einen Account erstellt? <a href="{{ _.Config.Urls.App.login }}">Zurück zur Anmeldung.</a></p>
+		<p class="note">Bereits einen Account erstellt? <a href="{{ _.Config.Urls.App.login }}">Zurück zur Anmeldung.</a></p>
 	</form>
 </div>
 {% endblock %}
