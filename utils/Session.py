@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 from flask import session as cookie
-
 from utils import Database
 
 

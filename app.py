@@ -2,11 +2,10 @@
 # -*- coding: UTF-8 -*-
 
 from flask import Flask, request
-
-from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController
+from config import Config
+from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController, UserController
 from models import User
 from utils.Interface import ViewInterface
-from config import Config
 
 
 app = Flask(__name__)
@@ -21,6 +20,12 @@ def home() :
 @app.route(Config.Urls.App.about)
 def about() :
 	return HomeController.about()
+
+@app.route(Config.Urls.App.user, methods = ["GET", "POST"])
+def user() :
+	if request.method == "POST" :
+		return UserController.update(request.form)
+	return UserController.view()
 
 @app.route(Config.Urls.App.admin, methods = ["GET", "POST"])
 def admin() :

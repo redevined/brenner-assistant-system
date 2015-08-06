@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 from flask import render_template
-
 from controllers import CourseController
 from models import User
 from utils import Log

@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 import os, urlparse
-
 from utils.Struct import Struct
 
 
@@ -30,6 +29,7 @@ Config = Struct(
 				"login" 			: 	"/login",
 				"logout"			:	"/logout",
 				"register"			:	"/register",
+				"user"				:	"/user",
 				"course_add"		:	"/course/add",
 				"course_delete"		:	"/course/delete",
 				"course_submit"		:	"/course/submit",

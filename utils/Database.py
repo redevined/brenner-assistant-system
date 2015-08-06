@@ -2,9 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import psycopg2 as pgsql
-
-from utils import Log
 from config import Config
+from utils import Log
 
 
 def exeq(query, *params) :
@@ -49,6 +48,13 @@ def loadUser(un) :
 def storeUser(user) :
 	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
 
+def updateUsername(un, new) :
+	exeq("UPDATE users SET username=%s WHERE username=%s;", new, un)
+	updateCourses(un, new)
+
+def updatePassword(un, pw) :
+	exeq("UPDATE users SET password=%s WHERE username=%s;", pw, un)
+
 def deleteUser(un) :
 	exeq("DELETE FROM users WHERE username=%s;", un)
 	deleteCourses(un)
@@ -63,6 +69,9 @@ def loadCourses(un) :
 
 def storeCourse(un, course) :
 	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
+
+def updateCourses(un, new) :
+	exeq("UPDATE courses SET username=%s WHERE username=%s;", new, un)
 
 def deleteCourse(un, id) :
 	exeq("DELETE FROM courses WHERE username=%s AND id=%s;", un, id)

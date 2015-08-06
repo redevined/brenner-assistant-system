@@ -6,7 +6,6 @@ class ViewInterface() :
 
 	import flask
 	from datetime import datetime
-
+	from config import Config
 	import models
 	import utils
-	from config import Config

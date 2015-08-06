@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import time, hashlib
+import time
 from flask import session as cookie
-
-from utils import Session, Database, Hash
 from config import Config
+from utils import Session, Database, Hash
 
 
 class User() :
@@ -17,6 +16,14 @@ class User() :
 
 	def isAdmin(self) :
 		return self.role == Config.User.Roles.admin
+
+	def update(self, username = None, password = None) :
+		if username and username != self.username :
+			self.username = username
+			Database.updateUsername(self.username, username)
+		if password and password != self.password :
+			self.password = password
+			Database.updatePassword(self.username, password)
 
 
 session = Session.UserSession(User)

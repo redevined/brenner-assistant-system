@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 from inspect import stack as getSysStack
-
 from config import Config
 
 

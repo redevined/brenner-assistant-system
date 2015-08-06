@@ -2,9 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 from flask import abort, flash, redirect, render_template
-
-from models import User, Course, Sheet
 from config import Config
+from models import User, Course, Sheet
 
 
 def view() :

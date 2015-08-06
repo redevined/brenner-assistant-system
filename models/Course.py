@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-from utils import Database, Log
 from config import Config
+from utils import Database, Log
 
 
 class Course() :
