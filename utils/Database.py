@@ -3,7 +3,7 @@
 
 import psycopg2 as pgsql
 from config import Config
-from utils import Log
+from utils import Log, Hash
 
 
 def exeq(query, *params) :
@@ -39,8 +39,8 @@ def createSheetTable() :
 	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE, courses text);")
 
 def doPatch() :
-	Log.warn("Setting all user roles to admin")
-	exeq("UPDATE users SET role=%s;", "ADMIN")
+	Log.debug("Creating admin account")
+	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", "test", Hash.hash("1234"), "ADMIN")
 
 
 def loadUserByLogin(un, pw) :
