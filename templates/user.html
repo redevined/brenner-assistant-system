@@ -15,20 +15,21 @@
 			<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}
 		</p>
 		{% endfor %}
+		<br />
 
 		<label for="username" class="sr-only">Neuer Benutzername</label>
-		<input type="text" id="username" name="username" class="form-control" placeholder="Neuer Benutzername" autofocus>
+		<input type="text" id="username" name="username" class="form-control form-control-top" placeholder="Neuer Benutzername" autofocus>
 
-		<label for="username" class="sr-only">Benutzername wiederholen</label>
-		<input type="text" id="username-repeat" name="username-repeat" class="form-control" placeholder="Benutzername wiederholen">
+		<label for="username-repeat" class="sr-only">Benutzername wiederholen</label>
+		<input type="text" id="username-repeat" name="username-repeat" class="form-control form-control-bottom" placeholder="Benutzername wiederholen">
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Übernehmen</button>
 
 		<label for="password" class="sr-only">Neues Passwort</label>
-		<input type="password" id="password" name="password" class="form-control" placeholder="Passwort">
+		<input type="password" id="password" name="password" class="form-control form-control-top" placeholder="Passwort">
 
-		<label for="username" class="sr-only">Passwort wiederholen</label>
-		<input type="text" id="password-repeat" name="password-repeat" class="form-control" placeholder="Passwort wiederholen">
+		<label for="password-repeat" class="sr-only">Passwort wiederholen</label>
+		<input type="password" id="password-repeat" name="password-repeat" class="form-control form-control-bottom" placeholder="Passwort wiederholen">
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Übernehmen</button>
 	</form>

@@ -4,7 +4,7 @@
 from flask import abort, flash, redirect, render_template
 from config import Config
 from models import User
-from utils import Hash
+from utils import Hash, Log
 
 
 def view() :
@@ -25,7 +25,10 @@ def update(form) :
 		elif not (un or pw) :
 			flash(u"Keine Änderungen eingegeben.", Config.Flash.warn)
 		else :
+			Log.debug("Updating user", username = un, password = pw)
 			user.update(username = un, password = Hash.hash(pw))
+			Log.debug("User updated, setting session", user = user.__dict__)
 			User.session.set(user)
+			Log.debug("Session set", user = User.session.get().__dict__)
 			flash(u"Neue Eingaben wurden erfolgreich übernommen.", Config.Flash.success)
 	return redirect(Config.Urls.App.user)
