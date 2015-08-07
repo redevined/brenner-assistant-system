@@ -27,8 +27,9 @@ def update(form) :
 		else :
 			Log.debug("Updating user", username = un, password = pw)
 			user.update(username = un, password = Hash.hash(pw))
-			Log.debug("User updated, setting session", user = user.__dict__)
+			Log.debug("User updated, setting session", user = user.username)
 			User.session.set(user)
-			Log.debug("Session set", user = User.session.get().__dict__)
-			flash(u"Neue Eingaben wurden erfolgreich übernommen.", Config.Flash.success)
+			Log.debug("Session set")
+			Log.debug(user = User.session.get().username)
+			flash(u"Die neuen Eingaben wurden erfolgreich übernommen.", Config.Flash.success)
 	return redirect(Config.Urls.App.user)
