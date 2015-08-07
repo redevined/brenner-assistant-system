@@ -10,11 +10,15 @@
 <div class="cover-content inner">
 	<form class="form-signin" method="POST">
 		<h2>Profil von {{ _.models.User.session.get().username }}.</h2>
+
 		{% for cat, msg in get_flashed_messages(with_categories=true) %}
 		<p class="flash flash-{{ cat }}">
 			<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}
 		</p>
 		{% endfor %}
+
+		<br />
+		<p>Möchtest du deinen Benutzernamen ändern?</p>
 		<br />
 
 		<label for="username" class="sr-only">Neuer Benutzername</label>
@@ -24,6 +28,10 @@
 		<input type="text" id="username-repeat" name="username-repeat" class="form-control form-control-bottom" placeholder="Benutzername wiederholen">
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Übernehmen</button>
+
+		<br />
+		<p>Möchtest du dein Passwort ändern?</p>
+		<br />
 
 		<label for="password" class="sr-only">Neues Passwort</label>
 		<input type="password" id="password" name="password" class="form-control form-control-top" placeholder="Passwort">

@@ -19,11 +19,11 @@ class User() :
 
 	def update(self, username = None, password = None) :
 		if username and username != self.username :
-			self.username = username
 			Database.updateUsername(self.username, username)
+			self.username = username
 		if password and password != self.password :
-			self.password = password
 			Database.updatePassword(self.username, password)
+			self.password = password
 
 
 session = Session.UserSession(User)

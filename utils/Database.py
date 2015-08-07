@@ -39,9 +39,7 @@ def createSheetTable() :
 	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), courses text);")
 
 def doPatch() :
-	Log.warn("Executing admin rights patch")
-	exeq("UPDATE users SET role=%s WHERE username=%s", "ADMIN", "redevined")
-	Log.warn("Patch done")
+	pass
 
 
 def loadUserByLogin(un, pw) :
@@ -56,9 +54,7 @@ def storeUser(user) :
 	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", user.username, user.password, user.role)
 
 def updateUsername(un, new) :
-	Log.debug("Updating username", old = un, new = new)
 	exeq("UPDATE users SET username=%s WHERE username=%s;", new, un)
-	Log.debug("Updated username")
 	updateCourses(un, new)
 
 def updatePassword(un, pw) :
@@ -80,9 +76,7 @@ def storeCourse(un, course) :
 	exeq("INSERT INTO courses (username, name, date, time, role) VALUES (%s, %s, %s, %s, %s);", un, course.name, course.date, course.time, course.role)
 
 def updateCourses(un, new) :
-	Log.debug("Updating courses", old = un, new = new)
 	exeq("UPDATE courses SET username=%s WHERE username=%s;", new, un)
-	Log.debug("Updated courses")
 
 def deleteCourse(un, id) :
 	exeq("DELETE FROM courses WHERE username=%s AND id=%s;", un, id)
