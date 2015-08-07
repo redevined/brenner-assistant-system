@@ -32,14 +32,15 @@ def createUserTable() :
 
 def createCourseTable() :
 	Log.warn("No table 'courses' found, creating new")
-	exeq("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
+	exeq("CREATE TABLE courses (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE, name varchar(255), date varchar(255), time varchar(255), role varchar(255));")
 
 def createSheetTable() :
 	Log.warn("No table 'sheets' found, creating new")
-	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username), courses text);")
+	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE, courses text);")
 
 def doPatch() :
-	pass
+	Log.warn("Setting all user roles to admin")
+	exeq("UPDATE users SET role=%s;", "ADMIN")
 
 
 def loadUserByLogin(un, pw) :
@@ -55,14 +56,12 @@ def storeUser(user) :
 
 def updateUsername(un, new) :
 	exeq("UPDATE users SET username=%s WHERE username=%s;", new, un)
-	updateCourses(un, new)
 
 def updatePassword(un, pw) :
 	exeq("UPDATE users SET password=%s WHERE username=%s;", pw, un)
 
 def deleteUser(un) :
 	exeq("DELETE FROM users WHERE username=%s;", un)
-	deleteCourses(un)
 
 def existsUser(un) :
 	return loadUser(un) is not None
