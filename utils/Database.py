@@ -40,7 +40,7 @@ def createSheetTable() :
 
 def doPatch() :
 	Log.debug("Creating admin account")
-	exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", "test", Hash.hash("1234"), "ADMIN")
+	#exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", "test", Hash.hash("1234"), "ADMIN")
 
 
 def loadUserByLogin(un, pw) :
