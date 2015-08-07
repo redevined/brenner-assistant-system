@@ -37,6 +37,9 @@
 									<a href="{{ _.Config.Urls.App.admin }}">Admin</a>
 								</li>
 								{% endif %}
+								<li class="{% if _.flask.request.endpoint == 'user' %}active{% endif %}">
+									<a href="{{ _.Config.Urls.App.user }}">Profil</a>
+								</li>
 								{% endif %}
 								<li class="{% if _.flask.request.endpoint == 'about' %}active{% endif %}">
 									<a href="{{ _.Config.Urls.App.about }}">Projekt</a>

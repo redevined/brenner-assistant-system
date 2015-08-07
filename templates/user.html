@@ -9,7 +9,7 @@
 {% block content %}
 <div class="cover-content inner">
 	<form class="form-signin" method="POST">
-		<h2>Profil von {{ _.User.session.get().username }}.</h2>
+		<h2>Profil von {{ _.models.User.session.get().username }}.</h2>
 		{% for cat, msg in get_flashed_messages(with_categories=true) %}
 		<p class="flash flash-{{ cat }}">
 			<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}
