@@ -39,8 +39,7 @@ def createSheetTable() :
 	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE, courses text);")
 
 def doPatch() :
-	Log.debug("Creating admin account")
-	#exeq("INSERT INTO users (username, password, role) VALUES (%s, %s, %s);", "test", Hash.hash("1234"), "ADMIN")
+	pass
 
 
 def loadUserByLogin(un, pw) :
