@@ -5,6 +5,7 @@ from flask import session as cookie
 from utils import Database
 
 
+# Session storage
 class UserSession() :
 
 	def __init__(self, cls) :

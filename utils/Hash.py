@@ -4,6 +4,7 @@
 import hashlib
 
 
+# All used hash algorithms in their use order
 ALGORITHMS = (
 	hashlib.sha1,
 	hashlib.sha512,
@@ -17,6 +18,7 @@ ALGORITHMS = (
 )
 
 
+# Function that applies the hash functions on a string
 def hash(msg, funcs = ALGORITHMS) :
 	if funcs :
 		hashed = funcs[0](msg).hexdigest()
