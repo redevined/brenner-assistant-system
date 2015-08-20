@@ -5,12 +5,17 @@ from flask import Flask, request
 from config import Config
 from controllers import AdminController, CourseController, HomeController, LoginController, RegisterController, UserController
 from models import User
+from utils import Log, Patch
 from utils.Interface import ViewInterface
 
 
+# Set up app
 app = Flask(__name__)
 app.secret_key = Config.secret_key
 app.jinja_env.globals.update(_ = ViewInterface())
+
+# Execute eventual patches
+Patch.execute()
 
 
 @app.route(Config.Urls.App.home)

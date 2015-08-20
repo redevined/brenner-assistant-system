@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 
+# Interface to important modules used in views
 class ViewInterface() :
 
 	import flask
