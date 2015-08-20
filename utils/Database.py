@@ -39,33 +39,7 @@ def createSheetTable() :
 	exeq("CREATE TABLE sheets (id serial PRIMARY KEY, username varchar(255) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE, courses text);")
 
 def doPatch() :
-	Log.debug("<1>", "Backing up user data")
-	users = exeq("SELECT * FROM users;")
-	courses = exeq("SELECT * FROM courses;")
-	Log.debug("Backup done", users = users, courses = courses)
-
-	Log.debug("<2>", "Deleting all rows")
-	exeq("DELETE FROM sheets")
-	exeq("DELETE FROM courses")
-	exeq("DELETE FROM users")
-	Log.debug("All rows deleted")
-
-	Log.debug("<3>", "Dropping tables")
-	exeq("DROP TABLE sheets")
-	exeq("DROP TABLE courses")
-	exeq("DROP TABLE users")
-	Log.debug("Tables dropped")
-
-	Log.debug("<4>", "Recreating tables")
-	createUserTable()
-	createCourseTable()
-	createSheetTable()
-	Log.debug("All tables created")
-
-	Log.debug("<5>", "Restoring data")
-	exeq("INSERT INTO users VALUES (%s, %s, %s);", *users)
-	exeq("INSERT INTO courses VALUES (%s, %s, %s, %s, %s, %s);", *courses)
-	Log.debug("Data successfully restored")
+	pass
 
 
 def loadUserByLogin(un, pw) :
