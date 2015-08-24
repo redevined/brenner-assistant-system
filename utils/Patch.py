@@ -8,7 +8,7 @@ from utils import Database, Log
 # All patches that need to be executed
 PATCHES = lambda : [
 	#createTables,
-	grantAdminRights
+	#grantAdminRights
 ]
 
 
