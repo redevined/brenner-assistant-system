@@ -4,7 +4,6 @@
 
 {% block style %}
 <link href="/static/css/bootstrap-multiselect.css" rel="stylesheet">
-<link href="/static/css/courses.css" rel="stylesheet">
 {% endblock %}
 
 {% block script %}
@@ -37,8 +36,15 @@
 				$('#time_end').val(
 					$(this).find('.course-time').text().split(' - ')[1]
 				);
-				var role = $(this).find('.course-role option:selected').text();
+				var role = $(this).find('.course-role').text();
 				$("#role option[value='" + role + "']").attr('selected', true);
+
+				// Hack to show (or refresh) the highlight animation
+				var inrow = $('tr.input-row')[0];
+				$(inrow).removeClass('highlight');
+				inrow.offsetWidth = inrow.offsetWidth;
+				$(inrow).addClass('highlight');
+
 			}
 		});
 
@@ -107,7 +113,7 @@
 					</td>
 					<td>
 						<div class="right">
-							<button class="btn btn-primary" type="submit">
+							<button class="btn btn-success" type="submit">
 								<span class="glyphicon glyphicon-plus-sign"></span>
 							</button>
 						</div>
@@ -121,7 +127,7 @@
 					<td class="course-role">{{ course.role }}</td>
 					<td>
 						<div class="right">
-							<a href="{{ _.Config.Urls.App.course_delete }}/{{ course.id }}" class="btn btn-primary">
+							<a href="{{ _.Config.Urls.App.course_delete }}/{{ course.id }}" class="btn btn-danger">
 								<span class="glyphicon glyphicon-minus-sign"></span>
 							</a>
 						</div>

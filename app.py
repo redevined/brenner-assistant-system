@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.secret_key = Config.secret_key
 app.jinja_env.globals.update(_ = ViewInterface())
 
-# Execute eventual patches
+# Execute eventual startup patches
 Patch.execute()
 
 

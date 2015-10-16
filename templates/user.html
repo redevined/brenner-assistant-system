@@ -2,42 +2,60 @@
 
 {% block title %}Profil{% endblock %}
 
-{% block style %}
-<link href="/static/css/login.css" rel="stylesheet">
-{% endblock %}
-
 {% block content %}
 <div class="cover-content inner">
-	<form class="form-signin" method="POST">
-		<h2>Profil von {{ _.models.User.session.get().username }}.</h2>
+	<form class="form-horizontal" method="POST">
+		<div class="form-group">
+			<h2>Profil von {{ _.models.User.session.get().username }}.</h2>
 
-		{% for cat, msg in get_flashed_messages(with_categories=true) %}
-		<p class="flash flash-{{ cat }}">
-			<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}
-		</p>
-		{% endfor %}
+			{% for cat, msg in get_flashed_messages(with_categories=true) %}
+			<p class="flash flash-{{ cat }}">
+				<span class="glyphicon glyphicon-exclamation-sign"></span> {{ msg }}
+			</p>
+			{% endfor %}
+
+			<div class="col-sm-offset-3 col-sm-9">
+				<p class="lead">Hier kannst du deinen Namen oder dein Passwort ändern.</p>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="username" class="col-sm-3 control-label">Benutzername</label>
+			<div class="col-sm-9">
+				<input type="text" id="username" name="username" class="form-control form-control-top" placeholder="Neuer Benutzername" autofocus>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="username-repeat" class="col-sm-3 control-label"></label>
+			<div class="col-sm-9">
+				<input type="text" id="username-repeat" name="username-repeat" class="form-control form-control-bottom" placeholder="Benutzername wiederholen">
+			</div>
+		</div>
 
 		<br />
-		<p class="lead">Möchtest du deinen Namen ändern?</p>
 
-		<label for="username" class="sr-only">Neuer Benutzername</label>
-		<input type="text" id="username" name="username" class="form-control form-control-top" placeholder="Neuer Benutzername" autofocus>
+		<div class="form-group">
+			<label for="password" class="col-sm-3 control-label">Passwort</label>
+			<div class="col-sm-9">
+				<input type="password" id="password" name="password" class="form-control form-control-top" placeholder="Neues Passwort">
+			</div>
+		</div>
 
-		<label for="username-repeat" class="sr-only">Benutzername wiederholen</label>
-		<input type="text" id="username-repeat" name="username-repeat" class="form-control form-control-bottom" placeholder="Benutzername wiederholen">
-
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Übernehmen</button>
+		<div class="form-group">
+			<label for="password-repeat" class="col-sm-3 control-label"></label>
+			<div class="col-sm-9">
+				<input type="password" id="password-repeat" name="password-repeat" class="form-control form-control-bottom" placeholder="Passwort wiederholen">
+			</div>
+		</div>
 
 		<br />
-		<p class="lead">Möchtest du dein Passwort ändern?</p>
 
-		<label for="password" class="sr-only">Neues Passwort</label>
-		<input type="password" id="password" name="password" class="form-control form-control-top" placeholder="Passwort">
-
-		<label for="password-repeat" class="sr-only">Passwort wiederholen</label>
-		<input type="password" id="password-repeat" name="password-repeat" class="form-control form-control-bottom" placeholder="Passwort wiederholen">
-
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Übernehmen</button>
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button class="btn btn-primary" type="submit">Speichern</button>
+			</div>
+		</div>
 	</form>
 </div>
 {% endblock %}

@@ -127,6 +127,14 @@ body {
   text-align: center;
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 .inner {
   padding: 30px;
 }
@@ -182,4 +190,164 @@ h1, h2, h3 {
   text-shadow: none;
   background-color: #fff;
   border: 1px solid #fff;
+}
+
+.highlight {
+  -webkit-animation-name: highlight-animation;
+     -moz-animation-name: highlight-animation;
+          animation-name: highlight-animation;
+  -webkit-animation-duration: 1s;
+     -moz-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+@-webkit-keyframes highlight-animation {
+  from { background-color: rgba(51, 183, 113, 1); }
+  to   { background-color: rgba(51, 183, 113, 0); }
+}
+
+@-moz-keyframes highlight-animation {
+  from { background-color: rgba(51, 183, 113, 1); }
+  to   { background-color: rgba(51, 183, 113, 0); }
+}
+
+@keyframes highlight-animation {
+  from { background-color: rgba(51, 183, 113, 1); }
+  to   { background-color: rgba(51, 183, 113, 0); }
+}
+
+/*
+ * Home page and About
+ */
+
+.cover-content a {
+  font-weight: bold;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.panel {
+  background-color: #444;
+}
+
+.panel-default {
+  border-color: #2e6da4;
+}
+
+.panel-default > .panel-heading#q1 {
+  background-color: #337ab7;
+}
+
+.panel-default > .panel-heading#q2 {
+  background-color: #438ac7;
+}
+
+.panel-default > .panel-heading#q3 {
+  background-color: #539ad7;
+}
+
+.panel-default > .panel-heading#q4 {
+  background-color: #63aae7;
+}
+
+.panel-default > .panel-heading#q5 {
+  background-color: #73baf7;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #2e6da4;
+}
+
+.panel-heading a, .panel-heading a:hover, .panel-heading a:focus {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+/*
+ * Login and register page
+ */
+
+.form-signin {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .bg-warning, .form-signin .checkbox, .form-signin button, .form-signin .flash {
+  margin-bottom: 20px;
+}
+
+.form-signin .checkbox {
+  font-weight: normal;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin .form-control-top {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin .form-control-bottom {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/*
+ * Course overview styles
+ */
+
+table.table {
+  color: #555;
+  text-shadow: none;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,.1);
+  overflow: hidden;
+}
+
+table.table thead .date {
+  width: 1%;
+}
+
+table.table > tbody > tr > td {
+  vertical-align: middle;
+  text-align: left;
+}
+
+.input-row span, .input-row input[type="time"] {
+  width: auto;
+  display: inline;
+}
+
+.multiselect-container {
+  color: #555;
+  text-shadow: none;
+}
+
+.form-inline .multiselect-container label.checkbox,
+.form-inline .multiselect-container label.radio {
+    padding: 3px 20px 3px 40px;
+}
+.form-inline .multiselect-container li a label.checkbox input[type="checkbox"],
+.form-inline .multiselect-container li a label.radio input[type="radio"] {
+    margin-left: -20px;
+    margin-right: 0px;
 }
