@@ -171,8 +171,8 @@ h1, h2, h3 {
 }
 
 .flash-success {
-  background-color: #33b771;
-  border-color: #23a761;
+  background-color: #5cb85c;
+  border-color: #4ca84c;
 }
 
 .flash-warn {
@@ -181,8 +181,8 @@ h1, h2, h3 {
 }
 
 .flash-error {
-  background-color: #b73337;
-  border-color: #a72327;
+  background-color: #d9534f;
+  border-color: #c9433f;
 }
 
 .btn-default, .btn-default:hover, .btn-default:focus {
@@ -202,18 +202,18 @@ h1, h2, h3 {
 }
 
 @-webkit-keyframes highlight-animation {
-  from { background-color: rgba(51, 183, 113, 1); }
-  to   { background-color: rgba(51, 183, 113, 0); }
+  from { background-color: rgba(92, 184, 92, 1); }
+  to   { background-color: rgba(92, 184, 92, 0); }
 }
 
 @-moz-keyframes highlight-animation {
-  from { background-color: rgba(51, 183, 113, 1); }
-  to   { background-color: rgba(51, 183, 113, 0); }
+  from { background-color: rgba(92, 184, 92, 1); }
+  to   { background-color: rgba(92, 184, 92, 0); }
 }
 
 @keyframes highlight-animation {
-  from { background-color: rgba(51, 183, 113, 1); }
-  to   { background-color: rgba(51, 183, 113, 0); }
+  from { background-color: rgba(92, 184, 92, 1); }
+  to   { background-color: rgba(92, 184, 92, 0); }
 }
 
 /*
