@@ -234,27 +234,27 @@ h1, h2, h3 {
 }
 
 .panel-default {
-  border-color: #2e6da4;
+  border-color: #135a97;
 }
 
 .panel-default > .panel-heading#q1 {
-  background-color: #337ab7;
+  background-color: #236aa7;
 }
 
 .panel-default > .panel-heading#q2 {
-  background-color: #438ac7;
+  background-color: #337ab7;
 }
 
 .panel-default > .panel-heading#q3 {
-  background-color: #539ad7;
+  background-color: #438ac7;
 }
 
 .panel-default > .panel-heading#q4 {
-  background-color: #63aae7;
+  background-color: #539ad7;
 }
 
 .panel-default > .panel-heading#q5 {
-  background-color: #73baf7;
+  background-color: #63aae7;
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
