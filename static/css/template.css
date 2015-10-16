@@ -196,23 +196,23 @@ h1, h2, h3 {
   -webkit-animation-name: highlight-animation;
      -moz-animation-name: highlight-animation;
           animation-name: highlight-animation;
-  -webkit-animation-duration: 1s;
-     -moz-animation-duration: 1s;
-          animation-duration: 1s;
+  -webkit-animation-duration: 1.5s;
+     -moz-animation-duration: 1.5s;
+          animation-duration: 1.5s;
 }
 
 @-webkit-keyframes highlight-animation {
-  from { background-color: rgba(92, 184, 92, 1); }
+  from { background-color: rgba(92, 184, 92, 0.5); }
   to   { background-color: rgba(92, 184, 92, 0); }
 }
 
 @-moz-keyframes highlight-animation {
-  from { background-color: rgba(92, 184, 92, 1); }
+  from { background-color: rgba(92, 184, 92, 0.5); }
   to   { background-color: rgba(92, 184, 92, 0); }
 }
 
 @keyframes highlight-animation {
-  from { background-color: rgba(92, 184, 92, 1); }
+  from { background-color: rgba(92, 184, 92, 0.5); }
   to   { background-color: rgba(92, 184, 92, 0); }
 }
 
