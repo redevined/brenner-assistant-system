@@ -33,7 +33,8 @@ Config = Struct(
 				"course_add"		:	"/course/add",
 				"course_delete"		:	"/course/delete",
 				"course_submit"		:	"/course/submit",
-				"download_sheet"	:	"/course/download",
+				"sheet_download"	:	"/course/sheet/download",
+				"sheet_delete"		:	"/course/sheet/delete"
 			},
 			"Ext" : {
 				"github"			:	u"https://github.com/redevined/brenner-assistants-system",
@@ -61,8 +62,7 @@ Config = Struct(
 			"Roles" : {
 				"assistant" 		: 	u"Assistent",
 				"trainer" 			: 	u"Lehrer"
-			},
-			"keep_sheets"			:	True
+			}
 		},
 		"Months" : {
 			"01" 					: 	u"Januar",

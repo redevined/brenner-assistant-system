@@ -68,9 +68,17 @@ def courseDelete(id) :
 def courseSubmit() :
 	return CourseController.submit(request.form)
 
-@app.route(Config.Urls.App.download_sheet)
-def downloadSheet() :
-	return CourseController.download()
+@app.route(Config.Urls.App.sheet_download)
+def downloadSheetByCookie() :
+	return CourseController.downloadSheet()
+
+@app.route(Config.Urls.App.sheet_download + "/<int:id>")
+def downloadSheet(id) :
+	return CourseController.downloadSheet(id)
+
+@app.route(Config.Urls.App.sheet_delete + "/<int:id>")
+def deleteSheet(id) :
+	return CourseController.deleteSheet(id)
 
 
 @app.errorhandler(403)

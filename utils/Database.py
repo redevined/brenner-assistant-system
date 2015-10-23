@@ -87,9 +87,14 @@ def deleteCourses(un) :
 
 
 # Return sheet from database
-def loadSheet(id) :
-	data = exeq("SELECT courses, id FROM sheets WHERE id=%s;", id)
+def loadSheet(un, id) :
+	data = exeq("SELECT courses, id FROM sheets WHERE username=%s AND id=%s;", un, id)
 	return data[0] if data else None
+
+# Load all sheets by user
+def loadSheets(un) :
+	data = exeq("SELECT courses, id FROM sheets WHERE username=%s;", un)
+	return data
 
 # Store sheet and return its id
 def storeSheetWithId(un, courses) :
@@ -97,5 +102,5 @@ def storeSheetWithId(un, courses) :
 	return id[0][0] if id else None
 
 # Delete sheet
-def deleteSheet(id) :
-	exeq("DELETE FROM sheets WHERE id=%s;", id)
+def deleteSheet(un, id) :
+	exeq("DELETE FROM sheets WHERE username=%s AND id=%s;", un, id)

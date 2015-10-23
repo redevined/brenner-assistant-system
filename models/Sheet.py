@@ -64,10 +64,18 @@ def storeWithId(user, courses) :
 	return id
 
 def getById(user, id) :
-	data, id = Database.loadSheet(id)
+	data, id = Database.loadSheet(user.username, id)
 	courses = pickle.loads(b64decode(data))
 	sheet = Sheet(user, courses, id)
 	return sheet
 
-def deleteById(id) :
-	Database.deleteSheet(id)
+def getAll(user) :
+	data = Database.loadSheets(user.username)
+	sheets = [
+		Sheet(user, pickle.loads(b64decode(cdata)), id)
+		for cdata, id in data
+	]
+	return sheets
+
+def delete(username, id) :
+	Database.deleteSheet(username, id)

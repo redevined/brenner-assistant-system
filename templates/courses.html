@@ -50,7 +50,7 @@
 
 		{% if pdf %}
 		// Redirect to download if PDF is present
-		var url = '{{ _.Config.Urls.App.download_sheet }}';
+		var url = '{{ _.Config.Urls.App.sheet_download }}';
 		window.location.replace(url);
 		{% endif %}
 	});

@@ -3,13 +3,15 @@
 
 from flask import abort, flash, redirect, render_template
 from config import Config
-from models import User
+from models import Sheet, User
 from utils import Hash, Log
 
 
 def view() :
 	if User.session.exists() :
-		return render_template("user.html")
+		user = User.sesison.get()
+		sheets = Sheet.getAll(user)
+		return render_template("user.html", sheets = sheets)
 	else :
 		return abort(403)
 

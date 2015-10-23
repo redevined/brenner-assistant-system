@@ -40,12 +40,17 @@ def submit(form) :
 		return abort(403)
 	return redirect(Config.Urls.App.home)
 
-def download() :
+def downloadSheet(sid = None) :
 	if User.session.exists() :
-		sid = User.session.getTemp()
-		if sid :
+		if sid is None :
+			sid = User.session.getTemp()
+		if sid is not None :
 			pdf = Sheet.getById(User.session.get(), sid)
-			if not Config.Course.keep_sheets :
-				Sheet.deleteById(sid)
 			return pdf.render()
 	return abort(403)
+
+def deleteSheet(sid) :
+	if User.session.exists() :
+		user = User.session.get()
+		Sheet.delete(user.username, sid)
+	return redirect(Config.Urls.App.user)
