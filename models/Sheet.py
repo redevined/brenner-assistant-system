@@ -63,8 +63,8 @@ def storeWithId(user, courses) :
 	sid = Database.storeSheetWithId(user.username, data)
 	return sid
 
-def getById(user, id) :
-	data, id = Database.loadSheet(user.username, sid)
+def getById(user, sid) :
+	data, sid = Database.loadSheet(user.username, sid)
 	courses = pickle.loads(b64decode(data))
 	sheet = Sheet(user, courses, sid)
 	return sheet
