@@ -11,6 +11,7 @@ def view() :
 	if User.session.exists() :
 		user = User.session.get()
 		sheets = Sheet.getAll(user)
+		Log.debug("Rendering...")
 		return render_template("user.html", sheets = sheets)
 	else :
 		return abort(403)

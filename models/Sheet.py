@@ -73,7 +73,7 @@ def getAll(user) :
 	data = Database.loadSheets(user.username)
 	sheets = [
 		Sheet(user, pickle.loads(b64decode(cdata)), id)
-		for cdata, id in data
+		for (cdata, id) in data
 	]
 	return sheets
 
