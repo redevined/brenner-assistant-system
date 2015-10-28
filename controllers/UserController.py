@@ -10,8 +10,12 @@ from utils import Hash, Log
 def view() :
 	if User.session.exists() :
 		user = User.session.get()
-		sheets = Sheet.getAll(user)
-		Log.debug("Rendering...")
+		sheets = ((
+			sheet.id,
+			" und ".join(
+				", ".join( mcs[0] for mcs in ycs[1] ) + " " + ycs[0] for ycs in sheet.courses
+			)) for sheet in Sheet.getAll(user)
+		)
 		return render_template("user.html", sheets = sheets)
 	else :
 		return abort(403)

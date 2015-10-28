@@ -15,8 +15,8 @@ except ImportError as e :
 
 class Sheet() :
 
-	def __init__(self, user, courses, id = None) :
-		self.id = id
+	def __init__(self, user, courses, sid = None) :
+		self.id = sid
 		self.user = user
 		self.courses = courses
 		self.filename = u"Auflistung_{0}.pdf".format(user.username)
@@ -60,22 +60,22 @@ def generate(user, courses, selected, destructive) :
 
 def storeWithId(user, courses) :
 	data = b64encode(pickle.dumps(courses)).decode(Config.encoding)
-	id = Database.storeSheetWithId(user.username, data)
-	return id
+	sid = Database.storeSheetWithId(user.username, data)
+	return sid
 
 def getById(user, id) :
-	data, id = Database.loadSheet(user.username, id)
+	data, id = Database.loadSheet(user.username, sid)
 	courses = pickle.loads(b64decode(data))
-	sheet = Sheet(user, courses, id)
+	sheet = Sheet(user, courses, sid)
 	return sheet
 
 def getAll(user) :
 	data = Database.loadSheets(user.username)
 	sheets = [
-		Sheet(user, pickle.loads(b64decode(cdata)), id)
-		for (cdata, id) in data
+		Sheet(user, pickle.loads(b64decode(cdata)), sid)
+		for cdata, sid in data
 	]
 	return sheets
 
-def delete(username, id) :
-	Database.deleteSheet(username, id)
+def delete(username, sid) :
+	Database.deleteSheet(username, sid)
