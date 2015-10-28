@@ -9,7 +9,7 @@ from utils import Hash, Log
 
 def view() :
 	if User.session.exists() :
-		user = User.sesison.get()
+		user = User.session.get()
 		sheets = Sheet.getAll(user)
 		return render_template("user.html", sheets = sheets)
 	else :
