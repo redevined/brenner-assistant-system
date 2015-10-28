@@ -71,7 +71,7 @@
 			{% for sheet in sheets %}
 			<tr>
 				<td class="months">
-					Monate: {{ ", ".join({ _.Config.Months[course.date.split(".")[1]] + " " + course.date.split(".")[2] for course in sheet.courses }) }}
+					Monate: {{ " und ".join( ", ".join( mcs[0] for mcs in ycs[1] ) + " " + ycs[0] for ycs in sheet.courses ) }}
 				</td>
 				<td class="actions">
 					<div class="btn-group right">
